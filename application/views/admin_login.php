@@ -31,7 +31,7 @@ $this->load->helper('url');
 <body class="bg-black">
 <div class="form-box" id="login-box">
     <div class="header">登录</div>
-    <form role="form" action="login_check" method="post" onsubmit="return logincheck()">
+    <form role="form" id="loginForm" action="login_check" method="post" onsubmit="return logincheck()">
         <div class="body bg-gray">
             <div class="form-group">
                 <input type="username"  id="username" name="username" class="form-control" placeholder="Username" required autofocus>
@@ -62,11 +62,15 @@ $this->load->helper('url');
             document.getElementById('password').focus();
             return false;
         }
+
+        document.getElementById('password').value = md5(document.getElementById('password').value);
+        document.getElementById('loginForm').submit();
     }
 </script>
 <!-- jQuery 2.0.2 -->
 <script src=<?php echo base_url("static/js/jquery-2.0.3.min.js"); ?>></script>
 <!-- Bootstrap -->
 <script src=<?php echo base_url("static/js/bootstrap.min.js"); ?> type="text/javascript"></script>
+<script src=<?php echo base_url("static/js/md5.js"); ?> type="text/javascript"></script>
 </body>
 </html>
