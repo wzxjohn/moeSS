@@ -16,6 +16,19 @@ class Admin extends CI_Controller
         $this->load->model('admin_model');
     }
 
+    function is_login()
+    {
+        if ($this->session->userdata('s_uid') && $this->session->userdata('admin') == 'true')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
     function index()
     {
         if (is_loggin())
@@ -25,18 +38,6 @@ class Admin extends CI_Controller
         else
         {
             redirect(site_url('admin/login/'));
-        }
-    }
-
-    function is_login()
-    {
-        if ($this->session->userdata('s_uid'))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 
@@ -61,7 +62,10 @@ class Admin extends CI_Controller
         {
             if ($user[0]->pass == $_POST['password'])
             {
-                $arr = array('s_uid' => $user[0]->uid);
+                $arr = array(
+                    's_uid' => $user[0]->uid,
+                    'admin' => 'true'
+                );
                 $this->session->set_userdata($arr);
                 echo "Login Success!";
                 redirect(site_url('admin'));
