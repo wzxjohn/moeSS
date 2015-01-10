@@ -14,6 +14,7 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->model('admin_model');
+        $this->load->library('auth');
     }
 
     function index()
@@ -24,5 +25,28 @@ class Admin extends CI_Controller
     function login()
     {
         $this->load->view('admin_login');
+    }
+
+    function login_check()
+    {
+        $this->load->model('admin_model');
+        $user = $this->admin_model->u_select($_POST['username']);
+        if ($user)
+        {
+            if ($user[0]->pass == $_POST['password'])
+            {
+                $this->load->library('session');
+                $arr = array('s_uid' => $user[0]->uid);
+                $this->session->set_userdate($arr);
+            }
+            else
+            {
+                echo "Wrong Password";
+            }
+        }
+        else
+        {
+            echo "Wrong Username";
+        }
     }
 }

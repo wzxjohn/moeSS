@@ -16,4 +16,12 @@ class Admin_model extends CI_Model
         parent::__construct();
         $this->load->database();
     }
+
+    function u_select($username)
+    {
+        $this->db->where('admin_name', $username);
+        $this->db->select('*');
+        $query = $this->db->get('ss_admin');
+        return $query->result();
+    }
 }
