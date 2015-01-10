@@ -18,12 +18,22 @@ class Admin extends CI_Controller
 
     function index()
     {
-        $this->load->view('welcome_message');
+        if ($this->session->userdata('s_uid'))
+        {
+            $this->load->view('welcome_message');
+            return;
+        }
+        else
+        {
+            redirect(site_url('admin/login/'));
+            return;
+        }
     }
 
     function login()
     {
         $this->load->view('admin_login');
+        return;
     }
 
     function login_check()
@@ -36,15 +46,19 @@ class Admin extends CI_Controller
             {
                 $arr = array('s_uid' => $user[0]->uid);
                 $this->session->set_userdata($arr);
+                echo "Login Success!";
+                redirect(site_url('admin/index/'));
             }
             else
             {
                 echo "Wrong Password";
+                redirect(site_url('admin/login/'));
             }
         }
         else
         {
             echo "Wrong Username";
+            redirect(site_url('admin/login/'));
         }
     }
 }

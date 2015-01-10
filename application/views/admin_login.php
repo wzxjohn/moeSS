@@ -14,11 +14,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta charset="utf-8">
     <title>ShadowX登录</title>
     <!-- bootstrap 3.0.2 -->
-    <link href=<?php echo base_url("static/bootstrap/css/bootstrap.min.css"); ?> rel="stylesheet" type="text/css" />
+    <link href=<?php echo site_url("static/bootstrap/css/bootstrap.min.css"); ?> rel="stylesheet" type="text/css" />
     <!-- font Awesome -->
-    <link href=<?php echo base_url("static/css/font-awesome.min.css"); ?> rel="stylesheet" type="text/css" />
+    <link href=<?php echo site_url("static/css/font-awesome.min.css"); ?> rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href=<?php echo base_url("static/css/AdminLTE.css"); ?> rel="stylesheet" type="text/css" />
+    <link href=<?php echo site_url("static/css/AdminLTE.css"); ?> rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -67,9 +67,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
 </script>
 <!-- jQuery 2.0.2 -->
-<script src=<?php echo base_url("static/js/jquery-2.0.3.min.js"); ?>></script>
+<script src=<?php echo site_url("static/js/jquery-2.0.3.min.js"); ?>></script>
 <!-- Bootstrap -->
-<script src=<?php echo base_url("static/js/bootstrap.min.js"); ?> type="text/javascript"></script>
-<script src=<?php echo base_url("static/js/md5.js"); ?> type="text/javascript"></script>
+<script src=<?php echo site_url("static/js/bootstrap.min.js"); ?> type="text/javascript"></script>
+<script src=<?php echo site_url("static/js/md5.js"); ?> type="text/javascript"></script>
 </body>
 </html>
