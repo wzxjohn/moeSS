@@ -47,7 +47,7 @@ class Admin extends CI_Controller
                 $arr = array('s_uid' => $user[0]->uid);
                 $this->session->set_userdata($arr);
                 echo "Login Success!";
-                redirect(site_url('admin/index/'));
+                redirect(site_url('admin'));
             }
             else
             {
