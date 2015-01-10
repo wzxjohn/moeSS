@@ -35,7 +35,7 @@ class Admin extends CI_Controller
             if ($user[0]->pass == $_POST['password'])
             {
                 $arr = array('s_uid' => $user[0]->uid);
-                $this->session->set_userdate($arr);
+                $this->session->set_userdata($arr);
             }
             else
             {
