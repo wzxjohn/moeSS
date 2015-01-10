@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html class="bg-black">
 <head>
     <meta charset="utf-8">
-    <title><?php echo $sitename; ?> - 管理登陆</title>
+    <title><?php echo $config['sitename']; ?> - 管理登陆</title>
     <!-- bootstrap 3.0.2 -->
     <link href=<?php echo site_url("static/bootstrap/css/bootstrap.min.css"); ?> rel="stylesheet" type="text/css" />
     <!-- font Awesome -->
