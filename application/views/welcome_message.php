@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title><?php echo $SITE_NAME; ?></title>
+	<title><?php echo SITE_NAME; ?></title>
 
 	<style type="text/css">
 
