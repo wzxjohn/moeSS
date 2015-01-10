@@ -18,21 +18,38 @@ class Admin extends CI_Controller
 
     function index()
     {
-        if ($this->session->userdata('s_uid'))
+        if (is_loggin())
         {
             $this->load->view('welcome_message');
-            return;
         }
         else
         {
             redirect(site_url('admin/login/'));
-            return;
+        }
+    }
+
+    function is_login()
+    {
+        if ($this->session->userdata('s_uid'))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
     function login()
     {
-        $this->load->view('admin_login');
+        if ($this->is_login())
+        {
+            redirect(site_url('admin'));
+        }
+        else
+        {
+            $this->load->view('admin_login');
+        }
         return;
     }
 
