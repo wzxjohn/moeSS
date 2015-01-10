@@ -31,7 +31,7 @@ $this->load->helper('url');
 <body class="bg-black">
 <div class="form-box" id="login-box">
     <div class="header">登录</div>
-    <form role="form" action="admin/login_check" method="post" onsubmit="return logincheck()">
+    <form role="form" action="login_check" method="post" onsubmit="return logincheck()">
         <div class="body bg-gray">
             <div class="form-group">
                 <input type="username"  id="username" name="username" class="form-control" placeholder="Username" required autofocus>
