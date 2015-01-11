@@ -52,6 +52,7 @@ $this->load->helper('form');
             <div class="form-group">
                 <input type="checkbox" name="remember_me" value="week"/> 保存Cookie7天
             </div>
+            <div class="form-group" id="loginResult"></div>
         </div>
         <div class="footer">
             <button type="submit" class="btn bg-olive btn-block"  name="login" >登录</button>
@@ -59,6 +60,23 @@ $this->load->helper('form');
     <?php echo form_close(); ?>
 </div>
 <script LANGUAGE="javascript">
+    $(document).ready(function() {
+        var options = {
+            target:        '#loginResult',   // target element(s) to be updated with server response
+            success:       showResponse,  // post-submit callback
+            dataType:  'json'        // 'xml', 'script', or 'json' (expected server response type)
+        };
+
+        $('#loginForm').submit(function() {
+            $(this).ajaxSubmit(options);
+            return false;
+        });
+    });
+
+    // post-submit callback
+    function showResponse(data, statusText, xhr, $form)  {
+        alert(data.result);
+    }
     function logincheck()
     {
         if(document.getElementById('username').value.length==0){
@@ -79,6 +97,8 @@ $this->load->helper('form');
 </script>
 <!-- jQuery 2.0.2 -->
 <script src=<?php echo base_url("static/js/jquery-2.0.3.min.js"); ?>></script>
+<script src=<?php echo base_url("static/js/jquery.validate.min.js"); ?>></script>
+<script src=<?php echo base_url("static/js/jquery.form.min.js"); ?>></script>
 <!-- Bootstrap -->
 <script src=<?php echo base_url("static/js/bootstrap.min.js"); ?> type="text/javascript"></script>
 <script src=<?php echo base_url("static/js/md5.js"); ?> type="text/javascript"></script>

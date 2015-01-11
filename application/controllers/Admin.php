@@ -52,35 +52,34 @@ class Admin extends CI_Controller
         }
         else
         {
-            //$this->load->database();//load users_mode defined in modes/uses_model.php
-            //$this->load->model('users_model'); //create user
-            //$this->users_model->create_user();
-        }
-
-        $this->load->model('admin_model');
-        $user = $this->admin_model->u_select($_POST['username']);
-        if ($user)
-        {
-            if ($user[0]->pass == $_POST['password'])
+            $this->load->model('admin_model');
+            $user = $this->admin_model->u_select(trim($_POST['username']));
+            if ($user)
             {
-                $arr = array(
-                    's_uid' => $user[0]->uid,
-                    'admin' => 'true'
-                );
-                $this->session->set_userdata($arr);
-                echo "Login Success!";
-                redirect(site_url('admin'));
+                if ($user[0]->pass == $_POST['password'])
+                {
+                    $arr = array(
+                        's_uid' => $user[0]->uid,
+                        'admin' => 'true'
+                    );
+                    $this->session->set_userdata($arr);
+                    echo '{"result" : "success" }';
+                    //redirect(site_url('admin'));
+                }
+                else
+                {
+                    echo '{"result" : "Wrong Username or Password!" }';
+                    //redirect(site_url('admin/login/'));
+                }
             }
             else
             {
-                echo "Wrong Password";
-                redirect(site_url('admin/login/'));
+                echo '{"result" : "Wrong Username or Password!" }';
+                //redirect(site_url('admin/login/'));
             }
-        }
-        else
-        {
-            echo "Wrong Username";
-            redirect(site_url('admin/login/'));
+            //$this->load->database();//load users_mode defined in modes/uses_model.php
+            //$this->load->model('users_model'); //create user
+            //$this->users_model->create_user();
         }
     }
 
