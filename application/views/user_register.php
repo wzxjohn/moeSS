@@ -103,24 +103,24 @@ $this->load->helper('form');
     ?>
         <div class="body bg-gray">
             <div class="form-group">
-                <input type="text" name="username" class="form-control" placeholder="用户名" >
+                <input type="text" id="username" name="username" class="form-control" placeholder="用户名" >
             </div>
 
             <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="密码" >
+                <input type="password" class="form-control" id="password" name="password" placeholder="密码" >
             </div>
 
             <div class="form-group">
-                <input type="password" class="form-control" name="repassword" placeholder="重复密码" >
+                <input type="password" class="form-control" id="repassword" name="repassword" placeholder="重复密码" >
             </div>
 
             <div class="form-group">
-                <input type="text" name="email" class="form-control" id="inputUsernameEmail" placeholder="邮箱" >
+                <input type="text" id="email" name="email" class="form-control" placeholder="邮箱" >
             </div>
 
             <?php if( $invite_only ) { ?>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="code" placeholder="邀请码" >
+                    <input type="text" class="form-control" id="code" name="code" placeholder="邀请码" >
                 </div>
             <?php } ?>
         </div>
