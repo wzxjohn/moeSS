@@ -91,10 +91,10 @@ class User_model extends CI_Model
             'switch' => '1',
             'enable' => '1',
             'type' => '7',
-            'reg_date' => 'now()',
             'invite_num' => $this->get_default_invite_number(),
             'money' => '0'
         );
+        $this->db->set('reg_date', 'NOW()', FALSE);
         return $this->db->insert('user', $data);
     }
 
