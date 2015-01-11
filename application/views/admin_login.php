@@ -45,7 +45,7 @@ $this->load->helper('form');
 
             $('#loginForm').submit(function() {
                 if ($(this).valid()) {
-                    document.getElementById('password').value = md5(document.getElementById('password').value);
+                    document.getElementById('password').value = md5(document.getElementById('pass').value);
                     $(this).ajaxSubmit(options);
                     return false;
                 }
@@ -62,7 +62,11 @@ $this->load->helper('form');
 
         // post-submit callback
         function showResponse(data, statusText, xhr, $form)  {
-            alert(data.result);
+            if (data.result == "success"){
+
+            } else {
+                alert(data.result);
+            }
         }
     </script>
 </head>
@@ -85,7 +89,10 @@ $this->load->helper('form');
                 <input type="username"  id="username" name="username" class="form-control" placeholder="Username" required autofocus>
             </div>
             <div class="form-group">
-                <input type="password"  id="password" name="password" class="form-control" placeholder="Password" required>
+                <input type="password"  id="pass" name="pass" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="form-group" style="display: none">
+                <input type="hidden"  id="password" name="password" class="form-control">
             </div>
             <div class="form-group">
                 <input type="checkbox" name="remember_me" value="week"/> 保存Cookie7天
