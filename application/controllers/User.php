@@ -52,6 +52,16 @@ class User extends CI_Controller
 
     function register()
     {
+        $this->load->view('user_register');
+        return;
+    }
+
+    function do_register()
+    {
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        $email = $this->input->post('email');
+        $invitecode = $this->input->post('invitecode');
         return;
     }
 

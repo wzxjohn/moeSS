@@ -8,8 +8,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->helper('form');
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html class="bg-black">
 <head>
     <meta charset="utf-8">
