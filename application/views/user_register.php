@@ -95,12 +95,12 @@ $this->load->helper('form');
     <?php
     $attributes = array(
         'role' => 'form',
+        'name' => 'reg',
         'id' => 'registerForm'//,
         //'onsubmit' => 'return logincheck()'
     );
     echo form_open('user/do_register', $attributes);
     ?>
-    <form name="reg" role="form" action="doreg.php" method="post" onsubmit="return regcheck()" >
         <div class="body bg-gray">
             <div class="form-group">
                 <input type="text" name="username" class="form-control" placeholder="用户名" >
