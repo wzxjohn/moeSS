@@ -46,7 +46,7 @@ $this->load->helper('form');
             $('#loginForm').submit(function() {
                 if ($(this).valid()) {
                     document.getElementById('password').value = md5(document.getElementById('pass').value);
-                    document.getElementById('pass').value) = '';
+                    document.getElementById('pass').value = '';
                     $(this).ajaxSubmit(options);
                     return false;
                 }
