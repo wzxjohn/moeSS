@@ -24,7 +24,7 @@ class Admin extends CI_Controller
         }
         else
         {
-            redirect(site_url('admin/login/'));
+            redirect(site_url('admin/login'));
         }
     }
 
@@ -39,6 +39,12 @@ class Admin extends CI_Controller
             $this->load->view('admin_login');
         }
         return;
+    }
+
+    function logout()
+    {
+        $this->session->sess_destroy();
+        redirect(site_url('admin/login'));
     }
 
     function login_check()
