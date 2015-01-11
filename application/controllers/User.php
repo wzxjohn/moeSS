@@ -59,7 +59,7 @@ class User extends CI_Controller
                 if ($user[0]->pass == $password)
                 {
                     $arr = array('s_uid' => $user[0]->uid,
-                        's_username' => $user[0]->username
+                        's_username' => $user[0]->user_name
                     );
                     $this->session->set_userdata($arr);
                     echo '{"result" : "success" }';
