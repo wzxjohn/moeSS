@@ -77,8 +77,16 @@ class User extends CI_Controller
                 $user = $this->user_model->u_select($username);
                 if ($user)
                 {
-                    echo '{"result" : "Username already exist!" }'
+                    echo '{"result" : "Username already exist!" }';
                 }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                echo '{"result" : "Something Missing!" }'
             }
         }
         else
