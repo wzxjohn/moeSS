@@ -50,27 +50,35 @@ $this->load->helper('form');
                 }
             });
 
+            jQuery.validator.addMethod("onlyAlphaNumber", function(value, element) {
+                return /^[a-zA-Z()]+$/.test(value);
+            }, "Alpha and Number Only!"),
+
             $('#registerForm').validate( {
                     rules:{
                         username: {
                         	required: true,
-                        	minlength: 8
+                        	minlength: 8,
+                            onlyAlphaNumber: true
                         },
                         password: {
                         	required: true,
-                        	minlength: 8
+                        	minlength: 8,
+                            onlyAlphaNumber: true
                         },
                         repassword: {
                         	required: true,
                         	minlength: 8,
-                        	equalTo: '#password'
+                        	equalTo: '#password',
+                            onlyAlphaNumber: true
                         },
                         email: {
                         	required: true,
                         	email: true
                         }<?php if( $invite_only ) { ?>,
                         code: {
-                        	required: true
+                        	required: true,
+                            onlyAlphaNumber: true
                         }
                         <?php } ?>
                     }

@@ -70,6 +70,21 @@ class User extends CI_Controller
         $password = $this->input->post('password');
         $email = $this->input->post('email');
         $invitecode = $this->input->post('invitecode');
+        if ( $this->user_model->need_invite() && $invitecode )
+        {
+            if ( $username && $password && $email )
+            {
+                $user = $this->user_model->u_select($username);
+                if ($user)
+                {
+                    echo '{"result" : "Username already exist!" }'
+                }
+            }
+        }
+        else
+        {
+            echo '{"result" : "Something Wrong!" }';
+        }
         return;
     }
 
@@ -86,7 +101,8 @@ class User extends CI_Controller
         {
             $this->load->model('user_model');
             $user = $this->user_model->u_select($username);
-            if ($user) {
+            if ($user)
+            {
                 if ($user[0]->pass == $password)
                 {
                     $arr = array('s_uid' => $user[0]->uid,
