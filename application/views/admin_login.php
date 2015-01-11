@@ -7,6 +7,7 @@
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+$this->load->helper('form');
 ?>
 <!DOCTYPE html>
 <html class="bg-black">
@@ -14,11 +15,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta charset="utf-8">
     <title><?php echo SITE_NAME; ?> - 管理登陆</title>
     <!-- bootstrap 3.0.2 -->
-    <link href=<?php echo site_url("static/bootstrap/css/bootstrap.min.css"); ?> rel="stylesheet" type="text/css" />
+    <link href=<?php echo base_url("static/bootstrap/css/bootstrap.min.css"); ?> rel="stylesheet" type="text/css" />
     <!-- font Awesome -->
-    <link href=<?php echo site_url("static/css/font-awesome.min.css"); ?> rel="stylesheet" type="text/css" />
+    <link href=<?php echo base_url("static/css/font-awesome.min.css"); ?> rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href=<?php echo site_url("static/css/AdminLTE.css"); ?> rel="stylesheet" type="text/css" />
+    <link href=<?php echo base_url("static/css/AdminLTE.css"); ?> rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,9 +29,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <![endif]-->
 </head>
 <body class="bg-black">
+
+<?php echo validation_errors(); ?>
+
 <div class="form-box" id="login-box">
     <div class="header">登录</div>
-    <form role="form" id="loginForm" action="login_check" method="post" onsubmit="return logincheck()">
+    <?php
+        $attributes = array(
+            'role' => 'form',
+            'id' => 'loginForm',
+            'onsubmit' => 'return logincheck()'
+        );
+        echo form_open('admin/login_check', $attributes);
+    ?>
         <div class="body bg-gray">
             <div class="form-group">
                 <input type="username"  id="username" name="username" class="form-control" placeholder="Username" required autofocus>
@@ -45,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="footer">
             <button type="submit" class="btn bg-olive btn-block"  name="login" >登录</button>
         </div>
-    </form>
+    <?php echo form_close(); ?>
 </div>
 <script LANGUAGE="javascript">
     function logincheck()
@@ -67,9 +78,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
 </script>
 <!-- jQuery 2.0.2 -->
-<script src=<?php echo site_url("static/js/jquery-2.0.3.min.js"); ?>></script>
+<script src=<?php echo base_url("static/js/jquery-2.0.3.min.js"); ?>></script>
 <!-- Bootstrap -->
-<script src=<?php echo site_url("static/js/bootstrap.min.js"); ?> type="text/javascript"></script>
-<script src=<?php echo site_url("static/js/md5.js"); ?> type="text/javascript"></script>
+<script src=<?php echo base_url("static/js/bootstrap.min.js"); ?> type="text/javascript"></script>
+<script src=<?php echo base_url("static/js/md5.js"); ?> type="text/javascript"></script>
 </body>
 </html>
