@@ -20,7 +20,7 @@ class User_model extends CI_Model
     function u_select($username)
     {
         $this->db->where('user_name', $username);
-        $this->db->select('uid', 'user_name', 'pass');
+        $this->db->select('uid, user_name, pass');
         $query = $this->db->get('user');
         return $query->result();
     }

@@ -51,11 +51,14 @@ class Admin extends CI_Controller
     {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
-        if ($username && $password) {
+        if ($username && $password)
+        {
             $this->load->model('admin_model');
             $user = $this->admin_model->u_select($username);
-            if ($user) {
-                if ($user[0]->pass == $password) {
+            if ($user)
+            {
+                if ($user[0]->pass == $password)
+                {
                     $arr = array(
                         's_uid' => $user[0]->uid,
                         'admin' => 'true'
@@ -63,11 +66,15 @@ class Admin extends CI_Controller
                     $this->session->set_userdata($arr);
                     echo '{"result" : "success" }';
                     //redirect(site_url('admin'));
-                } else {
+                }
+                else
+                {
                     echo '{"result" : "Wrong Username or Password!" }';
                     //redirect(site_url('admin/login/'));
                 }
-            } else {
+            }
+            else
+            {
                 echo '{"result" : "Wrong Username or Password!" }';
                 //redirect(site_url('admin/login/'));
             }

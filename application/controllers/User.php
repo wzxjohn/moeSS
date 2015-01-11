@@ -51,22 +51,28 @@ class User extends CI_Controller
     {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
-        if ($username && $password) {
+        if ($username && $password)
+        {
             $this->load->model('user_model');
             $user = $this->user_model->u_select($username);
             if ($user) {
-                if ($user[0]->pass == $password) {
+                if ($user[0]->pass == $password)
+                {
                     $arr = array('s_uid' => $user[0]->uid,
                         's_username' => $user[0]->username
                     );
                     $this->session->set_userdata($arr);
                     echo '{"result" : "success" }';
                     //redirect(site_url('admin'));
-                } else {
+                }
+                else
+                {
                     echo '{"result" : "Wrong Username or Password!" }';
                     //redirect(site_url('admin/login/'));
                 }
-            } else {
+            }
+            else
+            {
                 echo '{"result" : "Wrong Username or Password!" }';
                 //redirect(site_url('admin/login/'));
             }
