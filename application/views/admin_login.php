@@ -44,8 +44,10 @@ $this->load->helper('form');
             };
 
             $('#loginForm').submit(function() {
-                $(this).ajaxSubmit(options);
-                return false;
+                if ($('#loginForm').valid()) {
+                    $(this).ajaxSubmit(options);
+                    return false;
+                }
             });
 
             $('#loginForm').validate( {
