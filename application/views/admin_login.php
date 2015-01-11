@@ -35,7 +35,7 @@ $this->load->helper('form');
     <!-- Bootstrap -->
     <script src=<?php echo base_url("static/js/bootstrap.min.js"); ?> type="text/javascript"></script>
     <script src=<?php echo base_url("static/js/md5.js"); ?> type="text/javascript"></script>
-    <script LANGUAGE="javascript">
+    <script language="javascript">
         $(document).ready(function() {
             var options = {
                 target:        '#loginResult',   // target element(s) to be updated with server response
@@ -47,6 +47,14 @@ $this->load->helper('form');
                 $(this).ajaxSubmit(options);
                 return false;
             });
+
+            $('#loginForm').validate( {
+                    rules:{
+                        username: "required",
+                        password: "required"
+                    }
+                }
+            )
         });
 
         // post-submit callback
