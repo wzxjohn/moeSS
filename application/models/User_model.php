@@ -37,4 +37,18 @@ class User_model extends CI_Model
     {
         return;
     }
+
+    function valid_code($invitecode)
+    {
+        $this->db->where('code', $invitecode);
+        $query = $this->db->get('invite_code');
+        if ($query->num_rows() > 0)
+        {
+            return !$query->result()[0]->used;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
