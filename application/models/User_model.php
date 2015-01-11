@@ -30,7 +30,14 @@ class User_model extends CI_Model
     {
         $this->db->where('option_name', 'invite_only');
         $query = $this->db->get('options');
-        return $query->result()[0]->option_value;
+        if ( $query->result()[0]->option_value == 'true' )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     function new_user($username, $password, $email, $invitecode = null)

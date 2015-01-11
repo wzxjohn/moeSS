@@ -52,7 +52,7 @@ class User extends CI_Controller
 
     function register()
     {
-        if ($this->user_model->need_invite())
+        if ( $this->user_model->need_invite() )
         {
             $data['invite_only'] = true;
         }
