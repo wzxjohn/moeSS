@@ -49,12 +49,13 @@ class User extends CI_Controller
 
     function login_check()
     {
-        if (trim($_POST['username']) && trim($_POST['password']))
-        {
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        if ($username && $password) {
             $this->load->model('user_model');
-            $user = $this->user_model->u_select(trim($_POST['username']));
+            $user = $this->user_model->u_select($username);
             if ($user) {
-                if ($user[0]->pass == $_POST['password']) {
+                if ($user[0]->pass == $password) {
                     $arr = array('s_uid' => $user[0]->uid,
                         's_username' => $user[0]->username
                     );
