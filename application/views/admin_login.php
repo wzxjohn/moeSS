@@ -44,7 +44,8 @@ $this->load->helper('form');
             };
 
             $('#loginForm').submit(function() {
-                if ($('#loginForm').valid()) {
+                if ($(this).valid()) {
+                    $(this).username.value = md5($(this).username.value);
                     $(this).ajaxSubmit(options);
                     return false;
                 }
