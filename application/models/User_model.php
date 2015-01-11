@@ -24,4 +24,11 @@ class User_model extends CI_Model
         $query = $this->db->get('user');
         return $query->result();
     }
+
+    function need_invite()
+    {
+        $this->db->where('option_name', 'invite_only');
+        $query = $this->db->get('options');
+        return $query->result()[0]->option_value;
+    }
 }

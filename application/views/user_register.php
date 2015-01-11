@@ -12,7 +12,7 @@ $this->load->helper('form');
 <html class="bg-black">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo $site_name;?>注册</title>
+    <title><?php echo SITE_NAME; ?> - 注册</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
     <link href="<?php echo base_url("static/css/bootstrap.min.css"); ?>" rel="stylesheet" type="text/css" />
@@ -68,7 +68,11 @@ $this->load->helper('form');
                         email: {
                         	required: true,
                         	email: true
+                        }<?php if( $invite_only ) { ?>,
+                        code: {
+                        	required: true
                         }
+                        <?php } ?>
                     }
                 }
             )
@@ -99,7 +103,7 @@ $this->load->helper('form');
     <form name="reg" role="form" action="doreg.php" method="post" onsubmit="return regcheck()" >
         <div class="body bg-gray">
             <div class="form-group">
-                <input type="text" name="username" class="form-control" value="<?php echo $_COOKIE['reg_name'];?>"  placeholder="用户名" >
+                <input type="text" name="username" class="form-control" placeholder="用户名" >
             </div>
 
             <div class="form-group">
@@ -111,12 +115,12 @@ $this->load->helper('form');
             </div>
 
             <div class="form-group">
-                <input type="text" name="email" class="form-control" id="inputUsernameEmail" value="<?php echo $_COOKIE['reg_name'];?>" placeholder="邮箱" >
+                <input type="text" name="email" class="form-control" id="inputUsernameEmail" placeholder="邮箱" >
             </div>
 
-            <?php if($invite_only){ ?>
+            <?php if( $invite_only ) { ?>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="code" value="<?php echo $_COOKIE['reg_code'];?>"  placeholder="邀请码" >
+                    <input type="text" class="form-control" name="code" placeholder="邀请码" >
                 </div>
             <?php } ?>
         </div>
