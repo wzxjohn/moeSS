@@ -81,7 +81,7 @@ class User_model extends CI_Model
             'user_name' => $username,
             'email' => $email,
             'pass' => $password,
-            'password' => get_temp_pass(),
+            'passwd' => get_temp_pass(),
             't' => '0',
             'u' => '0',
             'd' => '0',
