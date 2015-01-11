@@ -86,7 +86,7 @@ class User extends CI_Controller
             }
             else
             {
-                echo '{"result" : "Something Missing!" }'
+                echo '{"result" : "Something Missing!" }';
             }
         }
         else
