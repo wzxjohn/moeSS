@@ -51,7 +51,7 @@ $this->load->helper('form');
             });
 
             jQuery.validator.addMethod("onlyAlphaNumber", function(value, element) {
-                return /^[a-zA-Z()]+$/.test(value);
+                return /^[a-zA-Z0-9]+$/.test(value);
             }, "Alpha and Number Only!"),
 
             $('#registerForm').validate( {
