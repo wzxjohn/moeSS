@@ -45,7 +45,7 @@ $this->load->helper('form');
 
             $('#loginForm').submit(function() {
                 if ($(this).valid()) {
-                    $(this).username.value = md5($(this).username.value);
+                    document.getElementById('password').value = md5(document.getElementById('password').value);
                     $(this).ajaxSubmit(options);
                     return false;
                 }
@@ -63,23 +63,6 @@ $this->load->helper('form');
         // post-submit callback
         function showResponse(data, statusText, xhr, $form)  {
             alert(data.result);
-        }
-        function logincheck()
-        {
-            if(document.getElementById('username').value.length==0){
-                alert("请输入用户名");
-                document.getElementById('username').focus();
-                return false;
-            }
-
-            if(document.getElementById('password').value.length==0){
-                alert("请输入密码!");
-                document.getElementById('password').focus();
-                return false;
-            }
-
-            document.getElementById('password').value = md5(document.getElementById('password').value);
-            document.getElementById('loginForm').submit();
         }
     </script>
 </head>
