@@ -50,7 +50,7 @@ class User extends CI_Controller
     function login_check()
     {
         $this->load->model('user_model');
-        $user = $this->admin_model->u_select(trim($_POST['username']));
+        $user = $this->user_model->u_select(trim($_POST['username']));
         if ($user)
         {
             if ($user[0]->pass == $_POST['password'])
