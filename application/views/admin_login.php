@@ -8,8 +8,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->helper('form');
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html class="bg-black">
 <head>
     <meta charset="utf-8">
@@ -84,7 +83,7 @@ $this->load->helper('form');
 <?php echo validation_errors(); ?>
 
 <div class="form-box" id="login-box">
-    <div class="header">登录</div>
+    <div class="header"><?php echo SITE_NAME; ?> - 管理登录</div>
     <?php
         $attributes = array(
             'role' => 'form',

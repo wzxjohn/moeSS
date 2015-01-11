@@ -67,8 +67,19 @@ class User extends CI_Controller
     function do_register()
     {
         $username = $this->input->post('username');
+        if ( strlen($username)<7||strlen($username)>32 )
+        {
+            echo '{"result" : "Username not valid!" }';
+            return;
+        }
         $password = $this->input->post('password');
         $email = $this->input->post('email');
+        $this->load->helper('email');
+        if ( !valid_email($email) )
+        {
+            echo '{"result" : "E-mail not valid!" }';
+            return;
+        }
         $invitecode = $this->input->post('code');
 
         if ( $username && $password && $email )
@@ -101,16 +112,16 @@ class User extends CI_Controller
                 $username = strip_slashes(strip_quotes($username));
                 $this->load->helper('security');
                 $password = do_hash($password, 'md5');
-                if ($invitecode)
+                if ( $this->user_model->new_user($username, $password, $email, $invitecode) )
                 {
-                    $this->user_model->new_user($username, $password, $email, $invitecode);
+                    echo '{"result" : "success" }';
+                    return;
                 }
                 else
                 {
-                    $this->user_model->new_user($username, $password, $email);
+                    echo '{"result" : "DB Failed!" }';
+                    return;
                 }
-                echo '{"result" : "success" }';
-                return;
             }
         }
         else

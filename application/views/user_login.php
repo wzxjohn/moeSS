@@ -83,7 +83,7 @@ $this->load->helper('form');
 <?php echo validation_errors(); ?>
 
 <div class="form-box" id="login-box">
-    <div class="header">登录</div>
+    <div class="header"><?php echo SITE_NAME; ?> - 用户登录</div>
     <?php
     $attributes = array(
         'role' => 'form',
