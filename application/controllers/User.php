@@ -55,6 +55,11 @@ class User extends CI_Controller
         return;
     }
 
+    function guestbook()
+    {
+        return;
+    }
+
     function login_check()
     {
         $username = $this->input->post('username');

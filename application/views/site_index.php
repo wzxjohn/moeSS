@@ -64,8 +64,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         </div>
     </div><?php
-    include_once 'footer.php';
-    include_once 'ana.php';?>
+    $this->load->view('index_footer');
+    $this->load->view('ana') ;?>
 
 </div> <!-- /container -->
 
