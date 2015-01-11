@@ -43,14 +43,14 @@ $this->load->helper('form');
                 dataType:  'json'        // 'xml', 'script', or 'json' (expected server response type)
             };
 
-            $('#loginForm').submit(function() {
+            $('#registerForm').submit(function() {
                 if ($(this).valid()) {
                     $(this).ajaxSubmit(options);
                     return false;
                 }
             });
 
-            $('#loginForm').validate( {
+            $('#registerForm').validate( {
                     rules:{
                         username: {
                         	required: true,
