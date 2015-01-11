@@ -61,9 +61,9 @@ $this->load->helper('form');
         });
 
         // post-submit callback
-        function showResponse(data, statusText, xhr, $form)  {
-            if (data.result == "success"){
-
+        function showResponse(data, statusText, xhr, $form) {
+            if (data.result == "success") {
+                location.reload();
             } else {
                 alert(data.result);
             }
