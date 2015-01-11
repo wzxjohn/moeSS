@@ -20,10 +20,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title><?php echo SITE_NAME; ?></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo base_url("static/css/bootstrap.min.css"); ?> rel="stylesheet">
+    <link href="<?php echo base_url("static/css/bootstrap.min.css"); ?>" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="<?php echo base_url("static/css/jumbotron-narrow.css"); ?> rel="stylesheet">
+    <link href="<?php echo base_url("static/css/jumbotron-narrow.css"); ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php $this->load->view('index_nav');?>
 
     <div class="jumbotron">
-        <h2><?php echo SITENAME; ?></h2>
+        <h2><?php echo SITE_NAME; ?></h2>
         <p class="lead"> 每个月5G流量，香港节点。</p>
         <p><a class="btn btn-lg btn-success" href="<?php echo site_url('user/reg'); ?>" role="button">立即注册</a></p>
     </div>
