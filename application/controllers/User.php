@@ -49,21 +49,23 @@ class User extends CI_Controller
 
     function login_check()
     {
-        $this->load->model('user_model');
-        $user = $this->user_model->u_select(trim($_POST['username']));
-        if ($user)
+        if (trim($_POST['username']) && trim($_POST['password']))
         {
-            if ($user[0]->pass == $_POST['password'])
-            {
-                $arr = array( 's_uid' => $user[0]->uid,
-                    's_username' => $user[0]->username
-                );
-                $this->session->set_userdata($arr);
-                echo '{"result" : "success" }';
-                //redirect(site_url('admin'));
-            }
-            else
-            {
+            $this->load->model('user_model');
+            $user = $this->user_model->u_select(trim($_POST['username']));
+            if ($user) {
+                if ($user[0]->pass == $_POST['password']) {
+                    $arr = array('s_uid' => $user[0]->uid,
+                        's_username' => $user[0]->username
+                    );
+                    $this->session->set_userdata($arr);
+                    echo '{"result" : "success" }';
+                    //redirect(site_url('admin'));
+                } else {
+                    echo '{"result" : "Wrong Username or Password!" }';
+                    //redirect(site_url('admin/login/'));
+                }
+            } else {
                 echo '{"result" : "Wrong Username or Password!" }';
                 //redirect(site_url('admin/login/'));
             }
@@ -71,7 +73,6 @@ class User extends CI_Controller
         else
         {
             echo '{"result" : "Wrong Username or Password!" }';
-            //redirect(site_url('admin/login/'));
         }
     }
 
