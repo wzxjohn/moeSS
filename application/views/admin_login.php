@@ -61,9 +61,9 @@ $this->load->helper('form');
         });
 
         // post-submit callback
-        function showResponse(data, statusText, xhr, $form) {
+        function showResponse(data) {
             if (data.result == "success") {
-                location.reload();
+                window.location.href = "<?php echo site_url('admin'); ?>";
             } else {
                 alert(data.result);
             }

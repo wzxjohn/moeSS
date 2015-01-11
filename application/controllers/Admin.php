@@ -61,7 +61,7 @@ class Admin extends CI_Controller
                 );
                 $this->session->set_userdata($arr);
                 echo '{"result" : "success" }';
-                redirect(site_url('admin'));
+                //redirect(site_url('admin'));
             }
             else
             {
