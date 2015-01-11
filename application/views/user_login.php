@@ -13,6 +13,7 @@ $this->load->helper('form');
 <head>
     <meta charset="utf-8">
     <title><?php echo SITE_NAME; ?> - 用戶登陆</title>
+    <link rel="icon" href="<?php echo site_url('favicon.ico'); ?>">
     <!-- bootstrap 3.0.2 -->
     <link href="<?php echo base_url("static/bootstrap/css/bootstrap.min.css"); ?>" rel="stylesheet" type="text/css" />
     <!-- font Awesome -->
@@ -51,9 +52,16 @@ $this->load->helper('form');
                 }
             });
 
+            jQuery.validator.addMethod("onlyAlphaNumber", function(value, element) {
+                return /^[a-zA-Z0-9]+$/.test(value);
+            }, "Alpha and Number Only!");
+
             $('#loginForm').validate( {
                     rules:{
-                        username: "required",
+                        username: {
+                            required: true,
+                            onlyAlphaNumber: true
+                        },
                         password: "required"
                     }
                 }

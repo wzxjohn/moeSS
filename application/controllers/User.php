@@ -70,34 +70,55 @@ class User extends CI_Controller
         $password = $this->input->post('password');
         $email = $this->input->post('email');
         $invitecode = $this->input->post('invitecode');
-        if ( $this->user_model->need_invite() && $invitecode )
-        {
-            if ( $username && $password && $email )
-            {
-                $user = $this->user_model->u_select($username);
-                if ($user)
-                {
-                    echo '{"result" : "Username already exist!" }';
-                }
-                else
-                {
 
-                }
+        if ( $username && $password && $email )
+        {
+            $user = $this->user_model->u_select($username);
+            if ($user)
+            {
+                echo '{"result" : "Username already exist!" }';
+                return;
             }
             else
             {
-                echo '{"result" : "Something Missing!" }';
+                if ( $this->user_model->need_invite() )
+                {
+                    if ( $invitecode )
+                    {
+                        if ( !$this->user_model->valid_code($invitecode) )
+                        {
+                            echo '{"result" : "Invite Code Invalid!" }';
+                            return;
+                        }
+                    }
+                }
+                $this->load->helper('string');
+                $username = strip_slashes(strip_quotes($username));
+                $this->load->helper('security');
+                $password = do_hash($password, 'md5');
+                if ($invitecode)
+                {
+                    $this->user_model->new_user($username, $password, $email, $invitecode);
+                }
+                else
+                {
+                    $this->user_model->new_user($username, $password, $email);
+                }
+                echo '{"result" : "success" }';
+                return;
             }
         }
         else
         {
-            echo '{"result" : "Something Wrong!" }';
+            echo '{"result" : "Something Missing!" }';
+            return;
         }
         return;
     }
 
     function guestbook()
     {
+        $this->view->load('guestbook');
         return;
     }
 

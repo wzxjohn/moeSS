@@ -13,6 +13,7 @@ $this->load->helper('form');
 <head>
     <meta charset="UTF-8">
     <title><?php echo SITE_NAME; ?> - 注册</title>
+    <link rel="icon" href="<?php echo site_url('favicon.ico'); ?>">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
     <link href="<?php echo base_url("static/css/bootstrap.min.css"); ?>" rel="stylesheet" type="text/css" />
@@ -52,25 +53,23 @@ $this->load->helper('form');
 
             jQuery.validator.addMethod("onlyAlphaNumber", function(value, element) {
                 return /^[a-zA-Z0-9]+$/.test(value);
-            }, "Alpha and Number Only!"),
+            }, "Alpha and Number Only!");
 
             $('#registerForm').validate( {
                     rules:{
                         username: {
                         	required: true,
-                        	minlength: 8,
+                        	minlength: 6,
                             onlyAlphaNumber: true
                         },
                         password: {
                         	required: true,
-                        	minlength: 8,
-                            onlyAlphaNumber: true
+                        	minlength: 8
                         },
                         repassword: {
                         	required: true,
                         	minlength: 8,
-                        	equalTo: '#password',
-                            onlyAlphaNumber: true
+                        	equalTo: '#password'
                         },
                         email: {
                         	required: true,
