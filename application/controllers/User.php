@@ -14,6 +14,7 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model('user_model');
+        return;
     }
 
     function index()
@@ -26,6 +27,7 @@ class User extends CI_Controller
         {
             redirect(site_url('user/login'));
         }
+        return;
     }
 
     function login()
@@ -45,6 +47,12 @@ class User extends CI_Controller
     {
         $this->session->sess_destroy();
         redirect(site_url('user/login'));
+        return;
+    }
+
+    function register()
+    {
+        return;
     }
 
     function login_check()
@@ -81,6 +89,7 @@ class User extends CI_Controller
         {
             echo '{"result" : "Wrong Username or Password!" }';
         }
+        return;
     }
 
     function is_login()
