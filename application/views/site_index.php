@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title><?php echo SITENAME; ?></title>
+    <title><?php echo SITE_NAME; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url("static/css/bootstrap.min.css"); ?> rel="stylesheet">
