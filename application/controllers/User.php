@@ -69,7 +69,7 @@ class User extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $email = $this->input->post('email');
-        $invitecode = $this->input->post('invitecode');
+        $invitecode = $this->input->post('code');
 
         if ( $username && $password && $email )
         {
@@ -90,6 +90,11 @@ class User extends CI_Controller
                             echo '{"result" : "Invite Code Invalid!" }';
                             return;
                         }
+                    }
+                    else
+                    {
+                        echo '{"result" : "Please input Invite Code!" }';
+                        return;
                     }
                 }
                 $this->load->helper('string');
