@@ -201,7 +201,7 @@ class User_model extends CI_Model
             }
             if ( !$email || $email == "" )
             {
-                unset($data['pass']);
+                unset($data['email']);
             }
             return $this->db->update('user', $data );
         }
