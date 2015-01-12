@@ -83,3 +83,6 @@ $this->load->helper('form');
         </div>
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
+<?php $this->load->view('ana') ;?>
+</body>
+</html>

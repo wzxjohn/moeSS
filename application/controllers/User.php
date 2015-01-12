@@ -317,7 +317,7 @@ class User extends CI_Controller
             $data['is_able_to_check_in'] = is_able_to_check_in( $user_info->last_check_in_time );
 
             $this->load->view( 'user/user_profile', $data );
-            $this->load->view( 'user/user_footer' );
+            //$this->load->view( 'user/user_footer' );
         }
         else
         {
