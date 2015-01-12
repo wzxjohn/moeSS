@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 dataType:  'json'        // 'xml', 'script', or 'json' (expected server response type)
             };
 
-            $('#registerForm').submit(function() {
+            $('#editForm').submit(function() {
                 if ($(this).valid()) {
                     $(this).ajaxSubmit(options);
                     return false;
