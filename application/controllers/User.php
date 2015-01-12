@@ -264,9 +264,9 @@ class User extends CI_Controller
 
             $data['index_active'] = (bool) false;
             $data['node_active'] = (bool) false;
-            $data['info_active'] = (bool) false;
+            $data['info_active'] = (bool) true;
             $data['update_active'] = (bool) false;
-            $data['code_active'] = (bool) true;
+            $data['code_active'] = (bool) false;
             $this->load->view( 'user/user_sidebar', $data );
 
             $user_info = $this->user_model->u_basic_info($data['user_name']);
@@ -316,7 +316,7 @@ class User extends CI_Controller
             $data['unix_time'] = $user_info->t;
             $data['is_able_to_check_in'] = is_able_to_check_in( $user_info->last_check_in_time );
 
-            $this->load->view( 'user/user_index', $data );
+            $this->load->view( 'user/user_profile', $data );
             $this->load->view( 'user/user_footer' );
         }
         else
