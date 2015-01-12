@@ -195,7 +195,7 @@ class User_model extends CI_Model
                 'pass' => $password,
                 'email' => $email
             );
-            if ( !$password || $password == "" )
+            if ( !$password )
             {
                 unset($data['pass']);
             }

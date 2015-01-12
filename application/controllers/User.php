@@ -368,7 +368,15 @@ class User extends CI_Controller
         {
             $username = $this->session->userdata('s_username');
             $uid = $this->session->userdata('s_uid');
-            $nowpassword = hash( 'md5', $this->input->post('nowpassword') );
+            $nowpassword = $this->input->post('password');
+            if ($nowpassword == "")
+            {
+                $nowpassword = null;
+            }
+            else
+            {
+                $nowpassword = hash( 'md5', $nowpassword );
+            }
             $password = $this->input->post('password');
             if ($password == "")
             {
@@ -388,6 +396,10 @@ class User extends CI_Controller
                 $repassword = hash( 'md5', $repassword );
             }
             $email = $this->input->post('email');
+            if ($email == "")
+            {
+                $email = null;
+            }
             if ( ! $password && ! $email )
             {
                 echo '{"result" : "Nothing to change!" }';
