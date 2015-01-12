@@ -20,6 +20,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="<?php echo base_url('static/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'); ?>" type="text/javascript"></script>
 <!-- jQuery Knob Chart -->
 <script src="<?php echo base_url('static/js/plugins/jqueryKnob/jquery.knob.js'); ?>" type="text/javascript"></script>
+<!-- Moment JS -->
+<script src="<?php echo base_url('static/js/plugins/moment/moment.min.js'); ?>"></script>
 <!-- daterangepicker -->
 <script src="<?php echo base_url('static/js/plugins/daterangepicker/daterangepicker.js'); ?>" type="text/javascript"></script>
 <!-- datepicker -->
