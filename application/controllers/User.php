@@ -103,8 +103,7 @@ class User extends CI_Controller
         }
         $password = $this->input->post('password');
         $email = $this->input->post('email');
-        $this->load->helper('email');
-        if ( !valid_email($email) )
+        if ( !filter_var($email, FILTER_VALIDATE_EMAIL) )
         {
             echo '{"result" : "E-mail not valid!" }';
             return;
@@ -384,7 +383,7 @@ class User extends CI_Controller
                 echo '{"result" : "Please type same password twice!" }';
                 return;
             }
-            if ( $email && ! valid_email($email) )
+            if ( $email && ! filter_var($email, FILTER_VALIDATE_EMAIL) )
             {
                 echo '{"result" : "E-mail not valid!" }';
                 return;
