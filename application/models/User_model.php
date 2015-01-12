@@ -211,7 +211,7 @@ class User_model extends CI_Model
         }
     }
 
-    function update_ss_pass($uid, $username, $pass)
+    function change_ss_pass($uid, $username, $pass)
     {
         $this->db->where('uid', $uid);
         $this->db->where('user_name', $username);

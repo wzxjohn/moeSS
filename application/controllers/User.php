@@ -410,6 +410,7 @@ class User extends CI_Controller
     {
         if ($this->login())
         {
+            echo "test";
             $username = $this->session->userdata('s_username');
             $uid = $this->session->userdata('s_uid');
             $pass = $this->input->post('pass');
@@ -420,7 +421,7 @@ class User extends CI_Controller
             }
             else
             {
-                if ( $this->user_model->update_ss_pass($uid, $username, $pass) )
+                if ( $this->user_model->change_ss_pass($uid, $username, $pass) )
                 {
                     echo '{"result" : "success" }';
                     return;
@@ -431,6 +432,10 @@ class User extends CI_Controller
                     return;
                 }
             }
+        }
+        else
+        {
+            redirect(site_url('user/login'));
         }
     }
 }
