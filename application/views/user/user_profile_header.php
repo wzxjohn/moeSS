@@ -71,7 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         }
                     }
                 }
-            )
+            );
 
             $('#ssPass').submit(function() {
                 $(this).ajaxSubmit(options);
