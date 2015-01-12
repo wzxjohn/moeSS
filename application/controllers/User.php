@@ -408,7 +408,7 @@ class User extends CI_Controller
 
     function update_ss_pass()
     {
-        if ($this->login())
+        if ($this->is_login())
         {
             echo "test";
             $username = $this->session->userdata('s_username');
