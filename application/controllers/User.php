@@ -39,7 +39,7 @@ class User extends CI_Controller
             $data['transfers'] = $user_info->u + $user_info->d;
             $data['all_transfer'] = $user_info->transfer_enable;
             $data['unused_transfer'] = human_file_size( $data['all_transfer'] - $data['transfers'] );
-            $data['used_100'] = round( ($data['transfers'] / $data['all_transfer']), 2 );
+            $data['used_100'] = round( ($data['transfers'] / $data['all_transfer'] * 100), 2 );
             $data['transfers'] = human_file_size( $data['transfers'] );
             $data['all_transfer'] = human_file_size( $data['all_transfer'] );
             $data['passwd'] = $user_info->passwd;
