@@ -131,13 +131,21 @@ class User_model extends CI_Model
     {
         if ($test)
         {
-            $this->db->where('node_type', '1');
+            $this->db->where('node_type', '0');
         }
         else
         {
-            $this->db->where('node_type', '0');
+            $this->db->where('node_type', '1');
         }
         $this->db->order_by('node_order', 'ASC');
-        return $this->db->get('ss_node')->result();
+        $query = $this->db->get('ss_node');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return (bool) false;
+        }
     }
 }
