@@ -21,7 +21,7 @@ class User_model extends CI_Model
     function u_select($username)
     {
         $this->db->where('user_name', $username);
-        $this->db->select('uid, user_name, pass');
+        $this->db->select('uid, user_name, pass, email');
         $query = $this->db->get('user');
         return $query->result();
     }
@@ -105,6 +105,21 @@ class User_model extends CI_Model
         if ($query->num_rows() > 0)
         {
             return (bool) !$query->result()[0]->used;
+        }
+        else
+        {
+            return (bool) false;
+        }
+    }
+
+    function u_info( $username )
+    {
+        $this->db->where('user_name', $username);
+        $this->db->select('t, u, d, plan, transfer_enable, passwd, port, last_check_in_time');
+        $query = $this->db->get('user');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0];
         }
         else
         {

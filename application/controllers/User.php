@@ -21,7 +21,29 @@ class User extends CI_Controller
     {
         if ($this->is_login())
         {
-            $this->load->view('welcome_message');
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
+            $this->load->view( 'user/user_header' );
+            $this->load->view( 'user/user_nav', $data );
+            $this->load->view( 'user/user_sidebar', $data );
+            $user_info = $this->user_model->u_info($data['user_name']);
+            $data['transfers'] = $user_info['u'] + $user_info['d'];
+            $data['all_transfer'] = $user_info['transfer_enable'];
+            $data['unused_transfer'] = human_file_size( $data['all_transfer'] - $data['transfers'] );
+            $data['used_100'] = round( ($data['transfers'] / $data['all_transfer']), 2 );
+            $data['transfers'] = human_file_size( $data['transfers'] );
+            $data['all_transfer'] = human_file_size( $data['all_transfer'] );
+            $data['pass'] = $user_info['passwd'];
+            $data['plan'] = $user_info['plan'];
+            $data['port'] = $user_info['port'];
+            $data['last_check_in_time'] = $user_info['last_check_in_time'];
+            $data['unix_time'] = $user_info['t'];
+            $data['is_able_to_check_in'] = is_able_to_check_in( $user_info['last_check_in_time'] );
+
+            $this->load->view( 'user/user_index', $data );
+            $this->load->view( 'user/user_footer' );
         }
         else
         {
@@ -151,7 +173,8 @@ class User extends CI_Controller
                 if ($user[0]->pass == $password)
                 {
                     $arr = array('s_uid' => $user[0]->uid,
-                        's_username' => $user[0]->user_name
+                        's_username' => $user[0]->user_name,
+                        's_email' => $user[0]->email
                     );
                     $this->session->set_userdata($arr);
                     echo '{"result" : "success" }';
@@ -186,6 +209,11 @@ class User extends CI_Controller
         {
             return false;
         }
+    }
+
+    function my_info()
+    {
+        return;
     }
 
 }

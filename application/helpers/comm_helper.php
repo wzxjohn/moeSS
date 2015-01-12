@@ -42,3 +42,19 @@ if ( ! function_exists('human_file_size'))
   		return number_format($size)." bytes";
 	}
 }
+
+if (! function_exists('is_able_to_check_in'))
+{
+	function is_able_to_check_in( $last_check_in_time )
+	{
+		$now = time();
+		if( $now - $last_check_in_time > 3600*24 )
+		{
+			return (bool) true;
+		}
+		else
+		{
+			return (bool) false;
+		}
+	}
+}
