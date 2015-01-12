@@ -241,7 +241,7 @@ class User extends CI_Controller
             $data['nodes'] = $nodes;
             $data['test_nodes'] = $test_nodes;
 
-            $this->load->view( 'user/user_node', $data );
+            $this->load->view( 'user/user_nodes', $data );
             $this->load->view( 'user/user_footer' );
         }
         else
