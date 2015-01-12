@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="<?php echo site_url('user/myinfo'); ?>" class="btn btn-default btn-flat">我的信息</a>
+                                <a href="<?php echo site_url('user/my_info'); ?>" class="btn btn-default btn-flat">我的信息</a>
                             </div>
                             <div class="pull-right">
                                 <a href="<?php echo site_url('user/logout');?>" class="btn btn-default btn-flat">退出</a>

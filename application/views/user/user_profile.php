@@ -68,7 +68,7 @@ $this->load->helper('form');
                         <h3 class="box-title">Shadowsocks连接密码修改</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" name="edit" method="post" action="<?php echo site_url('user/update_ss_pass'); ?>"  >
+                        <form role="form" id="ssPass" name="ssPass" method="post" action="<?php echo site_url('user/update_ss_pass'); ?>"  >
                             <div class="form-group">
                                 <input type="text" placeholder="输入新密码" class="form-control" id="pass" name="pass" required>
                             </div>

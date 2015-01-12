@@ -23,8 +23,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Theme style -->
     <link href="<?php echo base_url('static/css/AdminLTE.css'); ?>" rel="stylesheet" type="text/css" />
 
+    <script src="<?php echo base_url("static/js/jquery-2.0.3.min.js"); ?>"></script>
     <script src="<?php echo base_url("static/js/jquery.validate.min.js"); ?>"></script>
     <script src="<?php echo base_url("static/js/jquery.form.min.js"); ?>"></script>
+    <!-- Bootstrap -->
+    <script src="<?php echo base_url("static/js/bootstrap.min.js"); ?>" type="text/javascript"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -69,6 +72,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     }
                 }
             )
+
+            $('#ssPass').submit(function() {
+                $(this).ajaxSubmit(options);
+                return false;
+            });
         });
 
         // post-submit callback
