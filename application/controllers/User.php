@@ -41,6 +41,11 @@ class User extends CI_Controller
             $data['last_check_in_time'] = $user_info->last_check_in_time;
             $data['unix_time'] = $user_info->t;
             $data['is_able_to_check_in'] = is_able_to_check_in( $user_info->last_check_in_time );
+            $data['index_active'] = (bool) true;
+            $data['node_active'] = (bool) false;
+            $data['info_active'] = (bool) false;
+            $data['update_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
 
             $this->load->view( 'user/user_index', $data );
             $this->load->view( 'user/user_footer' );
