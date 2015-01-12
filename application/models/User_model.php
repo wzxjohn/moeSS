@@ -163,4 +163,9 @@ class User_model extends CI_Model
             return (bool) false;
         }
     }
+
+    function get_invite_codes()
+    {
+
+    }
 }
