@@ -140,7 +140,7 @@ class User extends CI_Controller
                 $this->load->helper('string');
                 $username = strip_slashes(strip_quotes($username));
                 $this->load->helper('security');
-                $password = do_hash($password, 'md5');
+                $password = hash('md5', $password );
                 if ( $this->user_model->new_user($username, $password, $email, $invitecode) )
                 {
                     echo '{"result" : "success" }';
@@ -369,9 +369,9 @@ class User extends CI_Controller
         {
             $username = $this->session->userdata('s_username');
             $uid = $this->session->userdata('s_uid');
-            $nowpassword = $this->input->post('nowpassword');
-            $password = $this->input->post('password');
-            $repassword = $this->input->post('repassword');
+            $nowpassword = hash( 'md5', $this->input->post('nowpassword') );
+            $password = hash( 'md5', $this->input->post('password') );
+            $repassword = hash( 'md5', $this->input->post('repassword') );
             $email = $this->input->post('email');
             if ( ! $password && ! $email )
             {
