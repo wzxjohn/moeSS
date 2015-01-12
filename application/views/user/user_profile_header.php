@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         nowpassword: {
                             required: true,
                             minlength: 8
-                        }
+                        },
                         password: {
                             required: false,
                             minlength: 8
