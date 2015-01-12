@@ -38,7 +38,7 @@ class User extends CI_Controller
         }
         else
         {
-            $this->load->view('user_login');
+            $this->load->view('user/user_login');
         }
         return;
     }
@@ -60,7 +60,7 @@ class User extends CI_Controller
         {
             $data['invite_only'] = false;
         }
-        $this->load->view('user_register', $data);
+        $this->load->view('user/user_register', $data);
         return;
     }
 

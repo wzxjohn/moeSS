@@ -36,7 +36,7 @@ class Admin extends CI_Controller
         }
         else
         {
-            $this->load->view('admin_login');
+            $this->load->view('admin/admin_login');
         }
         return;
     }

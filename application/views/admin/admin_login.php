@@ -79,9 +79,6 @@ $this->load->helper('form');
     </script>
 </head>
 <body class="bg-black">
-
-<?php echo validation_errors(); ?>
-
 <div class="form-box" id="login-box">
     <div class="header"><?php echo SITE_NAME; ?> - 管理登录</div>
     <?php
