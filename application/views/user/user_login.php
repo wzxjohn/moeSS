@@ -13,7 +13,7 @@ $this->load->helper('form');
 <head>
     <meta charset="utf-8">
     <title><?php echo SITE_NAME; ?> - 用戶登陆</title>
-    <link rel="icon" href="<?php echo site_url('favicon.ico'); ?>">
+    <link rel="icon" href="<?php echo base_url('favicon.ico'); ?>">
     <!-- bootstrap 3.0.2 -->
     <link href="<?php echo base_url("static/bootstrap/css/bootstrap.min.css"); ?>" rel="stylesheet" type="text/css" />
     <!-- font Awesome -->

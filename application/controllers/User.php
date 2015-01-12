@@ -35,7 +35,7 @@ class User extends CI_Controller
             $data['used_100'] = round( ($data['transfers'] / $data['all_transfer']), 2 );
             $data['transfers'] = human_file_size( $data['transfers'] );
             $data['all_transfer'] = human_file_size( $data['all_transfer'] );
-            $data['pass'] = $user_info->passwd;
+            $data['passwd'] = $user_info->passwd;
             $data['plan'] = $user_info->plan;
             $data['port'] = $user_info->port;
             $data['last_check_in_time'] = $user_info->last_check_in_time;

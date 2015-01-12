@@ -13,7 +13,7 @@ $this->load->helper('form');
 <head>
     <meta charset="UTF-8">
     <title><?php echo SITE_NAME; ?> - 注册</title>
-    <link rel="icon" href="<?php echo site_url('favicon.ico'); ?>">
+    <link rel="icon" href="<?php echo base_url('favicon.ico'); ?>">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
     <link href="<?php echo base_url("static/css/bootstrap.min.css"); ?>" rel="stylesheet" type="text/css" />
