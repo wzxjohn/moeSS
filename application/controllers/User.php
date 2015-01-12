@@ -410,7 +410,6 @@ class User extends CI_Controller
     {
         if ($this->is_login())
         {
-            echo "test";
             $username = $this->session->userdata('s_username');
             $uid = $this->session->userdata('s_uid');
             $pass = $this->input->post('pass');
