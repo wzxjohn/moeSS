@@ -369,21 +369,42 @@ class User extends CI_Controller
             $username = $this->session->userdata('s_username');
             $uid = $this->session->userdata('s_uid');
             $nowpassword = hash( 'md5', $this->input->post('nowpassword') );
-            $password = hash( 'md5', $this->input->post('password') );
-            $repassword = hash( 'md5', $this->input->post('repassword') );
+            $password = $this->input->post('password');
+            if ($password == "")
+            {
+                $password = null;
+            }
+            else
+            {
+                $password = hash( 'md5', $password );
+            }
+            $repassword = $this->input->post('repassword');
+            if ($repassword == "")
+            {
+                $repassword = null;
+            }
+            else
+            {
+                $repassword = hash( 'md5', $repassword );
+            }
             $email = $this->input->post('email');
             if ( ! $password && ! $email )
             {
                 echo '{"result" : "Nothing to change!" }';
                 return;
             }
+            if ( $password == "" && $email == "")
+            {
+                echo '{"result" : "Nothing to change!" }';
+                return;
+            }
 
-            if ( $password && $repassword && $password != $repassword )
+            if ( $password && $password != "" && $repassword && $password != $repassword )
             {
                 echo '{"result" : "Please type same password twice!" }';
                 return;
             }
-            if ( $email && ! filter_var($email, FILTER_VALIDATE_EMAIL) )
+            if ( $email && $email != "" && ! filter_var($email, FILTER_VALIDATE_EMAIL) )
             {
                 echo '{"result" : "E-mail not valid!" }';
                 return;
