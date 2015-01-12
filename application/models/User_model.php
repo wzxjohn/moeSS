@@ -210,4 +210,12 @@ class User_model extends CI_Model
             return (bool) false;
         }
     }
+
+    function update_ss_pass($uid, $username, $pass)
+    {
+        $this->db->where('uid', $uid);
+        $this->db->where('user_name', $username);
+        $data = array( 'passwd' => $pass );
+        return $this->db->update('user', $data );
+    }
 }

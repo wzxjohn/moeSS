@@ -405,4 +405,32 @@ class User extends CI_Controller
             redirect(site_url('user/login'));
         }
     }
+
+    function update_ss_pass()
+    {
+        if ($this->login())
+        {
+            $username = $this->session->userdata('s_username');
+            $uid = $this->session->userdata('s_uid');
+            $pass = $this->input->post('pass');
+            if ( ! $pass )
+            {
+                echo '{"result" : "Nothing to change!" }';
+                return;
+            }
+            else
+            {
+                if ( $this->user_model->update_ss_pass($uid, $username, $pass) )
+                {
+                    echo '{"result" : "success" }';
+                    return;
+                }
+                else
+                {
+                    echo '{"result" : "Something Wrong!" }';
+                    return;
+                }
+            }
+        }
+    }
 }

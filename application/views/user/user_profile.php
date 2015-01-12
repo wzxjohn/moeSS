@@ -80,7 +80,6 @@ $this->load->helper('form');
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div><!-- /.col (right) -->
-
         </div>
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
