@@ -138,6 +138,6 @@ class User_model extends CI_Model
             $this->db->where('node_type', '0');
         }
         $this->db->order_by('node_order', 'ASC');
-        return $this->db->get('ss_node');
+        return $this->db->get('ss_node')->result();
     }
 }
