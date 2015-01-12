@@ -218,8 +218,162 @@ class User extends CI_Controller
         }
     }
 
+    function node_list()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
+            $this->load->view( 'user/user_header' );
+            $this->load->view( 'user/user_nav', $data );
+
+            $data['index_active'] = (bool) false;
+            $data['node_active'] = (bool) true;
+            $data['info_active'] = (bool) false;
+            $data['update_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
+            $this->load->view( 'user/user_sidebar', $data );
+
+            $nodes = $this->user_model->get_nodes( (bool) false );
+            $test_nodes = $this->user_model->get_nodes( (bool) true );
+            $data['nodes'] = $nodes;
+            $data['test_nodes'] = $test_nodes;
+
+            $this->load->view( 'user/user_node', $data );
+            $this->load->view( 'user/user_footer' );
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
+        return;
+    }
+
     function my_info()
     {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
+            $this->load->view( 'user/user_header' );
+            $this->load->view( 'user/user_nav', $data );
+
+            $data['index_active'] = (bool) true;
+            $data['node_active'] = (bool) false;
+            $data['info_active'] = (bool) false;
+            $data['update_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
+            $this->load->view( 'user/user_sidebar', $data );
+
+            $user_info = $this->user_model->u_info($data['user_name']);
+            $data['transfers'] = $user_info->u + $user_info->d;
+            $data['all_transfer'] = $user_info->transfer_enable;
+            $data['unused_transfer'] = human_file_size( $data['all_transfer'] - $data['transfers'] );
+            $data['used_100'] = round( ($data['transfers'] / $data['all_transfer'] * 100), 2 );
+            $data['transfers'] = human_file_size( $data['transfers'] );
+            $data['all_transfer'] = human_file_size( $data['all_transfer'] );
+            $data['passwd'] = $user_info->passwd;
+            $data['plan'] = $user_info->plan;
+            $data['port'] = $user_info->port;
+            $data['last_check_in_time'] = $user_info->last_check_in_time;
+            $data['unix_time'] = $user_info->t;
+            $data['is_able_to_check_in'] = is_able_to_check_in( $user_info->last_check_in_time );
+
+            $this->load->view( 'user/user_index', $data );
+            $this->load->view( 'user/user_footer' );
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
+        return;
+    }
+
+    function profile_update()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
+            $this->load->view( 'user/user_header' );
+            $this->load->view( 'user/user_nav', $data );
+
+            $data['index_active'] = (bool) true;
+            $data['node_active'] = (bool) false;
+            $data['info_active'] = (bool) false;
+            $data['update_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
+            $this->load->view( 'user/user_sidebar', $data );
+
+            $user_info = $this->user_model->u_info($data['user_name']);
+            $data['transfers'] = $user_info->u + $user_info->d;
+            $data['all_transfer'] = $user_info->transfer_enable;
+            $data['unused_transfer'] = human_file_size( $data['all_transfer'] - $data['transfers'] );
+            $data['used_100'] = round( ($data['transfers'] / $data['all_transfer'] * 100), 2 );
+            $data['transfers'] = human_file_size( $data['transfers'] );
+            $data['all_transfer'] = human_file_size( $data['all_transfer'] );
+            $data['passwd'] = $user_info->passwd;
+            $data['plan'] = $user_info->plan;
+            $data['port'] = $user_info->port;
+            $data['last_check_in_time'] = $user_info->last_check_in_time;
+            $data['unix_time'] = $user_info->t;
+            $data['is_able_to_check_in'] = is_able_to_check_in( $user_info->last_check_in_time );
+
+            $this->load->view( 'user/user_index', $data );
+            $this->load->view( 'user/user_footer' );
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
+        return;
+    }
+
+    function invite_code()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
+            $this->load->view( 'user/user_header' );
+            $this->load->view( 'user/user_nav', $data );
+
+            $data['index_active'] = (bool) true;
+            $data['node_active'] = (bool) false;
+            $data['info_active'] = (bool) false;
+            $data['update_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
+            $this->load->view( 'user/user_sidebar', $data );
+
+            $user_info = $this->user_model->u_info($data['user_name']);
+            $data['transfers'] = $user_info->u + $user_info->d;
+            $data['all_transfer'] = $user_info->transfer_enable;
+            $data['unused_transfer'] = human_file_size( $data['all_transfer'] - $data['transfers'] );
+            $data['used_100'] = round( ($data['transfers'] / $data['all_transfer'] * 100), 2 );
+            $data['transfers'] = human_file_size( $data['transfers'] );
+            $data['all_transfer'] = human_file_size( $data['all_transfer'] );
+            $data['passwd'] = $user_info->passwd;
+            $data['plan'] = $user_info->plan;
+            $data['port'] = $user_info->port;
+            $data['last_check_in_time'] = $user_info->last_check_in_time;
+            $data['unix_time'] = $user_info->t;
+            $data['is_able_to_check_in'] = is_able_to_check_in( $user_info->last_check_in_time );
+
+            $this->load->view( 'user/user_index', $data );
+            $this->load->view( 'user/user_footer' );
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
         return;
     }
 

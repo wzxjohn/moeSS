@@ -126,4 +126,18 @@ class User_model extends CI_Model
             return (bool) false;
         }
     }
+
+    function get_nodes( $test = false )
+    {
+        if ($test)
+        {
+            $this->db->where('node_type', '1');
+        }
+        else
+        {
+            $this->db->where('node_type', '0');
+        }
+        $this->db->order_by('node_order', 'ASC');
+        return $this->db->get('ss_node');
+    }
 }
