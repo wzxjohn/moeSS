@@ -63,10 +63,13 @@ class User_model extends CI_Model
         return $query->result()[0]->port;
     }
 
-    function deactive_code($invitecode)
+    function deactive_code($invitecode, $username)
     {
         $this->db->where('code', $invitecode);
-        $data = array( 'used' => (bool) true );
+        $data = array(
+            'used' => (bool) true,
+            'user_name' => $username
+            );
         return $this->db->update('invite_code', $data );
     }
 
@@ -74,7 +77,7 @@ class User_model extends CI_Model
     {
         if ($invitecode)
         {
-            $this->deactive_code($invitecode);
+            $this->deactive_code($invitecode, $username);
         }
         $this->load->helper('comm');
         $data = array(
@@ -166,6 +169,45 @@ class User_model extends CI_Model
 
     function get_invite_codes()
     {
+        $this->db->where('user', '1');
+        $this->db->where('used', '0');
+        $query = $this->db->get('invite_code');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return (bool) false;
+        }
+    }
 
+    function profile_update($uid, $username, $nowpassword, $password, $email)
+    {
+        $this->db->where('uid', $uid);
+        $this->db->where('user_name', $username);
+        $this->db->where('pass', $nowpassword);
+        $query = $this->db->get('user');
+        if ($query->num_rows() > 0)
+        {
+            $this->db->where('uid', $uid);
+            $data = array(
+                'pass' => $password,
+                'email' => $email
+            );
+            if ( !$password )
+            {
+                unset($data['pass']);
+            }
+            if ( !$email )
+            {
+                unset($data['pass']);
+            }
+            return $this->db->update('user', $data );
+        }
+        else
+        {
+            return (bool) false;
+        }
     }
 }

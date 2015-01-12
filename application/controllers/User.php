@@ -359,6 +359,50 @@ class User extends CI_Controller
 
     function pay()
     {
+        redirect(site_url('user'));
         return;
+    }
+
+    function do_profile_update()
+    {
+        if ($this->is_login())
+        {
+            $username = $this->session->userdata('s_username');
+            $uid = $this->session->userdata('s_uid');
+            $nowpassword = $this->input->post('nowpassword');
+            $password = $this->input->post('password');
+            $repassword = $this->input->post('repassword');
+            $email = $this->input->post('email');
+            if ( ! $password && ! $email )
+            {
+                echo '{"result" : "Nothing to change!" }';
+                return;
+            }
+
+            if ( $password && $repassword && $password != $repassword )
+            {
+                echo '{"result" : "Please type same password twice!" }';
+                return;
+            }
+            if ( $email && ! valid_email($email) )
+            {
+                echo '{"result" : "E-mail not valid!" }';
+                return;
+            }
+            if ( $this->user_model->profile_update($uid, $username, $nowpassword, $password, $email) )
+            {
+                echo '{"result" : "success" }';
+                return;
+            }
+            else
+            {
+                echo '{"result" : "Wrong password!" }';
+                return;
+            }
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
     }
 }

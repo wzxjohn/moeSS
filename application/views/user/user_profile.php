@@ -35,11 +35,11 @@ $this->load->helper('form');
                         'id' => 'editForm'//,
                         //'onsubmit' => 'return check()'
                     );
-                    echo form_open('user/do_update', $attributes);
+                    echo form_open('user/do_profile_update', $attributes);
                     ?>
                         <div class="box-body">
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="当前密码(必填)" id="nowpassword" name="nowpassword">
+                                <input type="password" class="form-control" placeholder="当前密码(必填)" id="nowpassword" name="nowpassword" required>
                             </div>
 
                             <div class="form-group">
@@ -53,9 +53,7 @@ $this->load->helper('form');
                             <div class="form-group">
                                 <input type="text" placeholder="邮箱(不修改请留空)" class="form-control" id="email" name="email">
                             </div>
-
                         </div><!-- /.box-body -->
-
                         <div class="box-footer">
                             <button type="submit" name="action" value="add" class="btn btn-primary">修改</button>
                         </div>
@@ -70,9 +68,9 @@ $this->load->helper('form');
                         <h3 class="box-title">Shadowsocks连接密码修改</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" name="edit" method="post" action="profile_update_pass_do.php"  >
+                        <form role="form" name="edit" method="post" action="<?php echo site_url('user/update_ss_pass'); ?>"  >
                             <div class="form-group">
-                                <input type="text" placeholder="输入新密码" class="form-control" name="pass">
+                                <input type="text" placeholder="输入新密码" class="form-control" id="pass" name="pass" required>
                             </div>
 
                             <div class="box-footer">
