@@ -368,7 +368,7 @@ class User extends CI_Controller
         {
             $username = $this->session->userdata('s_username');
             $uid = $this->session->userdata('s_uid');
-            $nowpassword = $this->input->post('password');
+            $nowpassword = $this->input->post('nowpassword');
             if ($nowpassword == "")
             {
                 $nowpassword = null;
