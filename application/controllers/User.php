@@ -262,9 +262,9 @@ class User extends CI_Controller
             $this->load->view( 'user/user_header' );
             $this->load->view( 'user/user_nav', $data );
 
-            $data['index_active'] = (bool) true;
+            $data['index_active'] = (bool) false;
             $data['node_active'] = (bool) false;
-            $data['info_active'] = (bool) false;
+            $data['info_active'] = (bool) true;
             $data['update_active'] = (bool) false;
             $data['code_active'] = (bool) false;
             $this->load->view( 'user/user_sidebar', $data );
@@ -304,10 +304,10 @@ class User extends CI_Controller
             $this->load->view( 'user/user_header' );
             $this->load->view( 'user/user_nav', $data );
 
-            $data['index_active'] = (bool) true;
+            $data['index_active'] = (bool) false;
             $data['node_active'] = (bool) false;
             $data['info_active'] = (bool) false;
-            $data['update_active'] = (bool) false;
+            $data['update_active'] = (bool) true;
             $data['code_active'] = (bool) false;
             $this->load->view( 'user/user_sidebar', $data );
 
@@ -346,28 +346,19 @@ class User extends CI_Controller
             $this->load->view( 'user/user_header' );
             $this->load->view( 'user/user_nav', $data );
 
-            $data['index_active'] = (bool) true;
+            $data['index_active'] = (bool) false;
             $data['node_active'] = (bool) false;
             $data['info_active'] = (bool) false;
             $data['update_active'] = (bool) false;
-            $data['code_active'] = (bool) false;
+            $data['code_active'] = (bool) true;
             $this->load->view( 'user/user_sidebar', $data );
 
-            $user_info = $this->user_model->u_info($data['user_name']);
-            $data['transfers'] = $user_info->u + $user_info->d;
-            $data['all_transfer'] = $user_info->transfer_enable;
-            $data['unused_transfer'] = human_file_size( $data['all_transfer'] - $data['transfers'] );
-            $data['used_100'] = round( ($data['transfers'] / $data['all_transfer'] * 100), 2 );
-            $data['transfers'] = human_file_size( $data['transfers'] );
-            $data['all_transfer'] = human_file_size( $data['all_transfer'] );
-            $data['passwd'] = $user_info->passwd;
+            $user_info = $this->user_model->u_basic_info($data['user_name']);
+            $data['user_email'] = $user_info->email;
             $data['plan'] = $user_info->plan;
-            $data['port'] = $user_info->port;
-            $data['last_check_in_time'] = $user_info->last_check_in_time;
-            $data['unix_time'] = $user_info->t;
-            $data['is_able_to_check_in'] = is_able_to_check_in( $user_info->last_check_in_time );
+            $data['money'] = $user_info->money;
 
-            $this->load->view( 'user/user_index', $data );
+            $this->load->view( 'user/user_info', $data );
             $this->load->view( 'user/user_footer' );
         }
         else
@@ -377,4 +368,8 @@ class User extends CI_Controller
         return;
     }
 
+    function pay()
+    {
+        return;
+    }
 }

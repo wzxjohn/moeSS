@@ -127,6 +127,21 @@ class User_model extends CI_Model
         }
     }
 
+    function u_basic_info( $username )
+    {
+        $this->db->where('user_name', $username);
+        $this->db->select('email, plan, money');
+        $query = $this->db->get('user');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0];
+        }
+        else
+        {
+            return (bool) false;
+        }
+    }
+
     function get_nodes( $test = false )
     {
         if ($test)
