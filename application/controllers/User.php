@@ -292,7 +292,7 @@ class User extends CI_Controller
             $this->load->helper('comm');
             $data['user_name'] = $this->session->userdata('s_username');
             $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
-            $this->load->view( 'user/user_header' );
+            $this->load->view( 'user/user_profile_header' );
             $this->load->view( 'user/user_nav', $data );
 
             $data['index_active'] = (bool) false;

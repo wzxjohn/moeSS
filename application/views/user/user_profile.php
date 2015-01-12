@@ -7,6 +7,7 @@
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+$this->load->helper('form');
 ?><!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
     <!-- Content Header (Page header) -->
@@ -38,19 +39,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     ?>
                         <div class="box-body">
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="当前密码(必填)" name="nowpassword">
+                                <input type="password" class="form-control" placeholder="当前密码(必填)" id="nowpassword" name="nowpassword">
                             </div>
 
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="新密码(不修改请留空)" name="password">
+                                <input type="password" class="form-control" placeholder="新密码(不修改请留空)" id="password" name="password">
                             </div>
 
                             <div class="form-group">
-                                <input type="password" placeholder="确认密码" class="form-control" name="repassword">
+                                <input type="password" placeholder="确认密码" class="form-control" id="repassword" name="repassword">
                             </div>
 
                             <div class="form-group">
-                                <input type="text" placeholder="邮箱(不修改请留空)" class="form-control" name="email">
+                                <input type="text" placeholder="邮箱(不修改请留空)" class="form-control" id="email" name="email">
                             </div>
 
                         </div><!-- /.box-body -->
@@ -58,8 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="box-footer">
                             <button type="submit" name="action" value="add" class="btn btn-primary">修改</button>
                         </div>
-                    </form>
-
+                    <?php echo form_close(); ?>
                 </div><!-- /.box -->
             </div>
 
@@ -86,38 +86,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
-<script LANGUAGE="javascript">
-    function check()
-    {
-
-        if(document.edit.nowpassword.value.length==0){
-            alert("请输入当前密码!");
-            document.edit.nowpassword.focus();
-            return false;
-        }
-        if(document.edit.password.value.length != 0){
-            if(document.edit.password.value.length < 8){
-                alert("密码至少8位");
-                document.edit.password.focus();
-                return false;
-            }
-            if(document.edit.repassword.value != document.edit.password.value ){
-                alert("两次密码输入不符!");
-                document.edit.repassword.focus();
-                return false;
-            }
-        }
-        if(document.edit.email.length != 0){
-            //对电子邮件的验证
-            //定义email正则表达式
-            var email_reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-
-            if(!email_reg.test(document.reg.email.value)) {
-                alert('提示\n\n请输入有效的E-mail！');
-                document.reg.email.focus();
-                return false;
-            }
-        }
-
-    }
-</script>
