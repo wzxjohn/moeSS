@@ -28,6 +28,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data['index_active'] = (bool) true;
+            $data['user_active'] = (bool) false;
             $data['node_active'] = (bool) false;
             $data['code_active'] = (bool) false;
             $data['system_active'] = (bool) false;
