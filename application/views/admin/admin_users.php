@@ -44,13 +44,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td> <?php echo $user->user_name; ?></td>
                                         <td><?php echo $user->email; ?></td>
                                         <td><?php echo $user->passwd; ?></td>
-                                        <td><?php echo date("Y-m-j G:i:s", $user->t); ?></td>
-                                        <td><?php echo humanFileSize($user->u); ?></td>
-                                        <td><?php echo humanFileSize($user->d); ?></td>
+                                        <td><?php echo date("m-j G:i", $user->t); ?></td>
+                                        <td><?php echo human_file_size($user->u); ?></td>
+                                        <td><?php echo human_file_size($user->d); ?></td>
                                         <td><?php echo $user->plan; ?></td>
-                                        <td><?php echo humanFileSize($user->transfer_enable); ?></td>
+                                        <td><?php echo human_file_size($user->transfer_enable); ?></td>
                                         <td><?php echo $user->port; ?></td>
-                                        <td><?php echo date("Y-m-j G:i:s", $user->last_check_in_time); ?></td>
+                                        <td><?php echo date("m-j G:i", $user->last_check_in_time); ?></td>
                                         <td><?php echo $user->reg_date; ?></td>
                                         <td>
                                             <a class="btn btn-info btn-sm" href="user_edit.php?id=<?php echo $user->uid; ?>">编辑</a>
