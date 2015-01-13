@@ -20,12 +20,16 @@ class Admin extends CI_Controller
     {
         if ($this->is_login())
         {
-            $this->load->view('welcome_message');
+            //$this->load->view('welcome_message');
+            $data['node_count'] = $this->admin_model->c_nodes();
+            $data['all_user'] = $this->admin_model->c_users();
+            $this->load->view('admin_index', $data);
         }
         else
         {
             redirect(site_url('admin/login'));
         }
+        return;
     }
 
     function login()
@@ -45,6 +49,7 @@ class Admin extends CI_Controller
     {
         $this->session->sess_destroy();
         redirect(site_url('admin/login'));
+        return;
     }
 
     function login_check()
@@ -61,6 +66,7 @@ class Admin extends CI_Controller
                 {
                     $arr = array(
                         's_uid' => $user[0]->uid,
+                        's_username' => $user[0]->username,
                         'admin' => 'true'
                     );
                     $this->session->set_userdata($arr);
@@ -89,7 +95,7 @@ class Admin extends CI_Controller
     {
         if ($this->session->userdata('s_uid') && $this->session->userdata('admin') == 'true')
         {
-            return true;
+            return $this->admin_model->check_admin($this->session->userdata('s_uid'), $this->session->userdata('s_username') );
         }
         else
         {
