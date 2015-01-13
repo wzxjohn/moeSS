@@ -108,9 +108,9 @@ class Admin extends CI_Controller
 
     function is_login()
     {
-        if ($this->session->userdata('s_uid') && $this->session->userdata('admin') == 'true')
+        if ($this->session->userdata('s_admin_uid') && $this->session->userdata('admin') == 'true')
         {
-            return $this->admin_model->check_admin($this->session->userdata('s_uid'), $this->session->userdata('s_username') );
+            return $this->admin_model->check_admin($this->session->userdata('s_admin_uid'), $this->session->userdata('s_admin_username') );
         }
         else
         {
