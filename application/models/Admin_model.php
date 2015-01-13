@@ -103,6 +103,6 @@ class Admin_model extends CI_Model
             );
             array_push($datas, $data);
         }
-        return $this->db->insert_batch('invite_code', $data);
+        return $this->db->insert_batch('invite_code', $datas);
     }
 }
