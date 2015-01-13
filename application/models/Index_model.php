@@ -18,7 +18,7 @@ class Index_model extends CI_Model
         return;
     }
 
-    function get_code()
+    function get_codes()
     {
         $this->db->where('user', '0');
         $this->db->where('used', '0');
