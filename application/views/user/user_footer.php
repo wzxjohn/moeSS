@@ -30,6 +30,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="<?php echo base_url('static/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'); ?>" type="text/javascript"></script>
 <!-- iCheck -->
 <script src="<?php echo base_url('static/js/plugins/iCheck/icheck.min.js'); ?>" type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo base_url('static/js/AdminLTE/app.js'); ?>" type="text/javascript"></script>
 
 <!-- Select js -->
 <script src="<?php echo base_url('static/js/bootstrap-select.js'); ?>"></script>
