@@ -272,6 +272,6 @@ class User_model extends CI_Model
         }
         $transfer = $this->get_transfer_enable($username) + $amount;
         $data = array( 'transfer_enable' => $transfer );
-        return $this->db->update( 'user', $date );
+        return $this->db->update( 'user', $data );
     }
 }

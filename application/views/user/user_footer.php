@@ -47,6 +47,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         // $('.selectpicker').selectpicker('hide');
     });
 </script>
+<script type="text/javascript">
+	function do_check_in()
+	{
+		var xmlhttp;
+		if (window.XMLHttpRequest)
+  		{// code for IE7+, Firefox, Chrome, Opera, Safari
+  			xmlhttp=new XMLHttpRequest();
+  		}
+		else
+  		{// code for IE6, IE5
+  			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  		}
+		xmlhttp.onreadystatechange=function()
+  		{
+  			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    		{
+    			document.getElementById("check_in_result").innerHTML=xmlhttp.responseText;
+    		}
+  		}
+		xmlhttp.open("GET","<?php echo site_url('user/check_in'); ?>",true);
+		xmlhttp.send();
+	}
+</script>
 <?php $this->load->view('ana') ;?>
 </body>
 </html>
