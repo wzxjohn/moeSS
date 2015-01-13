@@ -200,7 +200,7 @@ class Admin extends CI_Controller
             $data['user_time_count_60'] = $this->admin_model->c_user_time(60);
             $data['user_time_count_10'] = $this->admin_model->c_user_time(10);
             $data['user_time_count_24'] = $this->admin_model->c_user_time(3600 * 24);
-            $data['mt'] = $this->admin_model->get_month_traffic();
+            $data['mt'] = human_file_size( $this->admin_model->get_month_traffic() );
             $data['version'] = $this->admin_model->get_version();
             $this->load->view( 'admin/admin_sysinfo', $data );    
             $this->load->view( 'admin/admin_footer' );
@@ -210,5 +210,10 @@ class Admin extends CI_Controller
             redirect(site_url('admin/login'));
         }
         return;
+    }
+
+    function add_invite($type)
+    {
+
     }
 }

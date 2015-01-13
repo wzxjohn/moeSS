@@ -31,8 +31,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <h4>注意!</h4>
                                 <p>流量统计仅供参考，在线人数有一小会儿的延迟.</p>
                             </div>
-                            <p>Time: <?php  echo  date("Y-m-d H:i",time()); ?>当前版本<code><?php echo $version; ?></code></p>
-                            <p><?php echo SITE_NAME;?>已经产生流量<code><?php echo $mt; ?></code>。</p>
+                            <p>Time: <?php  echo  date("Y-m-d H:i",time()); ?> 当前版本<code><?php echo $version; ?></code></p>
+                            <p><?php echo SITE_NAME;?> 已经产生流量 <code><?php echo $mt; ?></code>。</p>
                             <p>注册用户: <code><?php echo $all_user;?> </code></p>
                             <p>已经有<code><?php echo $active_user;?></code>个用户使用了<?php echo SITE_NAME;?>服务。</p>
                             <p>过去1小时在线人数<code><?php echo $user_time_count_3600;?></code>。</p>

@@ -82,7 +82,7 @@ class Admin_model extends CI_Model
         $query = $this->db->get('options');
         if ($query->num_rows() > 0)
         {
-            return $query->result()[0]->option_name;
+            return $query->result()[0]->option_value;
         }
         return 0;
     }
