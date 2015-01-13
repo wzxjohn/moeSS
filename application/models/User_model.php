@@ -255,9 +255,13 @@ class User_model extends CI_Model
 
     function get_transfer_enable($username)
     {
-        $this->db->where('user_name', $username);
-        $this->db->select('transfer_enable');
-        return $this->db->get('user')->result()[0]->transfer_enable;
+        if ($username)
+        {
+            $this->db->where('user_name', $username);
+            $this->db->select('transfer_enable');
+            return $this->db->get('user')->result()[0]->transfer_enable;
+        }
+        return (bool) false;
     }
 
     function add_transfer($username = null, $amount)
@@ -266,7 +270,7 @@ class User_model extends CI_Model
         {
             $this->db->where('user_name', $username);
         }
-        $data = array( 'transfer_enable', $this->get_transfer_enable + $amount );
+        $data = array( 'transfer_enable', $this->get_transfer_enable($username) + $amount );
         return $this->db->update( 'user', $date );
     }
 }
