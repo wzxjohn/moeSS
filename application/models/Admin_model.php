@@ -89,7 +89,7 @@ class Admin_model extends CI_Model
 
     function add_code($sub,$type,$num)
     {
-        $datas = array[];
+        $datas = array();
         for($a=0;$a<$num;$a++)
         {
             $x = rand(10, 1000);

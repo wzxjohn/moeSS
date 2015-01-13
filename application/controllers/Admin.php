@@ -155,7 +155,7 @@ class Admin extends CI_Controller
             $this->load->helper('comm');
             $data['user_name'] = $this->session->userdata('s_admin_username');
             $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
-            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_codes_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
             $data['index_active'] = (bool) false;
