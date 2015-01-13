@@ -58,3 +58,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>   <!-- /.row -->
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
+<?php $this->load->view('ana') ;?>
+</body>
+</html>

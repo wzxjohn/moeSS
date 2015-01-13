@@ -32,25 +32,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </li>
 
     <li <?php if ($node_active) { echo 'class="active"';};?>>
-        <a href="<?php echo site_url('user/node_list');?>"">
+        <a href="<?php echo site_url('user/node_list');?>">
             <i class="fa fa-sitemap"></i> <span>节点列表</span>
         </a>
     </li>
 
     <li <?php if ($info_active) { echo 'class="active"';};?>>
-        <a href="<?php echo site_url('user/my_info');?>"">
+        <a href="<?php echo site_url('user/my_info');?>">
             <i class="fa fa-user"></i> <span>我的信息</span>
         </a>
     </li>
 
     <li <?php if ($update_active) { echo 'class="active"';};?>>
-        <a href="<?php echo site_url('user/profile_update');?>"">
+        <a href="<?php echo site_url('user/profile_update');?>">
             <i class="fa  fa-pencil"></i> <span>修改资料</span>
         </a>
     </li>
 
     <li <?php if ($code_active) { echo 'class="active"';};?>>
-        <a href="<?php echo site_url('user/invite_code');?>"">
+        <a href="<?php echo site_url('user/invite_code');?>">
             <i class="fa fa-users"></i> <span>查看邀请</span>
         </a>
     </li>

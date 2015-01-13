@@ -167,7 +167,7 @@ class Admin extends CI_Controller
             $data['node_count'] = $this->admin_model->c_nodes();
             $data['all_user'] = $this->admin_model->c_users();
             $this->load->view( 'admin/admin_codes', $data );    
-            $this->load->view( 'admin/admin_footer' );
+            //$this->load->view( 'admin/admin_footer' );
         }
         else
         {
