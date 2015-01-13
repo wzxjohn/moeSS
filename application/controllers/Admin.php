@@ -118,18 +118,97 @@ class Admin extends CI_Controller
         }
     }
 
-    function node()
+    function nodes()
     {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
 
+            $data['index_active'] = (bool) false;
+            $data['node_active'] = (bool) true;
+            $data['code_active'] = (bool) false;
+            $data['system_active'] = (bool) false;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['node_count'] = $this->admin_model->c_nodes();
+            $data['all_user'] = $this->admin_model->c_users();
+            $this->load->view( 'admin/admin_nodes', $data );    
+            $this->load->view( 'admin/admin_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
     }
 
-    function code()
+    function codes()
     {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
 
+            $data['index_active'] = (bool) false;
+            $data['node_active'] = (bool) false;
+            $data['code_active'] = (bool) true;
+            $data['system_active'] = (bool) false;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['node_count'] = $this->admin_model->c_nodes();
+            $data['all_user'] = $this->admin_model->c_users();
+            $this->load->view( 'admin/admin_codes', $data );    
+            $this->load->view( 'admin/admin_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
     }
 
     function system_info()
     {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
 
+            $data['index_active'] = (bool) false;
+            $data['node_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
+            $data['system_active'] = (bool) true;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['all_user'] = $this->admin_model->c_users();
+            $data['active_user'] = $this->admin_model->c_active_users();
+            $data['user_time_count_3600'] = $this->admin_model->c_user_time(3600);
+            $data['user_time_count_300'] = $this->admin_model->c_user_time(300);
+            $data['user_time_count_60'] = $this->admin_model->c_user_time(60);
+            $data['user_time_count_10'] = $this->admin_model->c_user_time(10);
+            $data['user_time_count_24'] = $this->admin_model->c_user_time(3600 * 24);
+            $data['mt'] = $this->admin_model->get_month_traffic();
+            $data['version'] = $this->admin_model->get_version();
+            $this->load->view( 'admin/admin_sysinfo', $data );    
+            $this->load->view( 'admin/admin_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
     }
 }

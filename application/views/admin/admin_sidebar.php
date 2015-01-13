@@ -32,13 +32,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </li>
 
     <li <?php if ($node_active) { echo 'class="active"';};?>>
-        <a href="<?php echo site_url('admin/node');?>"">
+        <a href="<?php echo site_url('admin/nodes');?>"">
             <i class="fa fa-sitemap"></i> <span>节点编辑</span>
         </a>
     </li>
 
     <li <?php if ($code_active) { echo 'class="active"';};?>>
-        <a href="<?php echo site_url('admin/code');?>"">
+        <a href="<?php echo site_url('admin/codes');?>"">
             <i class="fa fa-user"></i> <span>邀请管理</span>
         </a>
     </li>

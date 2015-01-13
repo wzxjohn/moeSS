@@ -68,8 +68,22 @@ class Admin_model extends CI_Model
         return $u + $d;
     }
 
-    function c_user_time()
+    function c_user_time($time)
     {
+        $now = time();
+        $time = $now - $time;
+        $this->db->where('t >', $time);
+        return $this->db->count_all_results('user');
+    }
 
+    function get_version()
+    {
+        $this->db->where('option_name', 'version');
+        $query = $this->db->get('options');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0]->option_name;
+        }
+        return 0;
     }
 }
