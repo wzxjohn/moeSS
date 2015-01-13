@@ -212,7 +212,7 @@ class Admin extends CI_Controller
         return;
     }
 
-    function add_invite($type)
+    function add_invite()
     {
         $sub  = $this->input->post('code_sub');
         $type = $this->input->post('code_type');
