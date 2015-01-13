@@ -51,6 +51,12 @@ class Admin_model extends CI_Model
         return $this->db->count_all('user');
     }
 
+    function get_users()
+    {
+        $this->db->select('uid, user_name, email, passwd, t, u, d, plan, transfer_enable, port, last_check_in_time, reg_date');
+        return $this->db->get('users')->result();
+    }
+
     function c_active_users()
     {
         $this->db->where('t >', '0');

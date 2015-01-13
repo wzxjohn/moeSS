@@ -118,6 +118,35 @@ class Admin extends CI_Controller
         }
     }
 
+    function users()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data['index_active'] = (bool) false;
+            $data['user_active'] = (bool) true;
+            $data['node_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
+            $data['system_active'] = (bool) false;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['users'] = $this->admin_model->get_users();
+            $this->load->view( 'admin/admin_users', $data );    
+            $this->load->view( 'admin/admin_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
     function nodes()
     {
         if ($this->is_login())
@@ -130,6 +159,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data['index_active'] = (bool) false;
+            $data['user_active'] = (bool) false;
             $data['node_active'] = (bool) true;
             $data['code_active'] = (bool) false;
             $data['system_active'] = (bool) false;
@@ -159,6 +189,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data['index_active'] = (bool) false;
+            $data['user_active'] = (bool) false;
             $data['node_active'] = (bool) false;
             $data['code_active'] = (bool) true;
             $data['system_active'] = (bool) false;
@@ -188,6 +219,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data['index_active'] = (bool) false;
+            $data['user_active'] = (bool) false;
             $data['node_active'] = (bool) false;
             $data['code_active'] = (bool) false;
             $data['system_active'] = (bool) true;
@@ -231,5 +263,20 @@ class Admin extends CI_Controller
             echo '{"result" : "Database Error!" }';
         }
         return;
+    }
+
+    function add_user()
+    {
+
+    }
+
+    function del_user()
+    {
+
+    }
+
+    function edit_user()
+    {
+
     }
 }

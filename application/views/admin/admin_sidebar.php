@@ -31,6 +31,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </a>
     </li>
 
+    <li <?php if ($user_active) { echo 'class="active"';};?>>
+        <a href="<?php echo site_url('admin/users');?>">
+            <i class="fa fa-users"></i> <span>用户管理</span>
+        </a>
+    </li>
+
     <li <?php if ($node_active) { echo 'class="active"';};?>>
         <a href="<?php echo site_url('admin/nodes');?>">
             <i class="fa fa-sitemap"></i> <span>节点编辑</span>
@@ -45,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <li <?php if ($system_active) { echo 'class="active"';};?>>
         <a href="<?php echo site_url('admin/system_info');?>">
-            <i class="fa  fa-pencil"></i> <span>系统信息</span>
+            <i class="fa fa-pencil"></i> <span>系统信息</span>
         </a>
     </li>
 </ul>

@@ -169,7 +169,7 @@ class User_model extends CI_Model
 
     function get_invite_codes()
     {
-        $this->db->where('user', '1');
+        $this->db->where('user', '2');
         $this->db->where('used', '0');
         $query = $this->db->get('invite_code');
         if ($query->num_rows() > 0)
