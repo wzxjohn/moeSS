@@ -67,9 +67,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Select js -->
     <script src="<?php echo base_url('static/js/bootstrap-select.js'); ?>"></script>
     <script src="<?php echo base_url('static/js/bootstrap-switch.js'); ?>"></script>
-</head>
-<body class="skin-blue">
-<script language="javascript">
+
+    <script type="text/javascript">
+        $(window).on('load', function () {
+
+            $('.selectpicker').selectpicker({
+                'selectedText': 'cat'
+            });
+
+            // $('.selectpicker').selectpicker('hide');
+        });
+    </script>
+    <script language="javascript">
     $(document).ready(function() {
         var options = {
             target:        '#addResult',   // target element(s) to be updated with server response
@@ -111,3 +120,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
     }
 </script>
+</head>
+<body class="skin-blue">
