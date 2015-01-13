@@ -270,7 +270,8 @@ class User_model extends CI_Model
         {
             $this->db->where('user_name', $username);
         }
-        $data = array( 'transfer_enable' => $this->get_transfer_enable($username) + $amount );
+        $transfer = $this->get_transfer_enable($username) + $amount;
+        $data = array( 'transfer_enable' => $transfer );
         return $this->db->update( 'user', $date );
     }
 }
