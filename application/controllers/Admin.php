@@ -214,6 +214,22 @@ class Admin extends CI_Controller
 
     function add_invite($type)
     {
-
+        $sub  = $this->input->post('code_sub');
+        $type = $this->input->post('code_type');
+        $num  = $this->input->post('code_num');
+        if ($type == "" || $num == "" )
+        {
+            echo '{"result" : "Not enougth args!" }';
+            return;
+        }
+        if ($this->admin_model->add_code($sub,$type,$num))
+        {
+            echo '{"result" : "success" }';
+        }
+        else
+        {
+            echo '{"result" : "Database Error!" }';
+        }
+        return;
     }
 }

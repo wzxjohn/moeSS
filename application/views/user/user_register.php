@@ -22,12 +22,12 @@ $this->load->helper('form');
     <!-- Theme style -->
     <link href="<?php echo base_url("static/css/AdminLTE.css"); ?>" rel="stylesheet" type="text/css" />
 
-	<!-- jQuery 2.0.2 -->
+    <!-- jQuery 2.0.2 -->
     <script src="<?php echo base_url("static/js/jquery-2.0.3.min.js"); ?>"></script>
     <script src="<?php echo base_url("static/js/jquery.validate.min.js"); ?>"></script>
     <script src="<?php echo base_url("static/js/jquery.form.min.js"); ?>"></script>
-	<!-- Bootstrap -->
-	<script src="<?php echo base_url("static/js/bootstrap.min.js"); ?>" type="text/javascript"></script>
+    <!-- Bootstrap -->
+    <script src="<?php echo base_url("static/js/bootstrap.min.js"); ?>" type="text/javascript"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -58,25 +58,25 @@ $this->load->helper('form');
             $('#registerForm').validate( {
                     rules:{
                         username: {
-                        	required: true,
-                        	minlength: 6,
+                            required: true,
+                            minlength: 6,
                             onlyAlphaNumber: true
                         },
                         password: {
-                        	required: true,
-                        	minlength: 8
+                            required: true,
+                            minlength: 8
                         },
                         repassword: {
-                        	required: true,
-                        	minlength: 8,
-                        	equalTo: '#password'
+                            required: true,
+                            minlength: 8,
+                            equalTo: '#password'
                         },
                         email: {
-                        	required: true,
-                        	email: true
+                            required: true,
+                            email: true
                         }<?php if( $invite_only ) { ?>,
                         code: {
-                        	required: true,
+                            required: true,
                             onlyAlphaNumber: true
                         }
                         <?php } ?>
