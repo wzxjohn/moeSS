@@ -469,4 +469,34 @@ class User extends CI_Controller
             redirect(site_url('user/login'));
         }
     }
+
+    function check_in()
+    {
+        if ($this->is_login())
+        {
+            $this->load->helper('comm');
+            $username = $this->session->userdata('s_username');
+            $user_info = $this->user_model->u_info($username);
+            $last_check_in_time = $user_info->last_check_in_time;
+            if ( is_able_to_check_in( $user_info->last_check_in_time ) )
+            {
+                $result = $this->user_model->check_in($username);
+                if ( $result )
+                {
+                    echo "<script>alert('You now have " . $result . "MB more trafic!')</script>";
+                    redirect(site_url('user'));
+                }
+            }
+            else 
+            {
+                echo '<script>alert("Cannot Check In Now!");</script>';
+                redirect(site_url('user'));
+            }
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
+        return;
+    }
 }

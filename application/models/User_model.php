@@ -218,4 +218,55 @@ class User_model extends CI_Model
         $data = array( 'passwd' => $pass );
         return $this->db->update('user', $data );
     }
+
+    function check_in($username)
+    {
+        $this->db->where('option_name', 'check_min');
+        $this->db->select('option_value');
+        $query = $this->db->get('options');
+        if ($query->num_rows() > 0)
+        {
+            $check_min = $query->result()[0]->option_value;
+        }
+        else
+        {
+            $check_min = 50;
+        }
+
+        $this->db->where('option_name', 'check_max');
+        $this->db->select('option_value');
+        $query = $this->db->get('options');
+        if ($query->num_rows() > 0)
+        {
+            $check_max = $query->result()[0]->option_value;
+        }
+        else
+        {
+            $check_max = 100;
+        }
+
+        $transfer_to_add = rand($check_min,$check_max);
+        $this->add_transfer($username, $transfer_to_add  * 1024 * 1024 );
+        $this->db->where('user_name', $username);
+        $data = array( 'last_check_in_time' => time() );
+        $this->db->update('user', $data);
+        return $transfer_to_add;
+    }
+
+    function get_transfer_enable($username)
+    {
+        $this->db->where('user_name', $username);
+        $this->db->select('transfer_enable');
+        return $this->db->get('user')->result()[0]->transfer_enable;
+    }
+
+    function add_transfer($username = null, $amount)
+    {
+        if ( $username )
+        {
+            $this->db->where('user_name', $username);
+        }
+        $data = array( 'transfer_enable', $this->get_transfer_enable + $amount );
+        return $this->db->update( 'user', $date );
+    }
 }

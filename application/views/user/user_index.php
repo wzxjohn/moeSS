@@ -61,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box-body">
                         <p> 24小时内可以签到一次，剩余流量小于2G可以一次获得2G流量。 </p>
                         <?php  if( $is_able_to_check_in ) { ?>
-                            <p><a class="btn btn-success" href="docheckin.php">签到</a> </p>
+                            <p><a class="btn btn-success" href="<?php echo site_url('user/check_in'); ?>">签到</a> </p>
                         <?php  }else{ ?>
                             <p><a class="btn btn-success disabled" href="#">不能签到</a> </p>
                         <?php  } ?>
