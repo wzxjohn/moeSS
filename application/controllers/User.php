@@ -483,13 +483,13 @@ class User extends CI_Controller
                 $result = $this->user_model->check_in($username);
                 if ( $result )
                 {
-                    echo "<code>You now have " . $result . "MB more trafic!</code>";
+                    echo "You now have " . $result . "MB more trafic!";
                     //redirect(site_url('user'));
                 }
             }
             else 
             {
-                echo '<code>Cannot Check In Now!</code>';
+                echo 'Cannot Check In Now!';
                 //redirect(site_url('user'));
             }
         }

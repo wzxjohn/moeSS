@@ -63,12 +63,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   		  {
   			    if (xmlhttp.readyState==4 && xmlhttp.status==200)
     		    {
-    			      document.getElementById("check_in_result").innerHTML=xmlhttp.responseText;
+                var str1 = "<code>";
+                var str2 = "</code>";
+    			      document.getElementById("check_in_result").innerHTML = str1.concat( xmlhttp.responseText, str2 );
+                alert(xmlhttp.responseText);
     			      document.getElementById("check_in_button").href = "";
     			      document.getElementById("check_in_button").innerHTML = "不能签到";
                 setTimeout(function(){
                     window.location.reload();
-                }, 4000);
+                }, 3000);
     		    }
   		  }
 		    xmlhttp.open("GET","<?php echo site_url('user/check_in'); ?>",true);
