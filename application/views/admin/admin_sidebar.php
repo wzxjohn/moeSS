@@ -26,35 +26,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- sidebar menu: : style can be found in sidebar.less -->
 <ul class="sidebar-menu">
     <li <?php if ($index_active) { echo 'class="active"';};?>>
-        <a href="<?php echo site_url('user');?>">
-            <i class="fa fa-dashboard"></i> <span>用户中心</span>
+        <a href="<?php echo site_url('admin');?>">
+            <i class="fa fa-dashboard"></i> <span>管理中心</span>
         </a>
     </li>
 
     <li <?php if ($node_active) { echo 'class="active"';};?>>
-        <a href="<?php echo site_url('user/node_list');?>"">
-            <i class="fa fa-sitemap"></i> <span>节点列表</span>
-        </a>
-    </li>
-
-    <li <?php if ($info_active) { echo 'class="active"';};?>>
-        <a href="<?php echo site_url('user/my_info');?>"">
-            <i class="fa fa-user"></i> <span>我的信息</span>
-        </a>
-    </li>
-
-    <li <?php if ($update_active) { echo 'class="active"';};?>>
-        <a href="<?php echo site_url('user/profile_update');?>"">
-            <i class="fa  fa-pencil"></i> <span>修改资料</span>
+        <a href="<?php echo site_url('admin/node');?>"">
+            <i class="fa fa-sitemap"></i> <span>节点编辑</span>
         </a>
     </li>
 
     <li <?php if ($code_active) { echo 'class="active"';};?>>
-        <a href="<?php echo site_url('user/invite_code');?>"">
-            <i class="fa fa-users"></i> <span>查看邀请</span>
+        <a href="<?php echo site_url('admin/code');?>"">
+            <i class="fa fa-user"></i> <span>邀请管理</span>
         </a>
     </li>
 
+    <li <?php if ($system_active) { echo 'class="active"';};?>>
+        <a href="<?php echo site_url('admin/system_info');?>"">
+            <i class="fa  fa-pencil"></i> <span>系统信息</span>
+        </a>
+    </li>
 </ul>
 </section>
 <!-- /.sidebar -->

@@ -21,9 +21,23 @@ class Admin extends CI_Controller
         if ($this->is_login())
         {
             //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data['index_active'] = (bool) true;
+            $data['node_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
+            $data['system_active'] = (bool) false;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
             $data['node_count'] = $this->admin_model->c_nodes();
             $data['all_user'] = $this->admin_model->c_users();
-            $this->load->view('admin_index', $data);
+            $this->load->view( 'admin/admin_index', $data);
+            $this->load->view( 'admin/admin_footer' );
+
         }
         else
         {
@@ -65,8 +79,9 @@ class Admin extends CI_Controller
                 if ($user[0]->pass == $password)
                 {
                     $arr = array(
-                        's_uid' => $user[0]->uid,
-                        's_username' => $user[0]->admin_name,
+                        's_admin_uid' => $user[0]->uid,
+                        's_admin_username' => $user[0]->admin_name,
+                        's_admin_email' => $user[0]->email,
                         'admin' => 'true'
                     );
                     $this->session->set_userdata($arr);
@@ -103,4 +118,18 @@ class Admin extends CI_Controller
         }
     }
 
+    function node()
+    {
+
+    }
+
+    function code()
+    {
+
+    }
+
+    function system_info()
+    {
+
+    }
 }
