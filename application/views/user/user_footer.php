@@ -64,6 +64,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   			if (xmlhttp.readyState==4 && xmlhttp.status==200)
     		{
     			document.getElementById("check_in_result").innerHTML=xmlhttp.responseText;
+    			document.getElementById("check_in_button").disable = true;
+    			document.getElementById("check_in_button").innerHTML = "不能签到";
     		}
   		}
 		xmlhttp.open("GET","<?php echo site_url('user/check_in'); ?>",true);
