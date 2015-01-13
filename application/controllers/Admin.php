@@ -66,7 +66,7 @@ class Admin extends CI_Controller
                 {
                     $arr = array(
                         's_uid' => $user[0]->uid,
-                        's_username' => $user[0]->username,
+                        's_username' => $user[0]->admin_name,
                         'admin' => 'true'
                     );
                     $this->session->set_userdata($arr);
