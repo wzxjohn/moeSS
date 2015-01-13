@@ -54,10 +54,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </thead>
 
                 <tbody>
-                <?php if ($codes) { foreach ($codes as $code) : ?>
+                <?php if ($codes) { $a=1; foreach ($codes as $code) : ?>
                     <tr>
                         <td><?php echo $a;$a++; ?></td>
-                        <td><?php echo $code;?></td>
+                        <td><?php echo $code->code;?></td>
                         <td>可用</td>
 
                     </tr>
