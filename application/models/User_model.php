@@ -65,11 +65,11 @@ class User_model extends CI_Model
 
     function deactive_code($invitecode, $username)
     {
-        $this->db->where('code', $invitecode);
         $data = array(
             'used' => (bool) true,
             'user_name' => $username
             );
+        $this->db->where('code', $invitecode);
         return $this->db->update('invite_code', $data );
     }
 
@@ -190,7 +190,6 @@ class User_model extends CI_Model
         $query = $this->db->get('user');
         if ($query->num_rows() > 0)
         {
-            $this->db->where('uid', $uid);
             $data = array(
                 'pass' => $password,
                 'email' => $email
@@ -203,6 +202,7 @@ class User_model extends CI_Model
             {
                 unset($data['email']);
             }
+            $this->db->where('uid', $uid);
             return $this->db->update('user', $data );
         }
         else
@@ -213,9 +213,9 @@ class User_model extends CI_Model
 
     function change_ss_pass($uid, $username, $pass)
     {
+        $data = array( 'passwd' => $pass );
         $this->db->where('uid', $uid);
         $this->db->where('user_name', $username);
-        $data = array( 'passwd' => $pass );
         return $this->db->update('user', $data );
     }
 
@@ -247,8 +247,8 @@ class User_model extends CI_Model
 
         $transfer_to_add = rand($check_min,$check_max);
         $this->add_transfer($username, $transfer_to_add  * 1024 * 1024 );
-        $this->db->where('user_name', $username);
         $data = array( 'last_check_in_time' => time() );
+        $this->db->where('user_name', $username);
         $this->db->update('user', $data);
         return $transfer_to_add;
     }
