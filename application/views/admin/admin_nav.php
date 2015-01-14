@@ -9,7 +9,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!-- header logo: style can be found in header.less -->
 <header class="header">
-    <a href="<?php echo site_url('user');?>" class="logo">
+    <a href="<?php echo site_url('admin');?>" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
         <?php echo SITE_NAME; ?>
     </a>
