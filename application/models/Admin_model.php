@@ -121,4 +121,18 @@ class Admin_model extends CI_Model
         }
         return false;
     }
+
+    function del_node($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->limit(1);
+        return $this->db->delete('ss_node');
+    }
+
+    function del_user($uid)
+    {
+        $this->db->where('uid', $uid);
+        $this->db->limit(1);
+        return $this->db->delete('user');
+    }
 }

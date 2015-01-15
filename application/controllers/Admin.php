@@ -246,37 +246,166 @@ class Admin extends CI_Controller
 
     function add_invite()
     {
-        $sub  = $this->input->post('code_sub');
-        $type = $this->input->post('code_type');
-        $num  = $this->input->post('code_num');
-        if ($type == "" || $num == "" )
+        if ($this->is_login())
         {
-            echo '{"result" : "Not enougth args!" }';
+            $sub = $this->input->post('code_sub');
+            $type = $this->input->post('code_type');
+            $num = $this->input->post('code_num');
+            if ($type == "" || $num == "") {
+                echo '{"result" : "Not enougth args!" }';
+                return;
+            }
+            if ($this->admin_model->add_code($sub, $type, $num))
+            {
+                echo '{"result" : "success" }';
+            }
+            else
+            {
+                echo '{"result" : "Database Error!" }';
+            }
             return;
-        }
-        if ($this->admin_model->add_code($sub,$type,$num))
-        {
-            echo '{"result" : "success" }';
         }
         else
         {
-            echo '{"result" : "Database Error!" }';
+            redirect(site_url('admin/login'));
         }
         return;
     }
 
-    function add_user()
+    function user_add()
     {
-
     }
 
-    function del_user()
+    function user_del($uid = null)
     {
-
+        if ($this->is_login())
+        {
+            $uid = (int) $uid;
+            if ($this->admin_model->del_user($uid))
+            {
+                echo '{"result" : "success" }';
+            }
+            else
+            {
+                echo '{"result" : "Something Error!" }';
+            }
+            return;
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
     }
 
-    function edit_user()
+    function user_edit($uid = null)
     {
+        if ($this->is_login())
+        {
+            $uid = (int) $uid;
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
 
+            $data['index_active'] = (bool) false;
+            $data['user_active'] = (bool) true;
+            $data['node_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
+            $data['system_active'] = (bool) false;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['users'] = $this->admin_model->get_users();
+            $this->load->view( 'admin/admin_users', $data );
+            $this->load->view( 'admin/admin_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function node_add()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data['index_active'] = (bool) false;
+            $data['user_active'] = (bool) false;
+            $data['node_active'] = (bool) true;
+            $data['code_active'] = (bool) false;
+            $data['system_active'] = (bool) false;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['nodes'] = $this->admin_model->get_nodes();
+            $this->load->view( 'admin/admin_nodes', $data );
+            $this->load->view( 'admin/admin_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function node_del($id = null)
+    {
+        if ($this->is_login())
+        {
+            $id = (int) $id;
+            if ($this->admin_model->del_node($id))
+            {
+                echo '{"result" : "success" }';
+            }
+            else
+            {
+                echo '{"result" : "Something Error!" }';
+            }
+            return;
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function node_edit($id = null)
+    {
+        if ($this->is_login())
+        {
+            $id = (int) $id;
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data['index_active'] = (bool) false;
+            $data['user_active'] = (bool) false;
+            $data['node_active'] = (bool) true;
+            $data['code_active'] = (bool) false;
+            $data['system_active'] = (bool) false;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['nodes'] = $this->admin_model->get_nodes();
+            $this->load->view( 'admin/admin_nodes', $data );
+            $this->load->view( 'admin/admin_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
     }
 }
