@@ -413,6 +413,11 @@ class User_model extends CI_Model
         $query = $this->db->get('activate');
         if ($query->num_rows() > 0 && !$query->result()[0]->used)
         {
+            $data = array('used' => 1 );
+            $this->db->where('activate_code', $code);
+            $this->db->limit(1);
+            $this->db->update('activate',$data);
+            
             $result = $query->result()[0];
             $data = array(
                 'switch' => 1,
