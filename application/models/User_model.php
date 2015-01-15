@@ -21,7 +21,7 @@ class User_model extends CI_Model
     function u_select($username)
     {
         $this->db->where('user_name', $username);
-        $this->db->select('uid, user_name, pass, email');
+        $this->db->select('uid, user_name, pass, email, enable');
         $query = $this->db->get('user');
         if ($query->num_rows() > 0)
         {
@@ -343,9 +343,8 @@ class User_model extends CI_Model
                     $html = "<html>
                         <head></head>
                         <body>
-                        <p>Hi!<br>
-                        How are you?<br>
-                        <a href=\"".site_url("user/activate/$code")."\" target=\"_blank\">Click Here!</a>
+                        <p>请点击下方链接激活账户：<br>
+                        <a href=\"".site_url("user/activate/$code")."\" target=\"_blank\">激活账户</a>
                         </p>
                         </body>
                     </html>";
@@ -417,7 +416,7 @@ class User_model extends CI_Model
             $this->db->where('activate_code', $code);
             $this->db->limit(1);
             $this->db->update('activate',$data);
-            
+
             $result = $query->result()[0];
             $data = array(
                 'switch' => 1,

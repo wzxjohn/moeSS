@@ -34,6 +34,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div><!-- /.col (right) -->
+            <?php if (!$enable)
+            {
+                echo <<< EOD
+            <div class="col-md-6">
+                <div class="box box-solid">
+                    <div class="box-header">
+                        <h3 class="box-title">注意</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="callout callout-danger">
+                            <h4>未激活</h4>
+                            <p>您的账号还没有激活，暂时不能使用！请查收邮件。</p>
+                            <p><a class="btn btn-success" id="check_in_button" href="" onclick="do_resend_mail()">重发激活邮件</a> </p>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div><!-- /.col (right) -->
+EOD;
+            }?>
 
             <div class="col-md-6">
                 <div class="box box-solid">
@@ -118,6 +137,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             }
         }
         xmlhttp.open("GET","<?php echo site_url('user/check_in'); ?>",true);
+        xmlhttp.send();
+    }
+    function do_resend_mail()
+    {
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                alert(xmlhttp.responseText);
+            }
+        }
+        xmlhttp.open("GET","<?php echo site_url('user/resend_mail'); ?>",true);
         xmlhttp.send();
     }
 </script>

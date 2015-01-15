@@ -48,6 +48,7 @@ class User extends CI_Controller
             $data['last_check_in_time'] = $user_info->last_check_in_time;
             $data['unix_time'] = $user_info->t;
             $data['is_able_to_check_in'] = is_able_to_check_in( $user_info->last_check_in_time );
+            $data['enable'] = $user_info->enable;
 
             $this->load->view( 'user/user_index', $data );
             $this->load->view( 'user/user_footer' );
@@ -521,6 +522,27 @@ class User extends CI_Controller
             {
                 echo "<script>alert(\"Failed! Please check again!\"); window.location.href = \"" . site_url('user/login') . "\";</script>";
             }
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
+        return;
+    }
+
+    function resend_mail()
+    {
+        if ($this->is_login())
+        {
+            if ( $this->user_model->send_active_email( $this->session->userdata('s_username'); ) )
+            {
+                echo "Success!";
+            }
+            else
+            {
+                echo "Send mail error!";
+            }
+            return;
         }
         else
         {
