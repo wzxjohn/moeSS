@@ -274,6 +274,31 @@ class Admin extends CI_Controller
 
     function user_add()
     {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data['index_active'] = (bool) false;
+            $data['user_active'] = (bool) true;
+            $data['node_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
+            $data['system_active'] = (bool) false;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['user'] = null;
+            $this->load->view( 'admin/admin_user_edit', $data );
+            $this->load->view( 'admin/admin_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
     }
 
     function user_del($uid = null)
@@ -319,8 +344,8 @@ class Admin extends CI_Controller
             $data['system_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
-            $data['users'] = $this->admin_model->get_users();
-            $this->load->view( 'admin/admin_users', $data );
+            $data['user'] = $this->admin_model->get_users($uid);
+            $this->load->view( 'admin/admin_user_edit', $data );
             $this->load->view( 'admin/admin_footer' );
         }
         else

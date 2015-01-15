@@ -143,8 +143,16 @@ class User extends CI_Controller
                 $password = hash('md5', $password );
                 if ( $this->user_model->new_user($username, $password, $email, $invitecode) )
                 {
-                    echo '{"result" : "success" }';
-                    return;
+                    if ( $this->user_model->send_active_email($username) )
+                    {
+                        echo '{"result" : "success" }';
+                        return;
+                    }
+                    else
+                    {
+                        echo '{"result" : "E-mail send failed!" }';
+                        return;
+                    }
                 }
                 else
                 {
@@ -479,7 +487,7 @@ class User extends CI_Controller
             $username = $this->session->userdata('s_username');
             $user_info = $this->user_model->u_info($username);
             $last_check_in_time = $user_info->last_check_in_time;
-            if ( is_able_to_check_in( $user_info->last_check_in_time ) )
+            if ( is_able_to_check_in( $last_check_in_time ) )
             {
                 $result = $this->user_model->check_in($username);
                 if ( $result )
@@ -492,6 +500,26 @@ class User extends CI_Controller
             {
                 echo 'Cannot Check In Now!';
                 //redirect(site_url('user'));
+            }
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
+        return;
+    }
+
+    function activate($code = null)
+    {
+        if ($code)
+        {
+            if ( $this->user_model->activate($code) )
+            {
+                echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('user/login') . "\";</script>";
+            }
+            else
+            {
+                echo "<script>alert(\"Failed! Please check again!\"); window.location.href = \"" . site_url('user/login') . "\";</script>";
             }
         }
         else

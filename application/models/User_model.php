@@ -91,8 +91,8 @@ class User_model extends CI_Model
             'plan' => 'A',
             'transfer_enable' => $this->get_default_transfer(),
             'port' => $this->get_last_port() + rand( 2, 7 ),
-            'switch' => '1',
-            'enable' => '1',
+            'switch' => '0',
+            'enable' => '0',
             'type' => '7',
             'invite_num' => $this->get_default_invite_number(),
             'money' => '0'
@@ -273,5 +273,86 @@ class User_model extends CI_Model
             $this->db->where('user_name', $username);
         }
         return $this->db->update( 'user', $data );
+    }
+
+    function send_active_email($username)
+    {
+        $user = $this->u_select($username);
+        if ($user)
+        {
+            $x = $user->user_name;
+            $y = $user->pass;
+            $z = rand(10, 1000);
+            $x = md5($x).md5($y).md5($z);
+            $x = base64_encode($x);
+            $code = substr($x, rand(1, 13), 24);
+            $data = array(
+                'active_code' => $code,
+                'uid' => $user->uid,
+                'user_name' => $user->user_name,
+                'email' => $user->email
+            );
+            $this->db->insert('activate', $data);
+
+            $this->db->like('option_name', 'mail');
+            $query = $this->db->get('options');
+            if ($query->num_rows() > 0)
+            {
+                $email_config = $query->result()[0];
+
+                $config['protocol'] = $email_config->mail_protocol;
+                if ($config['protocol'] == 'sendmail')
+                {
+                    $config['mailpath'] = '/usr/sbin/sendmail';
+                }
+                elseif ($config['protocol'] == 'smtp')
+                {
+                    $config['smtp_host'] = $email_config->mail_smtp_host;
+                    $config['smtp_user'] = $email_config->mail_smtp_user;
+                    $config['smtp_pass'] = $email_config->mail_smtp_pass;
+                    $config['smtp_port'] = $email_config->mail_smtp_port;
+                    $config['smtp_crypto'] = $email_config->mail_smtp_crypto;
+                }
+                $config['mailtype'] = 'html';
+                $config['charset'] = 'utf-8';
+                $config['wordwrap'] = TRUE;
+                $config['crlf'] = '\r\n';
+                $config['newline'] = '\r\n';
+                $this->load->library('email');
+                $this->email->initialize($config);
+                $this->email->from($email_config->mail_sender_address, $email_config->mail_sender_name);
+                $this->email->to($user->email);
+                $this->email->subject('Please verify your account');
+                $this->email->message('<a href="'.site_url("user/activate/$code").'" target="_blank">Click Here!</a>');
+                return $this->email->send();
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function activate($code)
+    {
+        $this->db->where('activate_code', $code);
+        $query = $this->db->get('activate');
+        if ($query->num_rows() > 0)
+        {
+            $result = $query->result()[0];
+            $data = array(
+                'switch' => 1,
+                'enable' => 1
+            );
+            $this->db->where('uid', $result->uid);
+            $this->db->where('user_name', $result->username);
+            $this->db->where('email', $result->email);
+            $this->db->limit(1);
+            return $this->db->update('user',$data);
+        }
+        else
+        {
+            return false;
+        }
     }
 }
