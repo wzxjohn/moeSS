@@ -534,7 +534,7 @@ class User extends CI_Controller
     {
         if ($this->is_login())
         {
-            if ( $this->user_model->send_active_email( $this->session->userdata('s_username'); ) )
+            if ( $this->user_model->send_active_email( $this->session->userdata('s_username') ) )
             {
                 echo "Success!";
             }
