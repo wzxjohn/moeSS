@@ -348,7 +348,7 @@ class Admin extends CI_Controller
             $data['system_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
-            $data['nodes'] = $this->admin_model->get_nodes();
+            $data['node'] = null;
             $this->load->view( 'admin/admin_node_edit', $data );
             $this->load->view( 'admin/admin_footer' );
         }
