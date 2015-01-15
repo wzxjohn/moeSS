@@ -336,10 +336,10 @@ class User_model extends CI_Model
                     $url = 'https://api.sendgrid.com/';
                     $this->db->where('option_name', 'mail_sg_user');
                     $query = $this->db->get('options');
-                    $user = $query->result()[0]->option_value;
+                    $api_user = $query->result()[0]->option_value;
                     $this->db->where('option_name', 'mail_sg_pass');
                     $query = $this->db->get('options');
-                    $pass = $query->result()[0]->option_value;
+                    $api_pass = $query->result()[0]->option_value;
                     $html = "<html>
                         <head></head>
                         <body>
@@ -353,10 +353,10 @@ class User_model extends CI_Model
                     $query = $this->db->get('options');
                     $sender_address = $query->result()[0]->option_value;
                     $params = array(
-                        'api_user' => $user,
-                        'api_key' => $pass,
+                        'api_user' => $api_user,
+                        'api_key' => $api_pass,
                         'to' => $user->email,
-                        'subject' => 'Acticate your account',
+                        'subject' => '[ACTION REQUIRED] Activate your account',
                         'html' => $html,
                         'from' => $sender_address,
                     );
@@ -379,7 +379,7 @@ class User_model extends CI_Model
                         return false;
                     }
                 }
-                
+
                 $config['mailtype'] = 'html';
                 $config['charset'] = 'utf-8';
                 $config['wordwrap'] = TRUE;
