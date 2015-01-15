@@ -349,7 +349,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['nodes'] = $this->admin_model->get_nodes();
-            $this->load->view( 'admin/admin_node_add', $data );
+            $this->load->view( 'admin/admin_node_edit', $data );
             $this->load->view( 'admin/admin_footer' );
         }
         else
@@ -434,7 +434,8 @@ class Admin extends CI_Controller
                     if ($this->admin_model->update_node($mode, $id, $node_name, $node_server, $node_info, $node_type, $node_status, $node_order ))
                     {
                         //echo '{"result" : "success" }';
-                        echo '<script>alert("Success!");</script>';
+                        //echo '<script>alert("Success!");</script>';
+                        echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/nodes') . "\";</script>";
                         redirect('admin/nodes');
                     }
                     else
