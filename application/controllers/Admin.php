@@ -284,8 +284,8 @@ class Admin extends CI_Controller
             if ($this->admin_model->del_user($uid))
             {
                 //echo '{"result" : "success" }';
-                echo '<script>alert("Success!");</script>';
-                redirect('admin/users');
+                echo "<script>alert(\"Success!\"); windows.location.href = " . site_url('admin/users') . ";</script>";
+                //redirect('admin/users');
             }
             else
             {
@@ -367,8 +367,8 @@ class Admin extends CI_Controller
             if ($this->admin_model->del_node($id))
             {
                 //echo '{"result" : "success" }';
-                echo '<script>alert("Success!");</script>';
-                redirect('admin/nodes');
+                echo "<script>alert(\"Success!\"); windows.location.href = " . site_url('admin/nodes') . ";</script>";
+                //redirect('admin/nodes');
             }
             else
             {
@@ -417,19 +417,34 @@ class Admin extends CI_Controller
     {
             if ($this->is_login())
             {
+                $mode = "insert";
                 if ($id)
                 {
                     $id = (int) $id;
+                    $mode = "update";
                 }
-                if ($this->admin_model->del_node($id))
+                $node_name = $this->input->post('node_name');
+                $node_server = $this->input->post('node_server');
+                $node_info = $this->input->post('node_info');
+                $node_type = $this->input->post('node_type');
+                $node_status = $this->input->post('node_status');
+                $node_order = $this->input->post('node_order');
+                if ($node_name && $node_server && $node_info && $node_type && $node_status && $node_order)
                 {
-                    //echo '{"result" : "success" }';
-                    echo '<script>alert("Success!");</script>';
-                    redirect('admin/nodes');
+                    if ($this->admin_model->update_node($mode, $id, $node_name, $node_server, $node_info, $node_type, $node_status, $node_order ))
+                    {
+                        //echo '{"result" : "success" }';
+                        echo '<script>alert("Success!");</script>';
+                        redirect('admin/nodes');
+                    }
+                    else
+                    {
+                        echo '{"result" : "Something Error!" }';
+                    }
                 }
                 else
                 {
-                    echo '{"result" : "Something Error!" }';
+                    echo '{"result" : "You miss something!" }';
                 }
                 return;
             }

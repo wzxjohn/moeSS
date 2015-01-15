@@ -139,4 +139,40 @@ class Admin_model extends CI_Model
         $this->db->limit(1);
         return $this->db->delete('user');
     }
+
+    function update_node($mode = "insert", $id = null, $node_name, $node_server, $node_info, $node_type, $node_status, $node_order )
+    {
+        if ($mode == "update")
+        {
+            if ($id)
+            {
+                $this->db->where('id', $id);
+                $data = array(
+                    'node_name' => $node_name,
+                    'node_server' => $node_server,
+                    'node_info' => $node_info,
+                    'node_type' => $node_type,
+                    'node_status' => $node_status,
+                    'node_order' => $node_order
+                );
+                return $this->db->update('ss_node', $data);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            $data = array(
+                'node_name' => $node_name,
+                'node_server' => $node_server,
+                'node_info' => $node_info,
+                'node_type' => $node_type,
+                'node_status' => $node_status,
+                'node_order' => $node_order
+            );
+            return $this->db->insert('ss_node', $data);
+        }
+    }
 }
