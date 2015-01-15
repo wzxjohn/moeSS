@@ -284,7 +284,7 @@ class Admin extends CI_Controller
             if ($this->admin_model->del_user($uid))
             {
                 //echo '{"result" : "success" }';
-                echo "<script>alert(\"Success!\"); windows.location.href = " . site_url('admin/users') . ";</script>";
+                echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/users') . "\";</script>";
                 //redirect('admin/users');
             }
             else
@@ -367,7 +367,7 @@ class Admin extends CI_Controller
             if ($this->admin_model->del_node($id))
             {
                 //echo '{"result" : "success" }';
-                echo "<script>alert(\"Success!\"); windows.location.href = \"" . site_url('admin/nodes') . "\";</script>";
+                echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/nodes') . "\";</script>";
                 //redirect('admin/nodes');
             }
             else
@@ -429,7 +429,7 @@ class Admin extends CI_Controller
                 $node_type = $this->input->post('node_type');
                 $node_status = $this->input->post('node_status');
                 $node_order = $this->input->post('node_order');
-                if ($node_name && $node_server && $node_info && $node_type && $node_status && $node_order)
+                if ($node_name && $node_server && $node_info && $node_type != null && $node_status && $node_order != null)
                 {
                     if ($this->admin_model->update_node($mode, $id, $node_name, $node_server, $node_info, $node_type, $node_status, $node_order ))
                     {
