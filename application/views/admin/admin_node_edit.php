@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <h3 class="box-title"><?php if ($node) { echo "编辑"; } else { echo "添加"; } ?>节点</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="<?php echo site_url( 'admin/node_update'); ?>">
+                    <form role="form" method="post" action="<?php if ($node) { echo site_url( "admin/node_update/$node->id"); } else { echo site_url( 'admin/node_update'); } ?>">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="cate_title">节点名字</label>

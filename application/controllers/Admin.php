@@ -412,4 +412,31 @@ class Admin extends CI_Controller
         }
         return;
     }
+
+    function node_update($id = null)
+    {
+            if ($this->is_login())
+            {
+                if ($id)
+                {
+                    $id = (int) $id;
+                }
+                if ($this->admin_model->del_node($id))
+                {
+                    //echo '{"result" : "success" }';
+                    echo '<script>alert("Success!");</script>';
+                    redirect('admin/nodes');
+                }
+                else
+                {
+                    echo '{"result" : "Something Error!" }';
+                }
+                return;
+            }
+            else
+            {
+                redirect(site_url('admin/login'));
+            }
+        return;
+    }
 }

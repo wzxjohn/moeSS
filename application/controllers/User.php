@@ -79,11 +79,12 @@ class User extends CI_Controller
         return;
     }
 
-    function register()
+    function register($code = null)
     {
         if ( $this->user_model->need_invite() )
         {
             $data['invite_only'] = true;
+            $data['code'] = $code;
         }
         else
         {
