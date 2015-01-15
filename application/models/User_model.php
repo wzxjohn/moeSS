@@ -294,7 +294,7 @@ class User_model extends CI_Model
             $x = base64_encode($x);
             $code = substr($x, rand(1, 13), 24);
             $data = array(
-                'active_code' => $code,
+                'activate_code' => $code,
                 'uid' => $user->uid,
                 'user_name' => $user->user_name,
                 'email' => $user->email
