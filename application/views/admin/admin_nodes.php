@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <section class="content">
             <div class="row">
                 <div class="col-xs-12">
-                    <p> <a class="btn btn-success btn-sm" href="node_add.php">添加</a> </p>
+                    <p> <a class="btn btn-success btn-sm" href="<?php echo site_url( 'admin/node_add' ); ?>">添加</a> </p>
                     <div class="box">
                         <div class="box-body table-responsive no-padding">
                             <table class="table table-hover">
@@ -31,21 +31,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <th>排序</th>
                                     <th>操作</th>
                                 </tr>
-                                <?php
-                                $sql ="SELECT * FROM `ss_node`  ORDER BY node_order ";
-                                $query =  $dbc->query($sql);
-                                while ( $rs = $query->fetch_array()){ ?>
+                                <?php if ($nodes) { foreach( $nodes as $node ) : ?>
                                     <tr>
                                         <td>#<?php echo $node->id; ?></td>
-                                        <td> <?php echo $node->node_name; ?></td>
+                                        <td><?php echo $node->node_name; ?></td>
                                         <td><?php echo $node->node_info; ?></td>
                                         <td><?php echo $node->node_order; ?></td>
                                         <td>
-                                            <a class="btn btn-info btn-sm" href="node_edit.php?id=<?php echo $node->id; ?>">编辑</a>
-                                            <a class="btn btn-danger btn-sm" href="node_del.php?id=<?php echo $node->id; ?>">删除</a>
+                                            <a class="btn btn-info btn-sm" href="<?php echo site_url( 'admin/node_edit' ); echo $node->id; ?>">编辑</a>
+                                            <a class="btn btn-info btn-sm" href="<?php echo site_url( 'admin/node_del' ); echo $node->id; ?>">删除</a>
                                         </td>
                                     </tr>
-                                <?php } ?>
+                                <?php endforeach; } ?>
                             </table>
                         </div><!-- /.box-body -->
                     </div><!-- /.box -->
