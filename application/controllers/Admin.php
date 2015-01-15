@@ -255,13 +255,13 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $this->load->view( 'admin/admin_sidebar', $data );
-
             $data['index_active'] = (bool) false;
             $data['user_active'] = (bool) false;
             $data['node_active'] = (bool) false;
             $data['code_active'] = (bool) true;
             $data['system_active'] = (bool) false;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
             $codes = $this->admin_model->get_invite_codes();
             $data['codes'] = $codes;
             $this->load->view( 'admin/admin_code', $data );
