@@ -316,19 +316,19 @@ class User_model extends CI_Model
                 {
                     $this->db->where('option_name', 'mail_smtp_host');
                     $query = $this->db->get('options');
-                    $config['smtp_host'] = $query->result()[0]->mail_smtp_host;
+                    $config['smtp_host'] = $query->result()[0]->option_value;
                     $this->db->where('option_name', 'mail_smtp_user');
                     $query = $this->db->get('options');
-                    $config['smtp_user'] = $query->result()[0]->mail_smtp_user;
+                    $config['smtp_user'] = $query->result()[0]->option_value;
                     $this->db->where('option_name', 'mail_smtp_pass');
                     $query = $this->db->get('options');
-                    $config['smtp_pass'] = $query->result()[0]->mail_smtp_pass;
+                    $config['smtp_pass'] = $query->result()[0]->option_value;
                     $this->db->where('option_name', 'mail_smtp_port');
                     $query = $this->db->get('options');
-                    $config['smtp_port'] = $query->result()[0]->mail_smtp_port;
+                    $config['smtp_port'] = $query->result()[0]->option_value;
                     $this->db->where('option_name', 'mail_smtp_crypto');
                     $query = $this->db->get('options');
-                    $config['smtp_crypto'] = $query->result()[0]->mail_smtp_crypto;
+                    $config['smtp_crypto'] = $query->result()[0]->option_value;
                 }
                 $config['mailtype'] = 'html';
                 $config['charset'] = 'utf-8';
@@ -340,10 +340,10 @@ class User_model extends CI_Model
 
                 $this->db->where('option_name', 'mail_sender_address');
                 $query = $this->db->get('options');
-                $sender_address = $query->result()[0]->mail_smtp_crypto;
+                $sender_address = $query->result()[0]->option_value;
                 $this->db->where('option_name', 'mail_sender_name');
                 $query = $this->db->get('options');
-                $sender_name = $query->result()[0]->mail_smtp_crypto;
+                $sender_name = $query->result()[0]->option_value;
                 $this->email->from($sender_address, $sender_name);
                 $this->email->to($user->email);
                 $this->email->subject('Please verify your account');
