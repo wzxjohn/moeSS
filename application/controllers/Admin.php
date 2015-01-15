@@ -283,7 +283,9 @@ class Admin extends CI_Controller
             $uid = (int) $uid;
             if ($this->admin_model->del_user($uid))
             {
-                echo '{"result" : "success" }';
+                //echo '{"result" : "success" }';
+                echo '<script>alert("Success!");</script>';
+                redirect('admin/users');
             }
             else
             {
@@ -347,7 +349,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['nodes'] = $this->admin_model->get_nodes();
-            $this->load->view( 'admin/admin_nodes', $data );
+            $this->load->view( 'admin/admin_node_add', $data );
             $this->load->view( 'admin/admin_footer' );
         }
         else
@@ -364,7 +366,9 @@ class Admin extends CI_Controller
             $id = (int) $id;
             if ($this->admin_model->del_node($id))
             {
-                echo '{"result" : "success" }';
+                //echo '{"result" : "success" }';
+                echo '<script>alert("Success!");</script>';
+                redirect('admin/nodes');
             }
             else
             {
@@ -398,8 +402,8 @@ class Admin extends CI_Controller
             $data['system_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
-            $data['nodes'] = $this->admin_model->get_nodes();
-            $this->load->view( 'admin/admin_nodes', $data );
+            $data['node'] = $this->admin_model->get_nodes($id)[0];
+            $this->load->view( 'admin/admin_node_edit', $data );
             $this->load->view( 'admin/admin_footer' );
         }
         else
