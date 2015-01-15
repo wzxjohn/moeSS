@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title"><?php if ($user) { echo "编辑"; } else { echo "添加"; } ?>节点</h3>
+                        <h3 class="box-title"><?php if ($user) { echo "编辑"; } else { echo "添加"; } ?>用户</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     <form role="form" method="post" action="<?php if ($user) { echo site_url( "admin/user_update/$user->uid"); } else { echo site_url( 'admin/user_update'); } ?>">
@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                             <div class="form-group">
                                 <label for="cate_order">下载</label>
-                                <input type="text" class="form-control" name="d"  value="可用" <?php if ($user) {echo "value=\"$user->d\""; } ?> >
+                                <input type="text" class="form-control" name="d" <?php if ($user) {echo "value=\"$user->d\""; } ?> >
                             </div>
 
                             <div class="form-group">

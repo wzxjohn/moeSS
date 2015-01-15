@@ -374,7 +374,7 @@ class Admin extends CI_Controller
             $data['system_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
-            $data['user'] = $this->admin_model->get_users($uid);
+            $data['user'] = $this->admin_model->get_users($uid)[0];
             $this->load->view( 'admin/admin_user_edit', $data );
             $this->load->view( 'admin/admin_footer' );
         }
