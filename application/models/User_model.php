@@ -301,24 +301,34 @@ class User_model extends CI_Model
             );
             $this->db->insert('activate', $data);
 
-            $this->db->like('option_name', 'mail');
+            $this->db->where('option_name', 'mail_protocol');
             $query = $this->db->get('options');
             if ($query->num_rows() > 0)
             {
-                $email_config = $query->result()[0];
-
-                $config['protocol'] = $email_config->mail_protocol;
+                $config['protocol'] = $query->result()[0]->option_value;
                 if ($config['protocol'] == 'sendmail')
                 {
-                    $config['mailpath'] = '/usr/sbin/sendmail';
+                    $this->db->where('option_name', 'mail_mailpath');
+                    $query = $this->db->get('options');
+                    $config['mailpath'] = $query->result()[0]->option_value;
                 }
                 elseif ($config['protocol'] == 'smtp')
                 {
-                    $config['smtp_host'] = $email_config->mail_smtp_host;
-                    $config['smtp_user'] = $email_config->mail_smtp_user;
-                    $config['smtp_pass'] = $email_config->mail_smtp_pass;
-                    $config['smtp_port'] = $email_config->mail_smtp_port;
-                    $config['smtp_crypto'] = $email_config->mail_smtp_crypto;
+                    $this->db->where('option_name', 'mail_smtp_host');
+                    $query = $this->db->get('options');
+                    $config['smtp_host'] = $query->result()[0]->mail_smtp_host;
+                    $this->db->where('option_name', 'mail_smtp_user');
+                    $query = $this->db->get('options');
+                    $config['smtp_user'] = $query->result()[0]->mail_smtp_user;
+                    $this->db->where('option_name', 'mail_smtp_pass');
+                    $query = $this->db->get('options');
+                    $config['smtp_pass'] = $query->result()[0]->mail_smtp_pass;
+                    $this->db->where('option_name', 'mail_smtp_port');
+                    $query = $this->db->get('options');
+                    $config['smtp_port'] = $query->result()[0]->mail_smtp_port;
+                    $this->db->where('option_name', 'mail_smtp_crypto');
+                    $query = $this->db->get('options');
+                    $config['smtp_crypto'] = $query->result()[0]->mail_smtp_crypto;
                 }
                 $config['mailtype'] = 'html';
                 $config['charset'] = 'utf-8';
@@ -327,7 +337,14 @@ class User_model extends CI_Model
                 $config['newline'] = '\r\n';
                 $this->load->library('email');
                 $this->email->initialize($config);
-                $this->email->from($email_config->mail_sender_address, $email_config->mail_sender_name);
+
+                $this->db->where('option_name', 'mail_sender_address');
+                $query = $this->db->get('options');
+                $sender_address = $query->result()[0]->mail_smtp_crypto;
+                $this->db->where('option_name', 'mail_sender_name');
+                $query = $this->db->get('options');
+                $sender_name = $query->result()[0]->mail_smtp_crypto;
+                $this->email->from($sender_address, $sender_name);
                 $this->email->to($user->email);
                 $this->email->subject('Please verify your account');
                 $this->email->message('<a href="'.site_url("user/activate/$code").'" target="_blank">Click Here!</a>');
@@ -344,7 +361,7 @@ class User_model extends CI_Model
     {
         $this->db->where('activate_code', $code);
         $query = $this->db->get('activate');
-        if ($query->num_rows() > 0)
+        if ($query->num_rows() > 0 && !$query->result()[0]->used)
         {
             $result = $query->result()[0];
             $data = array(
@@ -352,7 +369,7 @@ class User_model extends CI_Model
                 'enable' => 1
             );
             $this->db->where('uid', $result->uid);
-            $this->db->where('user_name', $result->username);
+            $this->db->where('user_name', $result->user_name);
             $this->db->where('email', $result->email);
             $this->db->limit(1);
             return $this->db->update('user',$data);
