@@ -367,7 +367,7 @@ class Admin extends CI_Controller
             if ($this->admin_model->del_node($id))
             {
                 //echo '{"result" : "success" }';
-                echo "<script>alert(\"Success!\"); windows.location.href = " . site_url('admin/nodes') . ";</script>";
+                echo "<script>alert(\"Success!\"); windows.location.href = \"" . site_url('admin/nodes') . "\";</script>";
                 //redirect('admin/nodes');
             }
             else
