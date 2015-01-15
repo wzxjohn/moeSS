@@ -53,7 +53,7 @@ class Admin_model extends CI_Model
 
     function get_users()
     {
-        $this->db->select('uid, user_name, email, passwd, t, u, d, plan, transfer_enable, port, switch, enable, last_check_in_time, reg_date');
+        $this->db->select('uid, user_name, email, pass, passwd, t, u, d, plan, transfer_enable, port, switch, enable, last_check_in_time, reg_date');
         return $this->db->get('user')->result();
     }
 

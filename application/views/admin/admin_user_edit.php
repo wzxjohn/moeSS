@@ -76,12 +76,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                             <div class="form-group">
                                 <label for="cate_order">开关</label>
-                                <input type="checkbox" class="form-control" name="switch" <?php if ($user) {echo "value=\"$user->switch\""; } ?> >
+                                <input type="text" class="form-control" name="switch" <?php if ($user) {echo "value=\"$user->switch\""; } ?> >
                             </div>
 
                             <div class="form-group">
                                 <label for="cate_order">启用</label>
-                                <input type="checkbox" class="form-control" name="enable" <?php if ($user) {echo "value=\"$user->enable\""; } ?> >
+                                <input type="text" class="form-control" name="enable" <?php if ($user) {echo "value=\"$user->enable\""; } ?> >
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
