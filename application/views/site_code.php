@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php if ($codes) { $a=1; foreach ($codes as $code) : ?>
                     <tr>
                         <td><?php echo $a;$a++; ?></td>
-                        <td><a href="<?php echo site_url( "user/register/$code->code"); ?><" target="_self"><?php echo $code->code;?></a></td>
+                        <td><a href="<?php echo site_url( "user/register/$code->code"); ?>" target="_self"><?php echo $code->code;?></a></td>
                         <td>可用</td>
 
                     </tr>
