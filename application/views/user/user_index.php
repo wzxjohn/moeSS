@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="callout callout-danger">
                             <h4>未激活</h4>
                             <p>您的账号还没有激活，暂时不能使用！请查收邮件。</p>
-                            <p><a class="btn btn-success" id="check_in_button" href="" onclick="do_resend_mail()">重发激活邮件</a> </p>
+                            <p><a class="btn btn-success" id="check_in_button" onclick="do_resend_mail()">重发激活邮件</a> </p>
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->

@@ -172,7 +172,7 @@ class User extends CI_Controller
 
     function guestbook()
     {
-        $this->view->load('guestbook');
+        $this->load->view('guestbook');
         return;
     }
 
