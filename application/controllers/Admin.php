@@ -244,6 +244,36 @@ class Admin extends CI_Controller
         return;
     }
 
+    function invite_code()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['index_active'] = (bool) false;
+            $data['user_active'] = (bool) false;
+            $data['node_active'] = (bool) false;
+            $data['code_active'] = (bool) true;
+            $data['system_active'] = (bool) false;
+            $codes = $this->admin_model->get_invite_codes();
+            $data['codes'] = $codes;
+            $this->load->view( 'admin/admin_code', $data );
+            $this->load->view( 'admin/admin_footer' );
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
+        return;
+    }
+
     function add_invite()
     {
         if ($this->is_login())

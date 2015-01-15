@@ -112,6 +112,21 @@ class Admin_model extends CI_Model
         return $this->db->insert_batch('invite_code', $datas);
     }
 
+    function get_invite_codes()
+    {
+        $this->db->where('user', '1');
+        $this->db->where('used', '0');
+        $query = $this->db->get('invite_code');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return (bool) false;
+        }
+    }
+
     function get_nodes($id = null)
     {
         if ($id)
