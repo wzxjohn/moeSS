@@ -23,7 +23,14 @@ class User_model extends CI_Model
         $this->db->where('user_name', $username);
         $this->db->select('uid, user_name, pass, email');
         $query = $this->db->get('user');
-        return $query->result();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0];
+        }
+        else
+        {
+            return false;
+        }
     }
 
     function need_invite()

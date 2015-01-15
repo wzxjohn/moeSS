@@ -185,11 +185,11 @@ class User extends CI_Controller
             $user = $this->user_model->u_select($username);
             if ($user)
             {
-                if ($user[0]->pass == $password)
+                if ($user->pass == $password)
                 {
-                    $arr = array('s_uid' => $user[0]->uid,
-                        's_username' => $user[0]->user_name,
-                        's_email' => $user[0]->email
+                    $arr = array('s_uid' => $user->uid,
+                        's_username' => $user->user_name,
+                        's_email' => $user->email
                     );
                     $this->session->set_userdata($arr);
                     echo '{"result" : "success" }';
