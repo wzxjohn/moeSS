@@ -38,8 +38,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td><?php echo $node->node_info; ?></td>
                                         <td><?php echo $node->node_order; ?></td>
                                         <td>
-                                            <a class="btn btn-info btn-sm" href="<?php echo site_url( 'admin/node_edit' ); echo $node->id; ?>">编辑</a>
-                                            <a class="btn btn-info btn-sm" href="<?php echo site_url( 'admin/node_del' ); echo $node->id; ?>">删除</a>
+                                            <a class="btn btn-info btn-sm" href="<?php echo site_url( "admin/node_edit/$node->id" ); ?>">编辑</a>
+                                            <a class="btn btn-danger btn-sm" href="<?php echo site_url( "admin/node_del/$node->id" ); ?>">删除</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; } ?>
@@ -48,6 +48,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div><!-- /.box -->
                 </div>
             </div>
-
     </section><!-- /.content -->
 </aside><!-- /.right-side -->

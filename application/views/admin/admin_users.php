@@ -53,8 +53,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td><?php echo date("m-j G:i", $user->last_check_in_time); ?></td>
                                         <td><?php echo $user->reg_date; ?></td>
                                         <td>
-                                            <a class="btn btn-info btn-sm" href="user_edit.php?id=<?php echo $user->uid; ?>">编辑</a>
-                                            <a class="btn btn-danger btn-sm" href="user_del.php?id=<?php echo $user->uid; ?>">删除</a>
+                                            <a class="btn btn-info btn-sm" href="<?php echo site_url( "admin/user_edit/$user->uid"); ?>">编辑</a>
+                                            <a class="btn btn-danger btn-sm" href="<?php echo site_url( "admin/user_del/$user->uid"); ?>">删除</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; } ?>
