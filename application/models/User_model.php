@@ -297,7 +297,8 @@ class User_model extends CI_Model
                 'activate_code' => $code,
                 'uid' => $user->uid,
                 'user_name' => $user->user_name,
-                'email' => $user->email
+                'email' => $user->email,
+                'used' => 0
             );
             $this->db->insert('activate', $data);
 
@@ -330,6 +331,55 @@ class User_model extends CI_Model
                     $query = $this->db->get('options');
                     $config['smtp_crypto'] = $query->result()[0]->option_value;
                 }
+                elseif ($config['protocol'] == 'sendgrid')
+                {
+                    $url = 'https://api.sendgrid.com/';
+                    $this->db->where('option_name', 'mail_sg_user');
+                    $query = $this->db->get('options');
+                    $user = $query->result()[0]->option_value;
+                    $this->db->where('option_name', 'mail_sg_pass');
+                    $query = $this->db->get('options');
+                    $pass = $query->result()[0]->option_value;
+                    $html = "<html>
+                        <head></head>
+                        <body>
+                        <p>Hi!<br>
+                        How are you?<br>
+                        <a href=\"".site_url("user/activate/$code")."\" target=\"_blank\">Click Here!</a>
+                        </p>
+                        </body>
+                    </html>";
+                    $this->db->where('option_name', 'mail_sender_address');
+                    $query = $this->db->get('options');
+                    $sender_address = $query->result()[0]->option_value;
+                    $params = array(
+                        'api_user' => $user,
+                        'api_key' => $pass,
+                        'to' => $user->email,
+                        'subject' => 'Acticate your account',
+                        'html' => $html,
+                        'from' => $sender_address,
+                    );
+
+                    $request = $url.'api/mail.send.json';
+                    $session = curl_init($request);
+                    curl_setopt ($session, CURLOPT_POST, true);
+                    curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
+                    curl_setopt($session, CURLOPT_HEADER, false);
+                    curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+                    $response = curl_exec($session);
+                    curl_close($session);
+                    $response = json_decode($response);
+                    if ($response->message == "success")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                
                 $config['mailtype'] = 'html';
                 $config['charset'] = 'utf-8';
                 $config['wordwrap'] = TRUE;
