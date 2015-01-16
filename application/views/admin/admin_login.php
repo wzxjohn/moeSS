@@ -90,19 +90,27 @@ $this->load->helper('form');
         echo form_open('admin/login_check', $attributes);
     ?>
         <div class="body bg-gray">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                <input type="username"  id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                    <input type="username"  id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+                </div>
             </div>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                <input type="password"  id="pass" name="pass" class="form-control" placeholder="Password" required>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                    <input type="password"  id="pass" name="pass" class="form-control" placeholder="Password" required>
+                </div>
             </div>
-            <div class="input-group" style="display: none">
-                <input type="hidden"  id="password" name="password" class="form-control">
+            <div class="form-group">
+                <div class="input-group" style="display: none">
+                    <input type="hidden"  id="password" name="password" class="form-control">
+                </div>
             </div>
-            <div class="input-group">
-                <input type="checkbox" name="remember_me" value="week"/> 保存Cookie7天
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="checkbox" name="remember_me" value="week"/> 保存Cookie7天
+                </div>
             </div>
             <div class="input-group" id="loginResult"></div>
         </div>
