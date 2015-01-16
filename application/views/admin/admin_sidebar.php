@@ -54,6 +54,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <i class="fa fa-pencil"></i> <span>系统信息</span>
         </a>
     </li>
+
+    <li <?php if ($config_active) { echo 'class="active"';};?>>
+        <a href="<?php echo site_url('admin/system_config');?>">
+            <i class="fa fa-cog"></i> <span>系统设置</span>
+        </a>
+    </li>
 </ul>
 </section>
 <!-- /.sidebar -->

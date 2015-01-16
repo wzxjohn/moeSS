@@ -91,9 +91,11 @@ $this->load->helper('form');
     ?>
         <div class="body bg-gray">
             <div class="form-group">
+                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                 <input type="username"  id="username" name="username" class="form-control" placeholder="Username" required autofocus>
             </div>
             <div class="form-group">
+                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                 <input type="password"  id="pass" name="pass" class="form-control" placeholder="Password" required>
             </div>
             <div class="form-group" style="display: none">

@@ -190,4 +190,17 @@ class Admin_model extends CI_Model
             return $this->db->insert('ss_node', $data);
         }
     }
+
+    function get_config()
+    {
+        $query = $this->db->get('options');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

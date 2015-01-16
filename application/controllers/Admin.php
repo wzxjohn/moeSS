@@ -32,6 +32,7 @@ class Admin extends CI_Controller
             $data['node_active'] = (bool) false;
             $data['code_active'] = (bool) false;
             $data['system_active'] = (bool) false;
+            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['node_count'] = $this->admin_model->c_nodes();
@@ -135,6 +136,7 @@ class Admin extends CI_Controller
             $data['node_active'] = (bool) false;
             $data['code_active'] = (bool) false;
             $data['system_active'] = (bool) false;
+            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['users'] = $this->admin_model->get_users();
@@ -164,6 +166,7 @@ class Admin extends CI_Controller
             $data['node_active'] = (bool) true;
             $data['code_active'] = (bool) false;
             $data['system_active'] = (bool) false;
+            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['nodes'] = $this->admin_model->get_nodes();
@@ -193,6 +196,7 @@ class Admin extends CI_Controller
             $data['node_active'] = (bool) false;
             $data['code_active'] = (bool) true;
             $data['system_active'] = (bool) false;
+            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['node_count'] = $this->admin_model->c_nodes();
@@ -223,6 +227,7 @@ class Admin extends CI_Controller
             $data['node_active'] = (bool) false;
             $data['code_active'] = (bool) false;
             $data['system_active'] = (bool) true;
+            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['all_user'] = $this->admin_model->c_users();
@@ -260,6 +265,7 @@ class Admin extends CI_Controller
             $data['node_active'] = (bool) false;
             $data['code_active'] = (bool) true;
             $data['system_active'] = (bool) false;
+            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $codes = $this->admin_model->get_invite_codes();
@@ -318,6 +324,7 @@ class Admin extends CI_Controller
             $data['node_active'] = (bool) false;
             $data['code_active'] = (bool) false;
             $data['system_active'] = (bool) false;
+            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['user'] = null;
@@ -372,6 +379,7 @@ class Admin extends CI_Controller
             $data['node_active'] = (bool) false;
             $data['code_active'] = (bool) false;
             $data['system_active'] = (bool) false;
+            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['user'] = $this->admin_model->get_users($uid)[0];
@@ -401,6 +409,7 @@ class Admin extends CI_Controller
             $data['node_active'] = (bool) true;
             $data['code_active'] = (bool) false;
             $data['system_active'] = (bool) false;
+            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['node'] = null;
@@ -455,6 +464,7 @@ class Admin extends CI_Controller
             $data['node_active'] = (bool) true;
             $data['code_active'] = (bool) false;
             $data['system_active'] = (bool) false;
+            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['node'] = $this->admin_model->get_nodes($id)[0];
@@ -470,44 +480,74 @@ class Admin extends CI_Controller
 
     function node_update($id = null)
     {
-            if ($this->is_login())
+        if ($this->is_login())
+        {
+            $mode = "insert";
+            if ($id)
             {
-                $mode = "insert";
-                if ($id)
+                $id = (int) $id;
+                $mode = "update";
+            }
+            $node_name = $this->input->post('node_name');
+            $node_server = $this->input->post('node_server');
+            $node_info = $this->input->post('node_info');
+            $node_type = $this->input->post('node_type');
+            $node_status = $this->input->post('node_status');
+            $node_order = $this->input->post('node_order');
+            if ($node_name && $node_server && $node_info && $node_type != null && $node_status && $node_order != null)
+            {
+                if ($this->admin_model->update_node($mode, $id, $node_name, $node_server, $node_info, $node_type, $node_status, $node_order ))
                 {
-                    $id = (int) $id;
-                    $mode = "update";
-                }
-                $node_name = $this->input->post('node_name');
-                $node_server = $this->input->post('node_server');
-                $node_info = $this->input->post('node_info');
-                $node_type = $this->input->post('node_type');
-                $node_status = $this->input->post('node_status');
-                $node_order = $this->input->post('node_order');
-                if ($node_name && $node_server && $node_info && $node_type != null && $node_status && $node_order != null)
-                {
-                    if ($this->admin_model->update_node($mode, $id, $node_name, $node_server, $node_info, $node_type, $node_status, $node_order ))
-                    {
-                        //echo '{"result" : "success" }';
-                        //echo '<script>alert("Success!");</script>';
-                        echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/nodes') . "\";</script>";
-                        redirect('admin/nodes');
-                    }
-                    else
-                    {
-                        echo '{"result" : "Something Error!" }';
-                    }
+                    //echo '{"result" : "success" }';
+                    //echo '<script>alert("Success!");</script>';
+                    echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/nodes') . "\";</script>";
+                    redirect('admin/nodes');
                 }
                 else
                 {
-                    echo '{"result" : "You miss something!" }';
+                    echo '{"result" : "Something Error!" }';
                 }
-                return;
             }
             else
             {
-                redirect(site_url('admin/login'));
+                echo '{"result" : "You miss something!" }';
             }
+            return;
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function system_config()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data['index_active'] = (bool) false;
+            $data['user_active'] = (bool) false;
+            $data['node_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
+            $data['system_active'] = (bool) false;
+            $data['config_active'] = (bool) true;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['configs'] = $this->admin_model->get_config();
+            $this->load->view( 'admin/admin_config', $data );
+            $this->load->view( 'admin/admin_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
         return;
     }
 }
