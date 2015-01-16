@@ -501,7 +501,7 @@ class Admin extends CI_Controller
                     //echo '{"result" : "success" }';
                     //echo '<script>alert("Success!");</script>';
                     echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/nodes') . "\";</script>";
-                    redirect('admin/nodes');
+                    //redirect('admin/nodes');
                 }
                 else
                 {
@@ -543,6 +543,100 @@ class Admin extends CI_Controller
             $data['configs'] = $this->admin_model->get_config();
             $this->load->view( 'admin/admin_config', $data );
             $this->load->view( 'admin/admin_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function config_update()
+    {
+        if ($this->is_login())
+        {
+            $data = array(
+                array(
+                    'option_name' => 'invite_only',
+                    'option_value' => $this->input->post('invite_only'),
+                ),
+                array(
+                    'option_name' => 'default_transfer',
+                    'option_value' => $this->input->post('default_transfer'),
+                ),
+                array(
+                    'option_name' => 'default_invite_number',
+                    'option_value' => $this->input->post('default_invite_number'),
+                ),
+                array(
+                    'option_name' => 'check_min',
+                    'option_value' => $this->input->post('check_min'),
+                ),
+                array(
+                    'option_name' => 'check_max',
+                    'option_value' => $this->input->post('check_max'),
+                ),
+                array(
+                    'option_name' => 'version',
+                    'option_value' => $this->input->post('version'),
+                ),
+                array(
+                    'option_name' => 'mail_protocol',
+                    'option_value' => $this->input->post('mail_protocol'),
+                ),
+                array(
+                    'option_name' => 'mail_mailpath',
+                    'option_value' => $this->input->post('mail_mailpath'),
+                ),
+                array(
+                    'option_name' => 'mail_smtp_host',
+                    'option_value' => $this->input->post('mail_smtp_host'),
+                ),
+                array(
+                    'option_name' => 'mail_smtp_user',
+                    'option_value' => $this->input->post('mail_smtp_user'),
+                ),
+                array(
+                    'option_name' => 'mail_smtp_pass',
+                    'option_value' => $this->input->post('mail_smtp_pass'),
+                ),
+                array(
+                    'option_name' => 'mail_smtp_port',
+                    'option_value' => $this->input->post('mail_smtp_port'),
+                ),
+                array(
+                    'option_name' => 'mail_smtp_crypto',
+                    'option_value' => $this->input->post('mail_smtp_crypto'),
+                ),
+                array(
+                    'option_name' => 'mail_sender_address',
+                    'option_value' => $this->input->post('mail_sender_address'),
+                ),
+                array(
+                    'option_name' => 'mail_sender_name',
+                    'option_value' => $this->input->post('mail_sender_name'),
+                ),
+                array(
+                    'option_name' => 'mail_sg_user',
+                    'option_value' => $this->input->post('mail_sg_user'),
+                ),
+                array(
+                    'option_name' => 'mail_sg_pass',
+                    'option_value' => $this->input->post('mail_sg_pass'),
+                )
+                //array(
+                //    'option_name' => '',
+                //    'option_value' => $this->input->post(''),
+                //),
+            );
+            if ( $this->admin_model->update_config($data) )
+            {
+                echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/system_config') . "\";</script>";
+            }
+            else
+            {
+                echo "<script>alert(\"Something error!\"); window.location.href = \"" . site_url('admin/system_config') . "\";</script>";
+            }
         }
         else
         {

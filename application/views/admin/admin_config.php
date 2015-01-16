@@ -31,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="box-body">
                         <?php foreach ($configs as $config) : ?>
                             <div class="form-group">
-                                <label for="cate_title"><?php echo $config->display_name; ?><small><?php echo $config->option_name; ?></small></label>
+                                <label for="cate_title"><?php echo $config->display_name; ?>    <small><?php echo $config->option_name; ?></small></label>
                                 <input type="text" class="form-control" name="<?php echo $config->option_name; ?>" value="<?php echo $config->option_value; ?>" >
                             </div>
                         <?php endforeach ?>

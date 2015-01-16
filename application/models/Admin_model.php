@@ -203,4 +203,9 @@ class Admin_model extends CI_Model
             return false;
         }
     }
+
+    function update_config($data)
+    {
+        return $this->db->update_batch($data);
+    }
 }
