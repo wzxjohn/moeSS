@@ -110,22 +110,22 @@ $this->load->helper('form');
     ?>
         <div class="body bg-gray">
             <div class="form-group">
-                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                <i class="fa fa-user fa-fw"></i>
                 <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required autofocus>
             </div>
 
             <div class="form-group">
-                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                <i class="fa fa-key fa-fw"></i>
                 <input type="password" class="form-control" id="password" name="password" placeholder="密码" required >
             </div>
 
             <div class="form-group">
-                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                <i class="fa fa-key fa-fw"></i>
                 <input type="password" class="form-control" id="repassword" name="repassword" placeholder="重复密码" required >
             </div>
 
             <div class="form-group">
-                <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                <i class="fa fa-envelope-o fa-fw"></i>
                 <input type="email" id="email" name="email" class="form-control" placeholder="邮箱" required >
             </div>
 
