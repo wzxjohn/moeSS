@@ -393,6 +393,54 @@ class Admin extends CI_Controller
         return;
     }
 
+    function user_update($uid = null)
+    {
+        if ($this->is_login())
+        {
+            $mode = "insert";
+            if ($uid)
+            {
+                $uid = (int) $uid;
+                $mode = "update";
+            }
+            $user_name = $this->input->post('user_name');
+            $email = $this->input->post('email');
+            $pass = $this->input->post('pass');
+            $passwd = $this->input->post('passwd');
+            $u = $this->input->post('u');
+            $d = $this->input->post('d');
+            $transfer_enable = $this->input->post('transfer_enable');
+            $plan = $this->input->post('plan');
+            $port = $this->input->post('port');
+            $switch = $this->input->post('switch');
+            $enable = $this->input->post('enable');
+            if ($user_name && $email && $pass && $passwd && $u != null && $d != null && $transfer_enable != null && $plan && $port && $switch != null && $enable != null )
+            {
+                if ($this->admin_model->update_user($mode, $uid, $user_name, $email, $pass, $passwd, $u, $d, $transfer_enable, $plan, $port, $switch, $enable ))
+                {
+                    //echo '{"result" : "success" }';
+                    //echo '<script>alert("Success!");</script>';
+                    echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/users') . "\";</script>";
+                    //redirect('admin/nodes');
+                }
+                else
+                {
+                    echo '{"result" : "Something Error!" }';
+                }
+            }
+            else
+            {
+                echo '{"result" : "You miss something!" }';
+            }
+            return;
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
     function node_add()
     {
         if ($this->is_login())

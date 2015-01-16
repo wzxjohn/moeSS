@@ -195,6 +195,64 @@ class Admin_model extends CI_Model
         }
     }
 
+    function update_user($mode = "insert", $uid = null, $user_name, $email, $pass, $passwd, $u, $d, $transfer_enable, $plan, $port, $switch, $enable )
+    {
+        if ($mode == "update")
+        {
+            if ($id)
+            {
+                $this->db->where('uid', $uid);
+                $data = array(
+                    'user_name' => $user_name,
+                    'email' => $email,
+                    'pass' => $pass,
+                    'passwd' => $passwd,
+                    'u' => $u,
+                    'd' => $d,
+                    'transfer_enable' => $transfer_enable,
+                    'plan' => $plan,
+                    'port' => $port,
+                    'switch' => $switch,
+                    'enable' => $enable
+                );
+                return $this->db->update('user', $data);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            $data = array(
+                'user_name' => $user_name,
+                'email' => $email,
+                'pass' => $pass,
+                'passwd' => $passwd,
+                't' => '0',
+                'u' => $u,
+                'd' => $d,
+                'transfer_enable' => $transfer_enable,
+                'plan' => $plan,
+                'port' => $port,
+                'switch' => $switch,
+                'enable' => $enable,
+                'user_name' => $username,
+                'type' => '7',
+                'invite_num' => $this->get_default_invite_number(),
+                'money' => '0'
+            );
+            return $this->db->insert('user', $data);
+        }
+    }
+
+    function get_default_invite_number()
+    {
+        $this->db->where('option_name', 'default_invite_number');
+        $query = $this->db->get('options');
+        return (int) $query->result()[0]->option_value;
+    }
+
     function get_config()
     {
         $query = $this->db->get('options');
