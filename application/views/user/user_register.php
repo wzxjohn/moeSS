@@ -109,28 +109,28 @@ $this->load->helper('form');
     echo form_open('user/do_register', $attributes);
     ?>
         <div class="body bg-gray">
-            <div class="form-group">
-                <i class="fa fa-user fa-fw"></i>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                 <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required autofocus>
             </div>
 
-            <div class="form-group">
-                <i class="fa fa-key fa-fw"></i>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                 <input type="password" class="form-control" id="password" name="password" placeholder="密码" required >
             </div>
 
-            <div class="form-group">
-                <i class="fa fa-key fa-fw"></i>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                 <input type="password" class="form-control" id="repassword" name="repassword" placeholder="重复密码" required >
             </div>
 
-            <div class="form-group">
-                <i class="fa fa-envelope-o fa-fw"></i>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
                 <input type="email" id="email" name="email" class="form-control" placeholder="邮箱" required >
             </div>
 
             <?php if( $invite_only ) { ?>
-                <div class="form-group">
+                <div class="input-group">
                     <input type="text" class="form-control" id="code" name="code" placeholder="邀请码" <?php if ($code) { echo "value=\"$code\"" ;} ?> required >
                 </div>
             <?php } ?>

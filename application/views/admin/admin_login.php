@@ -90,21 +90,21 @@ $this->load->helper('form');
         echo form_open('admin/login_check', $attributes);
     ?>
         <div class="body bg-gray">
-            <div class="form-group">
-                <i class="fa fa-user fa-fw"></i>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                 <input type="username"  id="username" name="username" class="form-control" placeholder="Username" required autofocus>
             </div>
-            <div class="form-group">
-                <i class="fa fa-key fa-fw"></i>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                 <input type="password"  id="pass" name="pass" class="form-control" placeholder="Password" required>
             </div>
-            <div class="form-group" style="display: none">
+            <div class="input-group" style="display: none">
                 <input type="hidden"  id="password" name="password" class="form-control">
             </div>
-            <div class="form-group">
+            <div class="input-group">
                 <input type="checkbox" name="remember_me" value="week"/> 保存Cookie7天
             </div>
-            <div class="form-group" id="loginResult"></div>
+            <div class="input-group" id="loginResult"></div>
         </div>
         <div class="footer">
             <button type="submit" class="btn bg-olive btn-block"  name="login" >登录</button>
