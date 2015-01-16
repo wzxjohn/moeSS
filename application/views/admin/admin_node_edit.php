@@ -34,9 +34,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <input  class="form-control" name="node_name" <?php if ($node) {echo "value=\"$node->node_name\""; } ?> >
                             </div>
 
-                            <div class="form-group">
+                            <div class="input-group">
                                 <label for="cate_title">节点地址</label>
-                                <input  class="form-control" name="node_server" <?php if ($node) {echo "value=\"$node->node_server\""; } ?> >
+                                <div class="input-group-addon">
+                                    <i class="fa fa-laptop"></i>
+                                </div>
+                                <input type="text" data-inputmask="'alias': 'ip'" data-mask class="form-control" name="node_server" <?php if ($node) {echo "value=\"$node->node_server\""; } ?> >
                             </div>
 
                             <div class="form-group">
