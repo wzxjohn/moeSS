@@ -141,7 +141,7 @@ class Admin extends CI_Controller
 
             $data['users'] = $this->admin_model->get_users();
             $this->load->view( 'admin/admin_users', $data );
-            //$this->load->view( 'admin/admin_footer' );
+            $this->load->view( 'admin/admin_footer' );
         }
         else
         {
