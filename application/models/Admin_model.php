@@ -206,6 +206,6 @@ class Admin_model extends CI_Model
 
     function update_config($data)
     {
-        return $this->db->update_batch('options', $data);
+        return $this->db->update_batch('options', $data, 'option_name');
     }
 }

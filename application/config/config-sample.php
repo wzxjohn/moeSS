@@ -38,6 +38,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
+| Sample config file.
+| You need to change these settings:
+| SITE_NAME
+| base_url
+| encryption_key
+| Don't forget change database.conf to connect link the database.
+ */
+
+define('SITE_NAME', 'Asia SS');
+
+/*
 |--------------------------------------------------------------------------
 | Base Site URL
 |--------------------------------------------------------------------------
@@ -53,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = 'https://ss.qaq.moe/';
 
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +76,7 @@ $config['base_url'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -96,7 +107,7 @@ $config['uri_protocol']	= 'AUTO';
 | http://codeigniter.com/user_guide/general/urls.html
 */
 
-$config['url_suffix'] = '';
+$config['url_suffix'] = '.html';
 
 /*
 |--------------------------------------------------------------------------
@@ -343,7 +354,7 @@ $config['cache_query_string'] = FALSE;
 | http://codeigniter.com/user_guide/libraries/sessions.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'somethingRandomHere';
 
 /*
 |--------------------------------------------------------------------------
@@ -368,10 +379,10 @@ $config['encryption_key'] = '';
 */
 $config['sess_driver']			= 'cookie';
 $config['sess_valid_drivers']	= array();
-$config['sess_cookie_name']		= 'ci_session';
+$config['sess_cookie_name']		= 'asiass_session';
 $config['sess_expiration']		= 7200;
 $config['sess_expire_on_close']	= FALSE;
-$config['sess_encrypt_cookie']	= FALSE;
+$config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= FALSE;
 $config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= FALSE;
@@ -394,7 +405,7 @@ $config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
-$config['cookie_httponly'] 	= FALSE;
+$config['cookie_httponly'] 	= TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -419,7 +430,7 @@ $config['standardize_newlines'] = FALSE;
 | COOKIE data is encountered
 |
 */
-$config['global_xss_filtering'] = FALSE;
+$config['global_xss_filtering'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

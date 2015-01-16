@@ -38,6 +38,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
+| Sample database config file.
+| You need to change these settings:
+| hostname
+| username
+| password
+| database
+| Don't forget change database.conf to connect link the database.
+ */
+
+/*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
 | -------------------------------------------------------------------
@@ -102,9 +112,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => '',
-	'password' => '',
-	'database' => '',
+	'username' => 'ss',
+	'password' => 'yourDBPassword',
+	'database' => 'shadowsocks',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,
