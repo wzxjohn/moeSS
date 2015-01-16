@@ -24,21 +24,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box">
                         <div class="box-body table-responsive no-padding">
                             <table id="userTable" class="table table-bordered table-hover">
-                                <tr role="row">
-                                    <th role="columnheader">UID</th>
-                                    <th role="columnheader">用户名</th>
-                                    <th role="columnheader">电子邮件</th>
-                                    <th role="columnheader">SS 密码</th>
-                                    <th role="columnheader">上次连接时间</th>
-                                    <th role="columnheader">上传量</th>
-                                    <th role="columnheader">下载量</th>
-                                    <th role="columnheader">套餐</th>
-                                    <th role="columnheader">总量</th>
-                                    <th role="columnheader">端口</th>
-                                    <th role="columnheader">上次签到</th>
-                                    <th role="columnheader">注册时间</th>
-                                    <th role="columnheader">操作</th>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th>UID</th>
+                                        <th>用户名</th>
+                                        <th>电子邮件</th>
+                                        <th>SS 密码</th>
+                                        <th>上次连接时间</th>
+                                        <th>上传量</th>
+                                        <th>下载量</th>
+                                        <th>套餐</th>
+                                        <th>总量</th>
+                                        <th>端口</th>
+                                        <th>上次签到</th>
+                                        <th>注册时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                 <?php if ($users) { foreach ($users as $user) : ?>
                                     <tr>
                                         <td>#<?php echo $user->uid; ?></td>
@@ -59,6 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </td>
                                     </tr>
                                 <?php endforeach; } ?>
+                                </tbody>
                             </table>
                         </div><!-- /.box-body -->
                     </div><!-- /.box -->
@@ -105,7 +109,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         // $('.selectpicker').selectpicker('hide');
     });
-    $('#userTable').dataTable();
+    $(function() {
+        $('#userTable').dataTable();
+    });
 </script>
 <?php $this->load->view('ana') ;?>
 </body>
