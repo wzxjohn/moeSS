@@ -199,7 +199,7 @@ class Admin_model extends CI_Model
     {
         if ($mode == "update")
         {
-            if ($id)
+            if ($uid)
             {
                 $this->db->where('uid', $uid);
                 $data = array(
