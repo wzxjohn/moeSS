@@ -31,35 +31,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="cate_title">节点名字</label>
-                                <input  class="form-control" name="node_name" <?php if ($node) {echo "value=\"$node->node_name\""; } ?> >
+                                <input type="text" class="form-control" name="node_name" <?php if ($node) {echo "value=\"$node->node_name\""; } ?> >
                             </div>
 
                             <div class="form-group">
-                                <div class="input-group">
-                                    <label for="cate_title">节点地址</label>
-                                    <div class="input-group-addon"><i class="fa fa-laptop"></i></div>
-                                    <input type="text" data-inputmask="'alias': 'ip'" data-mask class="form-control" name="node_server" <?php if ($node) {echo "value=\"$node->node_server\""; } ?> >
-                                </div>
+                                <label for="cate_title">节点地址</label>
+                                <input type="text" class="form-control" name="node_server" <?php if ($node) {echo "value=\"$node->node_server\""; } ?> >
                             </div>
 
                             <div class="form-group">
                                 <label for="cate_title">节点描述</label>
-                                <input  class="form-control" name="node_info" <?php if ($node) {echo "value=\"$node->node_info\""; } ?> >
+                                <input type="text" class="form-control" name="node_info" <?php if ($node) {echo "value=\"$node->node_info\""; } ?> >
                             </div>
 
                             <div class="form-group">
                                 <label for="cate_order">分类(0或者1)</label>
-                                <input   class="form-control" name="node_type" <?php if ($node) {echo "value=\"$node->node_type\""; } ?> >
+                                <input type="text" class="form-control" name="node_type" <?php if ($node) {echo "value=\"$node->node_type\""; } ?> >
                             </div>
 
                             <div class="form-group">
                                 <label for="cate_order">状态</label>
-                                <input   class="form-control" name="node_status"  value="可用" <?php if ($node) {echo "value=\"$node->node_status\""; } ?> >
+                                <input type="text" class="form-control" name="node_status"  value="可用" <?php if ($node) {echo "value=\"$node->node_status\""; } ?> >
                             </div>
 
                             <div class="form-group">
                                 <label for="cate_order">排序</label>
-                                <input   class="form-control" name="node_order"  value="0" <?php if ($node) {echo "value=\"$node->node_order\""; } ?> >
+                                <input type="text" class="form-control" name="node_order"  value="0" <?php if ($node) {echo "value=\"$node->node_order\""; } ?> >
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
