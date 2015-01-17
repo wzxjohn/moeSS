@@ -6,6 +6,7 @@
  * Time: 21:28
  */
 
+defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
     <!-- Content Header (Page header) -->

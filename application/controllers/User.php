@@ -582,4 +582,27 @@ class User extends CI_Controller
             return false;
         }
     }
+
+    function client_config($id = null)
+    {
+        if ($id == null)
+        {
+            echo "<script>alert('No server select!');</script>";
+        }
+        if ($this->is_login())
+        {
+            $user = $this->user_model->u_info($this->session->userdata('s_username'));
+            $node = $this->user_model->get_nodes( false, $id )[0];
+            $data['server'] = $node->node_server;
+            $data['port'] = $user->port;
+            $data['password'] = $user->passwd;
+            $data['method'] = 'rc4-md5';
+            $this->load->view('user_config', $data);
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
+        return;
+    }
 }

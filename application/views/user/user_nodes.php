@@ -49,6 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <p>测试节点可能随时撤销，有问题请反馈.</p>
                         </div><?php if ($test_nodes) { foreach ($test_nodes as $node): ?>
                             <p><?php echo $node->node_name; ?>:  <code><?php echo $node->node_server; ?></code> <?php echo $node->node_info; ?> </p>
+                            <button class="btn btn-info btn-sm" onclick="viewConfig(<?php echo $node->id; ?>)">查看配置</button>
                         <?php endforeach; } ?>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -57,3 +58,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- END PROGRESS BARS -->
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
+<script>
+function viewConfig($id) {
+    var $url="<?php echo base_url('user/client_config/'); ?>".concat($id);
+    $url=$url.concat(".html");
+    window.open($url, "_blank", "toolbar=no, scrollbars=no, resizable=no, top=0, left=0, width=400, height=400");
+}
+</script>

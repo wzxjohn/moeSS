@@ -152,9 +152,13 @@ class User_model extends CI_Model
         }
     }
 
-    function get_nodes( $test = false )
+    function get_nodes( $test = false, $id = null )
     {
-        if ($test)
+        if ($id)
+        {
+            $this->db->where('id', $id);
+        }
+        elseif ($test)
         {
             $this->db->where('node_type', '1');
         }
@@ -162,6 +166,7 @@ class User_model extends CI_Model
         {
             $this->db->where('node_type', '0');
         }
+
         $this->db->order_by('node_order', 'ASC');
         $query = $this->db->get('ss_node');
         if ($query->num_rows() > 0)
