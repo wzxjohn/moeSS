@@ -597,6 +597,7 @@ class User extends CI_Controller
             $data['port'] = $user->port;
             $data['password'] = $user->passwd;
             $data['method'] = 'rc4-md5';
+            $data['ssurl'] = 'ss://' . base64_encode($data['method'] . ":" . $data['password'] . "@" . $data['server'] . ":" . $data['port']);
             $this->load->view('user/user_config', $data);
         }
         else

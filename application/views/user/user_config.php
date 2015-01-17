@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?php echo base_url('static/js/qrcode.min.js'); ?>"></script>
 </head>
 <body>
-	<div><textarea id="config" rows="8" cols="40">{
+	<div><textarea rows="7" cols="30">{
 "server":"<?php echo $server; ?>",
 "server_port":<?php echo $port; ?>,
 "local_port":1080,
@@ -22,6 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 "timeout":600,
 "method":"<?php echo $method; ?>"
 }</textarea></div>
+	<div><input id="config" type="hidden"><?php echo $ssurl; ?></input></div>
 	<div id="qrcode"></div>
 	<script type="text/javascript">
 		var text = document.getElementById("config");
