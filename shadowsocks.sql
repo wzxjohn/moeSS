@@ -49,6 +49,8 @@ INSERT INTO `options` VALUES(14, 'mail_sender_address', 'admin@gmail.com', '发�
 INSERT INTO `options` VALUES(15, 'mail_sender_name', 'John Stephen', '发件人姓名');
 INSERT INTO `options` VALUES(16, 'mail_sg_user', 'api_user', 'SendGrid API User');
 INSERT INTO `options` VALUES(17, 'mail_sg_pass', 'api_key', 'SendGrid API Key');
+INSERT INTO `options` VALUES(19, 'email_subject', '[ACTION REQUIRED] Activate your account', '邮件标题');
+INSERT INTO `options` VALUES(20, 'email_body', '<html>\n<head></head>\n<body>\n<p>请点击下方链接激活账户：<br>\n<a href="%s" target="_blank">激活账户</a>\n</p>\n</body>\n</html>', '邮件正文(%s将被替换为链接)');
 
 CREATE TABLE IF NOT EXISTS `ss_admin` (
   `uid` int(11) NOT NULL,
