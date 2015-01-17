@@ -566,7 +566,7 @@ class User extends CI_Controller
             $code = $data['activate_code'];
             $subject = $this->user_model->get_email_subject();
             $html = $this->user_model->get_email_templates();
-            $html = sprintf($html, site_url("user/active/$code"));
+            $html = sprintf($html, site_url("user/activate/$code"));
             $this->load->helper('comm');
             if (send_mail(null,null,$email,$subject,$html))
             {
