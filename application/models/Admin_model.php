@@ -248,6 +248,7 @@ class Admin_model extends CI_Model
 
     function get_default_invite_number()
     {
+        $this->db->select('option_value');
         $this->db->where('option_name', 'default_invite_number');
         $query = $this->db->get('options');
         return (int) $query->result()[0]->option_value;
