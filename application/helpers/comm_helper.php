@@ -63,9 +63,10 @@ if (! function_exists('send_mail'))
 {
     function send_mail($from = null, $from_name = null, $to, $subject, $html)
     {
-        $this->load->database();
-        $this->db->where('option_name', 'mail_protocol');
-        $query = $this->db->get('options');
+        $CI =& get_instance();
+        $CI->load->database();
+        $CI->db->where('option_name', 'mail_protocol');
+        $query = $CI->db->get('options');
         if ($query->num_rows() > 0)
         {
             if ($from)
@@ -74,8 +75,8 @@ if (! function_exists('send_mail'))
             }
             else
             {
-                $this->db->where('option_name', 'mail_sender_address');
-                $query = $this->db->get('options');
+                $CI->db->where('option_name', 'mail_sender_address');
+                $query = $CI->db->get('options');
                 $sender_address = $query->result()[0]->option_value;
             }
             if ($from_name)
@@ -84,43 +85,43 @@ if (! function_exists('send_mail'))
             }
             else
             {
-                $this->db->where('option_name', 'mail_sender_name');
-                $query = $this->db->get('options');
+                $CI->db->where('option_name', 'mail_sender_name');
+                $query = $CI->db->get('options');
                 $sender_name = $query->result()[0]->option_value;
             }
             $config['protocol'] = $query->result()[0]->option_value;
             if ($config['protocol'] == 'sendmail')
             {
-                $this->db->where('option_name', 'mail_mailpath');
-                $query = $this->db->get('options');
+                $CI->db->where('option_name', 'mail_mailpath');
+                $query = $CI->db->get('options');
                 $config['mailpath'] = $query->result()[0]->option_value;
             }
             elseif ($config['protocol'] == 'smtp')
             {
-                $this->db->where('option_name', 'mail_smtp_host');
-                $query = $this->db->get('options');
+                $CI->db->where('option_name', 'mail_smtp_host');
+                $query = $CI->db->get('options');
                 $config['smtp_host'] = $query->result()[0]->option_value;
-                $this->db->where('option_name', 'mail_smtp_user');
-                $query = $this->db->get('options');
+                $CI->db->where('option_name', 'mail_smtp_user');
+                $query = $CI->db->get('options');
                 $config['smtp_user'] = $query->result()[0]->option_value;
-                $this->db->where('option_name', 'mail_smtp_pass');
-                $query = $this->db->get('options');
+                $CI->db->where('option_name', 'mail_smtp_pass');
+                $query = $CI->db->get('options');
                 $config['smtp_pass'] = $query->result()[0]->option_value;
-                $this->db->where('option_name', 'mail_smtp_port');
-                $query = $this->db->get('options');
+                $CI->db->where('option_name', 'mail_smtp_port');
+                $query = $CI->db->get('options');
                 $config['smtp_port'] = $query->result()[0]->option_value;
-                $this->db->where('option_name', 'mail_smtp_crypto');
-                $query = $this->db->get('options');
+                $CI->db->where('option_name', 'mail_smtp_crypto');
+                $query = $CI->db->get('options');
                 $config['smtp_crypto'] = $query->result()[0]->option_value;
             }
             elseif ($config['protocol'] == 'sendgrid')
             {
                 $url = 'https://api.sendgrid.com/';
-                $this->db->where('option_name', 'mail_sg_user');
-                $query = $this->db->get('options');
+                $CI->db->where('option_name', 'mail_sg_user');
+                $query = $CI->db->get('options');
                 $api_user = $query->result()[0]->option_value;
-                $this->db->where('option_name', 'mail_sg_pass');
-                $query = $this->db->get('options');
+                $CI->db->where('option_name', 'mail_sg_pass');
+                $query = $CI->db->get('options');
                 $api_pass = $query->result()[0]->option_value;
                 $params = array(
                     'api_user' => $api_user,
@@ -152,14 +153,14 @@ if (! function_exists('send_mail'))
             $config['wordwrap'] = TRUE;
             $config['crlf'] = '\r\n';
             $config['newline'] = '\r\n';
-            $this->load->library('email');
-            $this->email->initialize($config);
+            $CI->load->library('email');
+            $CI->email->initialize($config);
 
-            $this->email->from($sender_address, $sender_name);
-            $this->email->to($to);
-            $this->email->subject($subject);
-            $this->email->message($html);
-            return $this->email->send();
+            $CI->email->from($sender_address, $sender_name);
+            $CI->email->to($to);
+            $CI->email->subject($subject);
+            $CI->email->message($html);
+            return $CI->email->send();
         }
     }
 }
