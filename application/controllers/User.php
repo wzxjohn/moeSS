@@ -144,7 +144,7 @@ class User extends CI_Controller
                 $password = hash('md5', $password );
                 if ( $this->user_model->new_user($username, $password, $email, $invitecode) )
                 {
-                    if ( $this->user_model->send_active_email($username) )
+                    if ( $this->do_send_mail($username) )
                     {
                         echo '{"result" : "success" }';
                         return;
@@ -534,7 +534,7 @@ class User extends CI_Controller
     {
         if ($this->is_login())
         {
-            if ( $this->user_model->send_active_email( $this->session->userdata('s_username') ) )
+            if ( $this->do_send_mail($this->session->userdata('s_username')) )
             {
                 echo "Success!";
             }
@@ -542,12 +542,37 @@ class User extends CI_Controller
             {
                 echo "Send mail error!";
             }
-            return;
         }
         else
         {
             redirect(site_url('user/login'));
         }
         return;
+    }
+
+    function do_send_mail($username)
+    {
+        $data = $this->user_model->send_active_email( $username );
+        if ( $data )
+        {
+            $email = $data['email'];
+            $code = $data['activate_code'];
+            $subject = $this->user_model->get_email_subject();
+            $html = $this->user_model->get_email_templates();
+            $html = sprintf($html, site_url("user/active/$code"));
+            $this->load->helper('comm');
+            if (send_mail(null,null,$email,$subject,$html))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 }

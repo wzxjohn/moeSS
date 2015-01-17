@@ -237,7 +237,7 @@ class Admin_model extends CI_Model
                 'port' => $port,
                 'switch' => $switch,
                 'enable' => $enable,
-                'user_name' => $username,
+                'user_name' => $user_name,
                 'type' => '7',
                 'invite_num' => $this->get_default_invite_number(),
                 'money' => '0'
@@ -255,6 +255,7 @@ class Admin_model extends CI_Model
 
     function get_config()
     {
+        $this->db->not_like('option_name', 'mail');
         $query = $this->db->get('options');
         if ($query->num_rows() > 0)
         {

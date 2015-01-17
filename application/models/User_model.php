@@ -301,104 +301,11 @@ class User_model extends CI_Model
                 'used' => 0
             );
             $this->db->insert('activate', $data);
-
-            $this->db->where('option_name', 'mail_protocol');
-            $query = $this->db->get('options');
-            if ($query->num_rows() > 0)
-            {
-                $config['protocol'] = $query->result()[0]->option_value;
-                if ($config['protocol'] == 'sendmail')
-                {
-                    $this->db->where('option_name', 'mail_mailpath');
-                    $query = $this->db->get('options');
-                    $config['mailpath'] = $query->result()[0]->option_value;
-                }
-                elseif ($config['protocol'] == 'smtp')
-                {
-                    $this->db->where('option_name', 'mail_smtp_host');
-                    $query = $this->db->get('options');
-                    $config['smtp_host'] = $query->result()[0]->option_value;
-                    $this->db->where('option_name', 'mail_smtp_user');
-                    $query = $this->db->get('options');
-                    $config['smtp_user'] = $query->result()[0]->option_value;
-                    $this->db->where('option_name', 'mail_smtp_pass');
-                    $query = $this->db->get('options');
-                    $config['smtp_pass'] = $query->result()[0]->option_value;
-                    $this->db->where('option_name', 'mail_smtp_port');
-                    $query = $this->db->get('options');
-                    $config['smtp_port'] = $query->result()[0]->option_value;
-                    $this->db->where('option_name', 'mail_smtp_crypto');
-                    $query = $this->db->get('options');
-                    $config['smtp_crypto'] = $query->result()[0]->option_value;
-                }
-                elseif ($config['protocol'] == 'sendgrid')
-                {
-                    $url = 'https://api.sendgrid.com/';
-                    $this->db->where('option_name', 'mail_sg_user');
-                    $query = $this->db->get('options');
-                    $api_user = $query->result()[0]->option_value;
-                    $this->db->where('option_name', 'mail_sg_pass');
-                    $query = $this->db->get('options');
-                    $api_pass = $query->result()[0]->option_value;
-                    $html = "<html>
-                        <head></head>
-                        <body>
-                        <p>请点击下方链接激活账户：<br>
-                        <a href=\"".site_url("user/activate/$code")."\" target=\"_blank\">激活账户</a>
-                        </p>
-                        </body>
-                    </html>";
-                    $this->db->where('option_name', 'mail_sender_address');
-                    $query = $this->db->get('options');
-                    $sender_address = $query->result()[0]->option_value;
-                    $params = array(
-                        'api_user' => $api_user,
-                        'api_key' => $api_pass,
-                        'to' => $user->email,
-                        'subject' => '[ACTION REQUIRED] Activate your account',
-                        'html' => $html,
-                        'from' => $sender_address,
-                    );
-
-                    $request = $url.'api/mail.send.json';
-                    $session = curl_init($request);
-                    curl_setopt ($session, CURLOPT_POST, true);
-                    curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
-                    curl_setopt($session, CURLOPT_HEADER, false);
-                    curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-                    $response = curl_exec($session);
-                    curl_close($session);
-                    $response = json_decode($response);
-                    if ($response->message == "success")
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-
-                $config['mailtype'] = 'html';
-                $config['charset'] = 'utf-8';
-                $config['wordwrap'] = TRUE;
-                $config['crlf'] = '\r\n';
-                $config['newline'] = '\r\n';
-                $this->load->library('email');
-                $this->email->initialize($config);
-
-                $this->db->where('option_name', 'mail_sender_address');
-                $query = $this->db->get('options');
-                $sender_address = $query->result()[0]->option_value;
-                $this->db->where('option_name', 'mail_sender_name');
-                $query = $this->db->get('options');
-                $sender_name = $query->result()[0]->option_value;
-                $this->email->from($sender_address, $sender_name);
-                $this->email->to($user->email);
-                $this->email->subject('Please verify your account');
-                $this->email->message('<a href="'.site_url("user/activate/$code").'" target="_blank">Click Here!</a>');
-                return $this->email->send();
-            }
+            $data = array(
+                'email' => $user->email,
+                'activate_code' => $code
+            );
+            return $data;
         }
         else
         {
@@ -427,6 +334,36 @@ class User_model extends CI_Model
             $this->db->where('email', $result->email);
             $this->db->limit(1);
             return $this->db->update('user',$data);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function get_email_subject()
+    {
+        $this->db->where('option_name', 'email_subject');
+        $this->db->select('option_value');
+        $query = $this->db->get('options');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0]->option_value;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function get_email_templates()
+    {
+        $this->db->where('option_name', 'email_body');
+        $this->db->select('option_value');
+        $query = $this->db->get('options');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0]->option_value;
         }
         else
         {

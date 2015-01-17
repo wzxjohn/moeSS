@@ -414,7 +414,7 @@ class Admin extends CI_Controller
             $port = $this->input->post('port');
             $switch = $this->input->post('switch');
             $enable = $this->input->post('enable');
-            if ($user_name && $email && $pass && $passwd && $u != null && $d != null && $transfer_enable != null && $plan && $port && $switch != null && $enable != null )
+            if ($user_name != "" && $email != "" && $pass != "" && $passwd != "" && $u != null && $d != null && $transfer_enable != null && $plan != "" && $port != "" && $switch != null && $enable != null )
             {
                 if ($this->admin_model->update_user($mode, $uid, $user_name, $email, $pass, $passwd, $u, $d, $transfer_enable, $plan, $port, $switch, $enable ))
                 {
@@ -542,7 +542,7 @@ class Admin extends CI_Controller
             $node_type = $this->input->post('node_type');
             $node_status = $this->input->post('node_status');
             $node_order = $this->input->post('node_order');
-            if ($node_name && $node_server && $node_info && $node_type != null && $node_status && $node_order != null)
+            if ($node_name != "" && $node_server != "" && $node_info != "" && $node_type != null && $node_status != "" && $node_order != null)
             {
                 if ($this->admin_model->update_node($mode, $id, $node_name, $node_server, $node_info, $node_type, $node_status, $node_order ))
                 {
