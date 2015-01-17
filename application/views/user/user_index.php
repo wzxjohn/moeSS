@@ -61,7 +61,7 @@ EOD;
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <p> 已用流量: <?php echo $transfers; ?> </p>
-                        <div class="progress progress-striped">
+                        <div class="progress progress-striped active">
                             <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $used_100; ?>%">
                                 <span class="sr-only">Transfer</span>
                             </div>

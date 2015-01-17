@@ -65,16 +65,19 @@ if (! function_exists('send_mail'))
     {
         $CI =& get_instance();
         $CI->load->database();
+        $CI->db->select('option_value');
         $CI->db->where('option_name', 'mail_protocol');
         $query = $CI->db->get('options');
         if ($query->num_rows() > 0)
         {
+            $config['protocol'] = $query->result()[0]->option_value;
             if ($from)
             {
                 $sender_address = $from;
             }
             else
             {
+                $CI->db->select('option_value');
                 $CI->db->where('option_name', 'mail_sender_address');
                 $query = $CI->db->get('options');
                 $sender_address = $query->result()[0]->option_value;
@@ -85,31 +88,37 @@ if (! function_exists('send_mail'))
             }
             else
             {
+                $CI->db->select('option_value');
                 $CI->db->where('option_name', 'mail_sender_name');
                 $query = $CI->db->get('options');
                 $sender_name = $query->result()[0]->option_value;
             }
-            $config['protocol'] = $query->result()[0]->option_value;
             if ($config['protocol'] == 'sendmail')
             {
+                $CI->db->select('option_value');
                 $CI->db->where('option_name', 'mail_mailpath');
                 $query = $CI->db->get('options');
                 $config['mailpath'] = $query->result()[0]->option_value;
             }
             elseif ($config['protocol'] == 'smtp')
             {
+                $CI->db->select('option_value');
                 $CI->db->where('option_name', 'mail_smtp_host');
                 $query = $CI->db->get('options');
                 $config['smtp_host'] = $query->result()[0]->option_value;
+                $CI->db->select('option_value');
                 $CI->db->where('option_name', 'mail_smtp_user');
                 $query = $CI->db->get('options');
                 $config['smtp_user'] = $query->result()[0]->option_value;
+                $CI->db->select('option_value');
                 $CI->db->where('option_name', 'mail_smtp_pass');
                 $query = $CI->db->get('options');
                 $config['smtp_pass'] = $query->result()[0]->option_value;
+                $CI->db->select('option_value');
                 $CI->db->where('option_name', 'mail_smtp_port');
                 $query = $CI->db->get('options');
                 $config['smtp_port'] = $query->result()[0]->option_value;
+                $CI->db->select('option_value');
                 $CI->db->where('option_name', 'mail_smtp_crypto');
                 $query = $CI->db->get('options');
                 $config['smtp_crypto'] = $query->result()[0]->option_value;
@@ -117,9 +126,11 @@ if (! function_exists('send_mail'))
             elseif ($config['protocol'] == 'sendgrid')
             {
                 $url = 'https://api.sendgrid.com/';
+                $CI->db->select('option_value');
                 $CI->db->where('option_name', 'mail_sg_user');
                 $query = $CI->db->get('options');
                 $api_user = $query->result()[0]->option_value;
+                $CI->db->select('option_value');
                 $CI->db->where('option_name', 'mail_sg_pass');
                 $query = $CI->db->get('options');
                 $api_pass = $query->result()[0]->option_value;
@@ -141,9 +152,12 @@ if (! function_exists('send_mail'))
                 $response = curl_exec($session);
                 curl_close($session);
                 $response = json_decode($response);
-                if ($response->message == "success") {
+                if ($response->message == "success")
+                {
                     return true;
-                } else {
+                }
+                else
+                {
                     return false;
                 }
             }
