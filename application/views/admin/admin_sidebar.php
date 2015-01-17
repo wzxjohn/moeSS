@@ -61,8 +61,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </a>
         <ul class="treeview-menu">
             <li><a href="<?php echo site_url('admin/system_config'); ?>"><i class="fa fa-angle-double-right"></i> 一般设置</a></li>
-            <li><a href="<?php echo site_url('admin/system_email'); ?>"><i class="fa fa-angle-double-right"></i> 发件设置</a></li>
-            <li><a href="<?php echo site_url('admin/system_email_tpl'); ?>"><i class="fa fa-angle-double-right"></i> 邮件模版</a></li>
+            <li><a href="<?php echo site_url('admin/mail_config'); ?>"><i class="fa fa-angle-double-right"></i> 发件设置</a></li>
+            <li><a href="<?php echo site_url('admin/email_tpl'); ?>"><i class="fa fa-angle-double-right"></i> 邮件模版</a></li>
         </ul>
     </li>
 </ul>

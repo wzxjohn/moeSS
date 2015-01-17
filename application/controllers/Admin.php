@@ -649,7 +649,7 @@ class Admin extends CI_Controller
         return;
     }
 
-    function email_config()
+    function mail_config()
     {
         if ($this->is_login())
         {
@@ -679,7 +679,7 @@ class Admin extends CI_Controller
         return;
     }
 
-    function email_config_update()
+    function mail_config_update()
     {
         if ($this->is_login())
         {
@@ -729,6 +729,14 @@ class Admin extends CI_Controller
                     'option_value' => $this->input->post('mail_sg_pass'),
                 )
             );
+            if ( $this->admin_model->update_config($data) )
+            {
+                echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/system_config') . "\";</script>";
+            }
+            else
+            {
+                echo "<script>alert(\"Something error!\"); window.location.href = \"" . site_url('admin/system_config') . "\";</script>";
+            }
         }
         else
         {

@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <h3 class="box-title">发件设置</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="<?php echo site_url( "admin/email_config_update"); ?>">
+                    <form role="form" method="post" action="<?php echo site_url( "admin/mail_config_update"); ?>">
                         <div class="box-body">
                             <?php foreach ($configs as $config) : ?>
                                 <div class="form-group">
