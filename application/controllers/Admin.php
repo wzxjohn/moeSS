@@ -10,11 +10,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
+    public $sidebar_data;
+
     function __construct()
     {
         parent::__construct();
         $this->load->model('admin_model');
+        $sidebar_data['index_active'] = (bool) false;
+        $sidebar_data['user_active'] = (bool) false;
+        $sidebar_data['node_active'] = (bool) false;
+        $sidebar_data['code_active'] = (bool) false;
+        $sidebar_data['system_active'] = (bool) false;
+        $sidebar_data['config_active'] = (bool) false;
+        $sidebar_data['config_g_activate'] = (bool) false;
+        $sidebar_data['config_m_activate'] = (bool) false;
+        $sidebar_data['config_e_activate'] = (bool) false;
     }
+
 
     function index()
     {
@@ -27,12 +39,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
+            $data = $this->sidebar_data;
             $data['index_active'] = (bool) true;
-            $data['user_active'] = (bool) false;
-            $data['node_active'] = (bool) false;
-            $data['code_active'] = (bool) false;
-            $data['system_active'] = (bool) false;
-            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['node_count'] = $this->admin_model->c_nodes();
@@ -131,12 +139,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data['index_active'] = (bool) false;
+            $data = $this->sidebar_data;
             $data['user_active'] = (bool) true;
-            $data['node_active'] = (bool) false;
-            $data['code_active'] = (bool) false;
-            $data['system_active'] = (bool) false;
-            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['users'] = $this->admin_model->get_users();
@@ -161,12 +165,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['user_active'] = (bool) false;
+            $data = $this->sidebar_data;
             $data['node_active'] = (bool) true;
-            $data['code_active'] = (bool) false;
-            $data['system_active'] = (bool) false;
-            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['nodes'] = $this->admin_model->get_nodes();
@@ -191,12 +191,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_codes_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['user_active'] = (bool) false;
-            $data['node_active'] = (bool) false;
+            $data = $this->sidebar_data;
             $data['code_active'] = (bool) true;
-            $data['system_active'] = (bool) false;
-            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['node_count'] = $this->admin_model->c_nodes();
@@ -222,12 +218,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['user_active'] = (bool) false;
-            $data['node_active'] = (bool) false;
-            $data['code_active'] = (bool) false;
+            $data = $this->sidebar_data;
             $data['system_active'] = (bool) true;
-            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['all_user'] = $this->admin_model->c_users();
@@ -260,12 +252,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['user_active'] = (bool) false;
-            $data['node_active'] = (bool) false;
+            $data = $this->sidebar_data;
             $data['code_active'] = (bool) true;
-            $data['system_active'] = (bool) false;
-            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $codes = $this->admin_model->get_invite_codes();
@@ -319,12 +307,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data['index_active'] = (bool) false;
+            $data = $this->sidebar_data;
             $data['user_active'] = (bool) true;
-            $data['node_active'] = (bool) false;
-            $data['code_active'] = (bool) false;
-            $data['system_active'] = (bool) false;
-            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['user'] = null;
@@ -374,12 +358,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data['index_active'] = (bool) false;
+            $data = $this->sidebar_data;
             $data['user_active'] = (bool) true;
-            $data['node_active'] = (bool) false;
-            $data['code_active'] = (bool) false;
-            $data['system_active'] = (bool) false;
-            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['user'] = $this->admin_model->get_users($uid)[0];
@@ -452,12 +432,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['user_active'] = (bool) false;
+            $data = $this->sidebar_data;
             $data['node_active'] = (bool) true;
-            $data['code_active'] = (bool) false;
-            $data['system_active'] = (bool) false;
-            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['node'] = null;
@@ -507,12 +483,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['user_active'] = (bool) false;
+            $data = $this->sidebar_data;
             $data['node_active'] = (bool) true;
-            $data['code_active'] = (bool) false;
-            $data['system_active'] = (bool) false;
-            $data['config_active'] = (bool) false;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['node'] = $this->admin_model->get_nodes($id)[0];
@@ -580,12 +552,9 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['user_active'] = (bool) false;
-            $data['node_active'] = (bool) false;
-            $data['code_active'] = (bool) false;
-            $data['system_active'] = (bool) false;
+            $data = $this->sidebar_data;
             $data['config_active'] = (bool) true;
+            $data['config_g_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['configs'] = $this->admin_model->get_config();
@@ -660,12 +629,9 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['user_active'] = (bool) false;
-            $data['node_active'] = (bool) false;
-            $data['code_active'] = (bool) false;
-            $data['system_active'] = (bool) false;
+            $data = $this->sidebar_data;
             $data['config_active'] = (bool) true;
+            $data['config_m_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['configs'] = $this->admin_model->get_config('mail');
@@ -756,12 +722,9 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['user_active'] = (bool) false;
-            $data['node_active'] = (bool) false;
-            $data['code_active'] = (bool) false;
-            $data['system_active'] = (bool) false;
+            $data = $this->sidebar_data;
             $data['config_active'] = (bool) true;
+            $data['config_e_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['configs'] = $this->admin_model->get_config('email');

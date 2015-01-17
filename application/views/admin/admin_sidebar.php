@@ -60,9 +60,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <i class="fa fa-cog"></i> <span>系统设置</span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="<?php echo site_url('admin/system_config'); ?>"><i class="fa fa-angle-double-right"></i> 一般设置</a></li>
-            <li><a href="<?php echo site_url('admin/mail_config'); ?>"><i class="fa fa-angle-double-right"></i> 发件设置</a></li>
-            <li><a href="<?php echo site_url('admin/email_tpl'); ?>"><i class="fa fa-angle-double-right"></i> 邮件模版</a></li>
+            <li <?php if ($config_g_active) { echo 'class="active"';};?>><a href="<?php echo site_url('admin/system_config'); ?>"><i class="fa fa-angle-double-right"></i> 一般设置</a></li>
+            <li <?php if ($config_m_active) { echo 'class="active"';};?>><a href="<?php echo site_url('admin/mail_config'); ?>"><i class="fa fa-angle-double-right"></i> 发件设置</a></li>
+            <li <?php if ($config_e_active) { echo 'class="active"';};?>><a href="<?php echo site_url('admin/email_tpl'); ?>"><i class="fa fa-angle-double-right"></i> 邮件模版</a></li>
         </ul>
     </li>
 </ul>
