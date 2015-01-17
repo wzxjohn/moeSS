@@ -30,12 +30,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <form role="form" method="post" action="<?php echo site_url( "admin/email_tpl_update"); ?>">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="cate_title"><?php echo $configs[0]->display_name; ?>    <small><?php echo $config[0]->option_name; ?></small></label>
-                                <input type="text" class="form-control" name="<?php echo $config->option_name; ?>" value="<?php echo $config->option_value; ?>" >
+                                <label for="cate_title"><?php echo $configs[0]->display_name; ?>    <small><?php echo $configs[0]->option_name; ?></small></label>
+                                <input type="text" class="form-control" name="<?php echo $configs[0]->option_name; ?>" value="<?php echo $configs[0]->option_value; ?>" >
                             </div>
                             <div class="form-group">
-                                <label for="cate_title"><?php echo $configs[1]->display_name; ?>    <small><?php echo $config[1]->option_name; ?></small></label>
-                                <textarea class="form-control" name="<?php echo $config->option_name; ?>"><?php echo $config->option_value; ?></textarea>
+                                <label for="cate_title"><?php echo $configs[1]->display_name; ?>    <small><?php echo $configs[1]->option_name; ?></small></label>
+                                <textarea class="form-control" name="<?php echo $configs[1]->option_name; ?>"><?php echo $configs[1]->option_value; ?></textarea>
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
