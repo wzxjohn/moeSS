@@ -12,7 +12,7 @@ $this->load->helper('form');
 <html class="bg-black">
 <head>
     <meta charset="utf-8">
-    <title><?php echo SITE_NAME; ?> - 用戶登陆</title>
+    <title><?php echo SITE_NAME; ?> - 忘记密码</title>
     <link rel="icon" href="<?php echo base_url('favicon.ico'); ?>">
     <!-- bootstrap 3.0.2 -->
     <link href="<?php echo base_url("static/bootstrap/css/bootstrap.min.css"); ?>" rel="stylesheet" type="text/css" />
@@ -38,15 +38,13 @@ $this->load->helper('form');
     <script language="javascript">
         $(document).ready(function() {
             var options = {
-                target:        '#loginResult',   // target element(s) to be updated with server response
+                target:        '#resultResult',   // target element(s) to be updated with server response
                 success:       showResponse,  // post-submit callback
                 dataType:  'json'        // 'xml', 'script', or 'json' (expected server response type)
             };
 
-            $('#loginForm').submit(function() {
+            $('#forgetForm').submit(function() {
                 if ($(this).valid()) {
-                    document.getElementById('password').value = md5(document.getElementById('pass').value);
-                    document.getElementById('pass').value = '';
                     $(this).ajaxSubmit(options);
                     return false;
                 }
@@ -56,13 +54,16 @@ $this->load->helper('form');
                 return /^[a-zA-Z0-9]+$/.test(value);
             }, "Alpha and Number Only!");
 
-            $('#loginForm').validate( {
+            $('#forgetForm').validate( {
                     rules:{
                         username: {
                             required: true,
                             onlyAlphaNumber: true
                         },
-                        password: "required"
+                        email: {
+                            required: true,
+                            email: true
+                        }
                     }
                 }
             )
@@ -79,18 +80,15 @@ $this->load->helper('form');
     </script>
 </head>
 <body class="bg-black">
-
-<?php echo validation_errors(); ?>
-
 <div class="form-box" id="login-box">
-    <div class="header"><?php echo SITE_NAME; ?> - 用户登录</div>
+    <div class="header"><?php echo SITE_NAME; ?> - 忘记密码</div>
     <?php
     $attributes = array(
         'role' => 'form',
-        'id' => 'loginForm'//,
+        'id' => 'forgetForm'//,
         //'onsubmit' => 'return logincheck()'
     );
-    echo form_open('user/login_check', $attributes);
+    echo form_open('user/resend_passwd', $attributes);
     ?>
     <div class="body bg-gray">
         <div class="form-group">
@@ -102,23 +100,13 @@ $this->load->helper('form');
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                <input type="password"  id="pass" name="pass" class="form-control" placeholder="Password" required>
+                <input type="email"  id="email" name="email" class="form-control" placeholder="E-mail" required>
             </div>
         </div>
-        <div class="form-group">
-            <div class="input-group" style="display: none">
-                <input type="hidden"  id="password" name="password" class="form-control">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                <input type="checkbox" name="remember_me" value="week"/> 保存Cookie7天
-            </div>
-        </div>
-        <div class="input-group" id="loginResult"></div>
+        <div class="input-group" id="forgetResult"></div>
     </div>
     <div class="footer">
-        <button type="submit" class="btn bg-olive btn-block"  name="login" >登录</button>
+        <button type="submit" class="btn bg-olive btn-block"  name="login" >重置</button>
         <a href="<?php echo site_url('user/register')?>" class="text-center">没有注册？</a>
         <a href="<?php echo site_url('user/forget')?>" class="text-center">忘记密码？</a>
     </div>

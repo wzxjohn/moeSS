@@ -606,4 +606,18 @@ class User extends CI_Controller
         }
         return;
     }
+
+    function forget()
+    {
+        if ($this->is_login())
+        {
+            redirect(site_url('user/login'));
+        }
+        else
+        {
+            $this->load->view('user/user_forget');
+        }
+        return;
+    }
+}
 }
