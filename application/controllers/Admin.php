@@ -10,12 +10,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
-    public $sidebar_data;
 
     function __construct()
     {
         parent::__construct();
         $this->load->model('admin_model');
+    }
+
+    function sidebar()
+    {
         $sidebar_data['index_active'] = (bool) false;
         $sidebar_data['user_active'] = (bool) false;
         $sidebar_data['node_active'] = (bool) false;
@@ -25,8 +28,8 @@ class Admin extends CI_Controller
         $sidebar_data['config_g_activate'] = (bool) false;
         $sidebar_data['config_m_activate'] = (bool) false;
         $sidebar_data['config_e_activate'] = (bool) false;
+        return $sidebar_data;
     }
-
 
     function index()
     {
@@ -39,7 +42,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['index_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
@@ -139,7 +142,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['user_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
@@ -165,7 +168,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['node_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
@@ -191,7 +194,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_codes_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['code_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
@@ -218,7 +221,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['system_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
@@ -252,7 +255,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['code_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
@@ -307,7 +310,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['user_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
@@ -358,7 +361,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['user_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
@@ -432,7 +435,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['node_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
@@ -483,7 +486,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['node_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
@@ -552,7 +555,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['config_active'] = (bool) true;
             $data['config_g_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
@@ -629,7 +632,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['config_active'] = (bool) true;
             $data['config_m_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
@@ -722,7 +725,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
-            $data = $this->sidebar_data;
+            $data = $this->sidebar();
             $data['config_active'] = (bool) true;
             $data['config_e_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
