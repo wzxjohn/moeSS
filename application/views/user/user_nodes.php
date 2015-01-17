@@ -60,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </aside><!-- /.right-side -->
 <script>
 function viewConfig($id) {
-    var $url="<?php echo base_url('user/client_config/'); ?>".concat($id);
+    var $url="<?php echo base_url('user/client_config'); ?>/".concat($id);
     $url=$url.concat(".html");
     window.open($url, "_blank", "toolbar=no, scrollbars=no, resizable=no, top=0, left=0, width=400, height=400");
 }

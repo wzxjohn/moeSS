@@ -14,14 +14,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?php echo base_url('static/js/qrcode.min.js'); ?>"></script>
 </head>
 <body>
-	<div><textarea id="config" value='{
+	<div><textarea id="config" rows="8" cols="40">{
 "server":"<?php echo $server; ?>",
 "server_port":<?php echo $port; ?>,
 "local_port":1080,
 "password":"<?php echo $password; ?>",
 "timeout":600,
 "method":"<?php echo $method; ?>"
-}'></textarea></div>
+}</textarea></div>
 	<div id="qrcode"></div>
 	<script type="text/javascript">
 		var text = document.getElementById("config");

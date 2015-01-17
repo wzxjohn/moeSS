@@ -597,7 +597,7 @@ class User extends CI_Controller
             $data['port'] = $user->port;
             $data['password'] = $user->passwd;
             $data['method'] = 'rc4-md5';
-            $this->load->view('user_config', $data);
+            $this->load->view('user/user_config', $data);
         }
         else
         {
