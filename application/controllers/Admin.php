@@ -668,7 +668,7 @@ class Admin extends CI_Controller
             $data['config_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
-            $data['configs'] = $this->admin_model->get_config();
+            $data['configs'] = $this->admin_model->get_config('mail');
             $this->load->view( 'admin/admin_config_email', $data );
             $this->load->view( 'admin/admin_footer' );
         }
@@ -737,6 +737,36 @@ class Admin extends CI_Controller
             {
                 echo "<script>alert(\"Something error!\"); window.location.href = \"" . site_url('admin/system_config') . "\";</script>";
             }
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function email_tpl()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data['index_active'] = (bool) false;
+            $data['user_active'] = (bool) false;
+            $data['node_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
+            $data['system_active'] = (bool) false;
+            $data['config_active'] = (bool) true;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['configs'] = $this->admin_model->get_config('email');
+            $this->load->view( 'admin/admin_config_email_tpl', $data );
+            $this->load->view( 'admin/admin_footer' );
         }
         else
         {
