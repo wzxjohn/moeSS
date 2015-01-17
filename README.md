@@ -29,5 +29,5 @@ Currently supprt php mail(), sendmail, SMTP and SendGrid Web API. (Send test E-m
 See [LICENSE](https://github.com/wzxjohn/moeSS/blob/master/LICENSE)
 
 # Requires
-- This system is using [CodeIgniter 3.0](https://github.com/bcit-ci/CodeIgniter) to build, so you need php, mysql, curl to run.
+- This system is using [CodeIgniter 3.0](https://github.com/bcit-ci/CodeIgniter) to build, so you need PHP 5.2.4 or newer, MySQL (5.1+), curl to run.
 - Apache is the best one because it support *.htaccess* file, which is needed to rewrite the request uri to index.php.
