@@ -25,9 +25,9 @@ class Admin extends CI_Controller
         $sidebar_data['code_active'] = (bool) false;
         $sidebar_data['system_active'] = (bool) false;
         $sidebar_data['config_active'] = (bool) false;
-        $sidebar_data['config_g_activate'] = (bool) false;
-        $sidebar_data['config_m_activate'] = (bool) false;
-        $sidebar_data['config_e_activate'] = (bool) false;
+        $sidebar_data['config_g_active'] = (bool) false;
+        $sidebar_data['config_m_active'] = (bool) false;
+        $sidebar_data['config_e_active'] = (bool) false;
         return $sidebar_data;
     }
 
