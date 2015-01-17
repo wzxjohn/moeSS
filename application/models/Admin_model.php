@@ -253,9 +253,20 @@ class Admin_model extends CI_Model
         return (int) $query->result()[0]->option_value;
     }
 
-    function get_config()
+    function get_config($mode = null)
     {
-        $this->db->not_like('option_name', 'mail');
+        if ($mode == 'mail')
+        {
+            $this->db->like('option_name', 'mail', 'after');
+        }
+        elseif ($mode == 'email')
+        {
+            $this->db->like('option_name', 'email', 'after');
+        }
+        else
+        {
+            $this->db->not_like('option_name', 'mail');
+        }
         $query = $this->db->get('options');
         if ($query->num_rows() > 0)
         {

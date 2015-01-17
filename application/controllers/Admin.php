@@ -628,6 +628,62 @@ class Admin extends CI_Controller
                     'option_name' => 'version',
                     'option_value' => $this->input->post('version'),
                 ),
+                //array(
+                //    'option_name' => '',
+                //    'option_value' => $this->input->post(''),
+                //),
+            );
+            if ( $this->admin_model->update_config($data) )
+            {
+                echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/system_config') . "\";</script>";
+            }
+            else
+            {
+                echo "<script>alert(\"Something error!\"); window.location.href = \"" . site_url('admin/system_config') . "\";</script>";
+            }
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function email_config()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data['index_active'] = (bool) false;
+            $data['user_active'] = (bool) false;
+            $data['node_active'] = (bool) false;
+            $data['code_active'] = (bool) false;
+            $data['system_active'] = (bool) false;
+            $data['config_active'] = (bool) true;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['configs'] = $this->admin_model->get_config();
+            $this->load->view( 'admin/admin_config_email', $data );
+            $this->load->view( 'admin/admin_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function email_config_update()
+    {
+        if ($this->is_login())
+        {
+            $data = array(
                 array(
                     'option_name' => 'mail_protocol',
                     'option_value' => $this->input->post('mail_protocol'),
@@ -672,19 +728,7 @@ class Admin extends CI_Controller
                     'option_name' => 'mail_sg_pass',
                     'option_value' => $this->input->post('mail_sg_pass'),
                 )
-                //array(
-                //    'option_name' => '',
-                //    'option_value' => $this->input->post(''),
-                //),
             );
-            if ( $this->admin_model->update_config($data) )
-            {
-                echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/system_config') . "\";</script>";
-            }
-            else
-            {
-                echo "<script>alert(\"Something error!\"); window.location.href = \"" . site_url('admin/system_config') . "\";</script>";
-            }
         }
         else
         {
