@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?php echo base_url('static/js/qrcode.min.js'); ?>"></script>
 </head>
 <body>
-	<div><textarea rows="7" cols="30">{
+	<div><textarea rows="7" cols="30" onclick="this.focus();this.select()">{
 "server":"<?php echo $server; ?>",
 "server_port":<?php echo $port; ?>,
 "local_port":1080,
