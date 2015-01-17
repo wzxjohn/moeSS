@@ -375,4 +375,23 @@ class User_model extends CI_Model
             return false;
         }
     }
+
+    function generate_passwd($username = null)
+    {
+        if (!empty($username))
+        {
+            $this->db->where('user_name', $username);
+            $x = rand(10,1000);
+            $x = md5($x);
+            $x = substr($x,rand(1,9),13);
+            $y = rand(10,1000);
+            $y = md5($y);
+            $y = substr($y,rand(1,9),13);
+            $password = substr($x.$y, rand(5,30), 10);
+
+
+            
+            return $password;
+        }
+    }
 }

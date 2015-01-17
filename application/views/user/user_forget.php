@@ -72,6 +72,7 @@ $this->load->helper('form');
         // post-submit callback
         function showResponse(data) {
             if (data.result == "success") {
+                alert('Success!');
                 window.location.href = "<?php echo site_url('user'); ?>";
             } else {
                 alert(data.result);
@@ -108,7 +109,6 @@ $this->load->helper('form');
     <div class="footer">
         <button type="submit" class="btn bg-olive btn-block"  name="login" >重置</button>
         <a href="<?php echo site_url('user/register')?>" class="text-center">没有注册？</a>
-        <a href="<?php echo site_url('user/forget')?>" class="text-center">忘记密码？</a>
     </div>
     <?php echo form_close(); ?>
 </div>

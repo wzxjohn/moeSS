@@ -619,4 +619,53 @@ class User extends CI_Controller
         }
         return;
     }
+
+    function resend_passwd()
+    {
+        $user_name = $this->input->post('username');
+        $email = $this->input->post('email');
+        if (!empty($user_name) && !empty($email))
+        {
+            $user = $this->user_model->u_select($user_name);
+            if ($user->email == $email)
+            {
+                $this->do_resend_passwd($user_name, $email);
+                echo '{"result" : "success" }';
+            }
+            else
+            {
+                echo '{"result" : "Not match!" }';
+            }
+        }
+        else
+        {
+            echo '{"result" : "Something missing!" }';
+        }
+    }
+
+    function do_resend_passwd()
+    {
+        $new_passwd = $this->user_model->generate_passwd( $username );
+        if ( $data )
+        {
+            $email = $data['email'];
+            $code = $data['activate_code'];
+            $subject = $this->user_model->get_email_subject();
+            $html = $this->user_model->get_email_templates();
+            $html = str_replace('%{activate_link}%', site_url("user/activate/$code"), $html);
+            $this->load->helper('comm');
+            if (send_mail(null,null,$email,$subject,$html))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
