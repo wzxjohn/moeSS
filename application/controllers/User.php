@@ -177,11 +177,11 @@ class User extends CI_Controller
         return;
     }
 
-    function guestbook()
-    {
-        $this->load->view('guestbook');
-        return;
-    }
+    //function guestbook()
+    //{
+    //    $this->load->view('guestbook');
+    //    return;
+    //}
 
     function login_check()
     {
