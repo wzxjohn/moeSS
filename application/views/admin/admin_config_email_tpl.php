@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                             <div class="form-group">
                                 <label for="cate_title"><?php echo $configs[1]->display_name; ?>    <small><?php echo $configs[1]->option_name; ?></small></label>
-                                <textarea class="form-control" name="<?php echo $configs[1]->option_name; ?>"><?php echo $configs[1]->option_value; ?></textarea>
+                                <textarea rows="20" class="form-control" name="<?php echo $configs[1]->option_name; ?>"><?php echo $configs[1]->option_value; ?></textarea>
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
