@@ -22,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 "timeout":600,
 "method":"<?php echo $method; ?>"
 }</textarea></div>
-	<div><input id="config" type="hidden"><?php echo $ssurl; ?></input></div>
+	<div><input id="config" type="hidden" value="<?php echo $ssurl; ?>"></input></div>
 	<div id="qrcode"></div>
 	<script type="text/javascript">
 		var text = document.getElementById("config");
