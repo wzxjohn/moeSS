@@ -134,6 +134,10 @@ if (! function_exists('send_mail'))
                 $CI->db->where('option_name', 'mail_sg_pass');
                 $query = $CI->db->get('options');
                 $api_pass = $query->result()[0]->option_value;
+                $CI->db->select('option_value');
+                $CI->db->where('option_name', 'mail_sender_name');
+                $query = $CI->db->get('options');
+                $from_name = $query->result()[0]->option_value;
                 $params = array(
                     'api_user' => $api_user,
                     'api_key' => $api_pass,
@@ -141,6 +145,7 @@ if (! function_exists('send_mail'))
                     'subject' => $subject,
                     'html' => $html,
                     'from' => $sender_address,
+                    'fromname' => $from_name
                 );
 
                 $request = $url . 'api/mail.send.json';
