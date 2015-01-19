@@ -18,11 +18,11 @@ CREATE TABLE IF NOT EXISTS `activate` (
 
 CREATE TABLE IF NOT EXISTS `invite_code` (
   `id` int(32) NOT NULL,
-  `code` varchar(32) CHARACTER SET utf8 NOT NULL,
+  `code` varchar(32) NOT NULL,
   `user` int(32) NOT NULL,
   `used` tinyint(1) DEFAULT '0',
   `owner` int(11) DEFAULT '1',
-  `user_name` varchar(128) CHARACTER SET utf8 DEFAULT NULL
+  `user_name` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `options` (
@@ -37,20 +37,34 @@ INSERT INTO `options` VALUES(2, 'default_transfer', '5368709120', '默认流量(
 INSERT INTO `options` VALUES(3, 'default_invite_number', '1', '默认邀请数量');
 INSERT INTO `options` VALUES(4, 'check_min', '50', '签到下限(MB)');
 INSERT INTO `options` VALUES(5, 'check_max', '100', '签到上限(MB)');
-INSERT INTO `options` VALUES(6, 'version', '1.1', '程序版本');
-INSERT INTO `options` VALUES(7, 'mail_protocol', 'sendgrid', '邮件引擎');
-INSERT INTO `options` VALUES(8, 'mail_mailpath', '/usr/sbin/sendmail', 'Sendmail路径');
-INSERT INTO `options` VALUES(9, 'mail_smtp_host', 'smtp.gmail.com', 'SMTP服务器');
-INSERT INTO `options` VALUES(10, 'mail_smtp_user', 'admin@gmail.com', 'SMTP用户名');
-INSERT INTO `options` VALUES(11, 'mail_smtp_pass', 'adminPassword', 'SMTP密码');
-INSERT INTO `options` VALUES(12, 'mail_smtp_port', '587', 'SMTP端口');
-INSERT INTO `options` VALUES(13, 'mail_smtp_crypto', 'tls', 'SMTP加密方法');
-INSERT INTO `options` VALUES(14, 'mail_sender_address', 'admin@gmail.com', '发件邮箱');
-INSERT INTO `options` VALUES(15, 'mail_sender_name', 'John Stephen', '发件人姓名');
-INSERT INTO `options` VALUES(16, 'mail_sg_user', 'api_user', 'SendGrid API User');
-INSERT INTO `options` VALUES(17, 'mail_sg_pass', 'api_key', 'SendGrid API Key');
+INSERT INTO `options` VALUES(6, 'version', '0.1', '程序版本');
+INSERT INTO `options` VALUES(7, 'default_method', 'rc4-md5', '默认加密方式');
+INSERT INTO `options` VALUES(8, 'mail_protocol', 'sendgrid', '邮件引擎');
+INSERT INTO `options` VALUES(9, 'mail_mailpath', '/usr/sbin/sendmail', 'Sendmail路径');
+INSERT INTO `options` VALUES(10, 'mail_smtp_host', 'smtp.gmail.com', 'SMTP服务器');
+INSERT INTO `options` VALUES(11, 'mail_smtp_user', 'admin@gmail.com', 'SMTP用户名');
+INSERT INTO `options` VALUES(12, 'mail_smtp_pass', 'adminPassword', 'SMTP密码');
+INSERT INTO `options` VALUES(13, 'mail_smtp_port', '587', 'SMTP端口');
+INSERT INTO `options` VALUES(14, 'mail_smtp_crypto', 'tls', 'SMTP加密方法');
+INSERT INTO `options` VALUES(15, 'mail_sender_address', 'admin@gmail.com', '发件邮箱');
+INSERT INTO `options` VALUES(16, 'mail_sender_name', 'John Stephen', '发件人姓名');
+INSERT INTO `options` VALUES(17, 'mail_sg_user', 'api_user', 'SendGrid API User');
+INSERT INTO `options` VALUES(18, 'mail_sg_pass', 'api_key', 'SendGrid API Key');
 INSERT INTO `options` VALUES(19, 'email_subject', '[ACTION REQUIRED] Activate your account', '邮件标题');
-INSERT INTO `options` VALUES(20, 'email_body', '<html>\n<head></head>\n<body>\n<p>请点击下方链接激活账户：<br>\n<a href="%s" target="_blank">激活账户</a>\n</p>\n</body>\n</html>', '邮件正文(%s将被替换为链接)');
+INSERT INTO `options` VALUES(20, 'email_body', '<html>\n<head></head>\n<body>\n<p>请点击下方链接激活账户：<br />\n<a href="%{activate_link}%" target="_blank">激活账户</a><br />\n%{activate_link}%<br />\n</p>\n</body>\n</html>', '邮件正文(%{activate_link}%将被替换为链接)');
+INSERT INTO `options` VALUES(21, 'reset_mail_subject', '请确认您的密码重置请求', '邮件标题');
+INSERT INTO `options` VALUES(22, 'reset_mail_body', '<html>\n<head></head>\n<body>\n<p>请点击下方链确认重置：<br />\n<a href="%{reset_link}%" target="_blank">重置密码</a><br />\n%{reset_link}%\n</p>\n</body>\n</html>', '邮件正文(%{reset_link}%将被替换为链接)');
+INSERT INTO `options` VALUES(23, 'resend_mail_subject', '您的密码已经重置', '邮件标题');
+INSERT INTO `options` VALUES(24, 'resend_mail_body', '<html>\n<head></head>\n<body>\n<p>您的密码已经重置，这是您的账户信息：<br />\nUsername: %{username}%<br />\nPassword: %{password}%<br />\n</p>\n</body>\n</html>', '邮件正文(%{username}%和%{password}%将被替换为账号密码)');
+
+CREATE TABLE IF NOT EXISTS `reset` (
+  `id` int(11) NOT NULL,
+  `reset_code` varchar(128) CHARACTER SET latin1 NOT NULL,
+  `uid` int(11) NOT NULL,
+  `user_name` varchar(128) CHARACTER SET latin1 NOT NULL,
+  `email` varchar(32) CHARACTER SET latin1 NOT NULL,
+  `used` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ss_admin` (
   `uid` int(11) NOT NULL,
@@ -107,6 +121,9 @@ ALTER TABLE `invite_code`
 ALTER TABLE `options`
   ADD PRIMARY KEY (`option_id`);
 
+ALTER TABLE `reset`
+  ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `ss_admin`
   ADD PRIMARY KEY (`uid`);
 
@@ -116,17 +133,24 @@ ALTER TABLE `ss_node`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`uid`);
 
-
 ALTER TABLE `activate`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `invite_code`
   MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `options`
   MODIFY `option_id` int(20) unsigned NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `reset`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `ss_admin`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `ss_node`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `user`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
