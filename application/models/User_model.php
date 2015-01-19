@@ -429,7 +429,7 @@ class User_model extends CI_Model
             $y = rand(10,1000);
             $y = md5($y);
             $y = substr($y,rand(1,9),13);
-            $code = substr($x.$y, rand(5,30), 10);
+            $code = substr($x.$y, rand(1,10), 15);
             $data = array(
                 'reset_code' => $code,
                 'uid' => $user->uid,

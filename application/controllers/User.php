@@ -681,7 +681,7 @@ class User extends CI_Controller
 
     }
 
-    function resend_password($code = null)
+    function resend_pass($code = null)
     {
         if ($code)
         {
