@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <h3 class="box-title">账户激活邮件模版</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="<?php echo site_url( "admin/email_tpl_update"); ?>">
+                    <form role="form" method="post" action="<?php echo site_url( "admin/email_tpl_update/email"); ?>">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="cate_title"><?php echo $email[0]->display_name; ?>    <small><?php echo $email[0]->option_name; ?></small></label>
@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <h3 class="box-title">密码重置邮件模版</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="<?php echo site_url( "admin/email_tpl_update"); ?>">
+                    <form role="form" method="post" action="<?php echo site_url( "admin/email_tpl_update/reset"); ?>">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="cate_title"><?php echo $reset[0]->display_name; ?>    <small><?php echo $reset[0]->option_name; ?></small></label>
@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <h3 class="box-title">账户信息邮件模版</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="<?php echo site_url( "admin/email_tpl_update"); ?>">
+                    <form role="form" method="post" action="<?php echo site_url( "admin/email_tpl_update/resend"); ?>">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="cate_title"><?php echo $resend[0]->display_name; ?>    <small><?php echo $resend[0]->option_name; ?></small></label>

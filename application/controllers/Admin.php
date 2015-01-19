@@ -742,4 +742,56 @@ class Admin extends CI_Controller
         }
         return;
     }
+
+    function email_tpl_update($part = null)
+    {
+        if ($this->is_login())
+        {
+            if ($part)
+            {
+                if ($part == 'email')
+                {
+                    $data = array(
+                        'email_subject' => $this->input->post('email_subject'),
+                        'email_body' => $this->input->post('email_body')
+                    );
+                }
+                elseif ($part == 'reset')
+                {
+                    $data = array(
+                        'reset_subject' => $this->input->post('reset_subject'),
+                        'reset_body' => $this->input->post('reset_body')
+                    );
+                }
+                elseif ($part == 'resend')
+                {
+                    $data = array(
+                        'resend_subject' => $this->input->post('resend_subject'),
+                        'resend_body' => $this->input->post('resend_body')
+                    );
+                }
+                else
+                {
+                    echo "<script>alert(\"Something error!\"); window.location.href = \"" . site_url('admin/email_tpl') . "\";</script>";
+                }
+                if ($this->admin_model->update_config($data))
+                {
+                    echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/email_tpl') . "\";</script>";
+                }
+                else
+                {
+                    echo "<script>alert(\"Database Error!\"); window.location.href = \"" . site_url('admin/email_tpl') . "\";</script>";
+                }
+            }
+            else
+            {
+                echo "<script>alert(\"Something error!\"); window.location.href = \"" . site_url('admin/email_tpl') . "\";</script>";
+            }
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
 }
