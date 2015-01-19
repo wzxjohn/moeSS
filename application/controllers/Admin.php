@@ -700,11 +700,11 @@ class Admin extends CI_Controller
             );
             if ( $this->admin_model->update_config($data) )
             {
-                echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/system_config') . "\";</script>";
+                echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/mail_config') . "\";</script>";
             }
             else
             {
-                echo "<script>alert(\"Something error!\"); window.location.href = \"" . site_url('admin/system_config') . "\";</script>";
+                echo "<script>alert(\"Something error!\"); window.location.href = \"" . site_url('admin/mail_config') . "\";</script>";
             }
         }
         else

@@ -89,7 +89,7 @@ $this->load->helper('form');
         'id' => 'forgetForm'//,
         //'onsubmit' => 'return logincheck()'
     );
-    echo form_open('user/resend_passwd', $attributes);
+    echo form_open('user/reset_passwd', $attributes);
     ?>
     <div class="body bg-gray">
         <div class="form-group">
