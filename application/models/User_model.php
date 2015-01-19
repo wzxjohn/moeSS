@@ -423,13 +423,13 @@ class User_model extends CI_Model
         {
             $user = $this->u_select($username);
             $this->db->where('user_name', $username);
-            $x = rand(10,1000);
+            $x = $username;
             $x = md5($x);
             $x = substr($x,rand(1,9),13);
             $y = rand(10,1000);
             $y = md5($y);
             $y = substr($y,rand(1,9),13);
-            $code = substr($x.$y, rand(1,10), 15);
+            $code = md5($x.$y);
             $data = array(
                 'reset_code' => $code,
                 'uid' => $user->uid,
@@ -457,7 +457,7 @@ class User_model extends CI_Model
             $y = rand(10,1000);
             $y = md5($y);
             $y = substr($y,rand(1,9),13);
-            $password = substr($x.$y, rand(5,30), 10);
+            $password = substr($x.$y, rand(2,15), 10);
             return $password;
         }
     }
