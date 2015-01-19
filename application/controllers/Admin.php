@@ -752,22 +752,40 @@ class Admin extends CI_Controller
                 if ($part == 'email')
                 {
                     $data = array(
-                        'email_subject' => $this->input->post('email_subject'),
-                        'email_body' => $this->input->post('email_body')
+                        array (
+                            'option_name' => 'email_subject',
+                            'option_value' => $this->input->post('email_subject')
+                        ),
+                        array (
+                            'option_name' => 'email_body',
+                            'option_value' => $this->input->post('email_body')
+                        )
                     );
                 }
                 elseif ($part == 'reset')
                 {
                     $data = array(
-                        'reset_subject' => $this->input->post('reset_subject'),
-                        'reset_body' => $this->input->post('reset_body')
+                        array (
+                            'option_name' => 'reset_subject',
+                            'option_value' => $this->input->post('reset_subject')
+                        ),
+                        array (
+                            'option_name' => 'reset_body',
+                            'option_value' => $this->input->post('reset_body')
+                        )
                     );
                 }
                 elseif ($part == 'resend')
                 {
                     $data = array(
-                        'resend_subject' => $this->input->post('resend_subject'),
-                        'resend_body' => $this->input->post('resend_body')
+                        array (
+                            'option_name' => 'resend_subject',
+                            'option_value' => $this->input->post('resend_subject')
+                        ),
+                        array (
+                            'option_name' => 'resend_body',
+                            'option_value' => $this->input->post('resend_body')
+                        )
                     );
                 }
                 else
