@@ -693,7 +693,7 @@ class User extends CI_Controller
                 $email = $data['email'];
                 if ($this->do_resend_passwd($username, $new_password, $email))
                 {
-                    echo "<script>alert(\"Success!\nPlease check your email!\"); window.location.href = \"" . site_url('user/login') . "\";</script>";
+                    echo "<script>alert(\"Success!\\nPlease check your email!\"); window.location.href = \"" . site_url('user/login') . "\";</script>";
                 }
                 else
                 {
