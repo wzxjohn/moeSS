@@ -32,6 +32,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <p>无特殊说明加密方式均为<code>rc4-md5</code></p>
                         </div><?php if ($nodes) { foreach ($nodes as $node): ?>
                             <p><?php echo $node->node_name; ?>:  <code><?php echo $node->node_server; ?></code> <?php echo $node->node_info; ?> </p>
+                            <button class="btn btn-info btn-sm" onclick="viewConfig(<?php echo $node->id; ?>)">查看配置</button>
+                            <p></p>
                         <?php endforeach; } ?>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -50,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div><?php if ($test_nodes) { foreach ($test_nodes as $node): ?>
                             <p><?php echo $node->node_name; ?>:  <code><?php echo $node->node_server; ?></code> <?php echo $node->node_info; ?> </p>
                             <button class="btn btn-info btn-sm" onclick="viewConfig(<?php echo $node->id; ?>)">查看配置</button>
+                            <p></p>
                         <?php endforeach; } ?>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -62,6 +65,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 function viewConfig($id) {
     var $url="<?php echo base_url('user/client_config'); ?>/".concat($id);
     $url=$url.concat(".html");
-    window.open($url, "_blank", "toolbar=no, scrollbars=no, resizable=no, top=0, left=0, width=280, height=400");
+    window.open($url, "_blank", "location=no, menubar=no, status=no, toolbar=no, scrollbars=no, resizable=no, top=0, left=0, width=280, height=400");
 }
 </script>

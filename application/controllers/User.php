@@ -177,11 +177,11 @@ class User extends CI_Controller
         return;
     }
 
-    function guestbook()
-    {
-        $this->load->view('guestbook');
-        return;
-    }
+    //function guestbook()
+    //{
+    //    $this->load->view('guestbook');
+    //    return;
+    //}
 
     function login_check()
     {
@@ -557,29 +557,34 @@ class User extends CI_Controller
         return;
     }
 
-    function do_send_mail($username)
+    private function do_send_mail($username)
     {
-        $data = $this->user_model->send_active_email( $username );
-        if ( $data )
+        if ($this->is_login())
         {
-            $email = $data['email'];
-            $code = $data['activate_code'];
-            $subject = $this->user_model->get_email_subject();
-            $html = $this->user_model->get_email_templates();
-            $html = sprintf($html, site_url("user/activate/$code"));
-            $this->load->helper('comm');
-            if (send_mail(null,null,$email,$subject,$html))
+            $data = $this->user_model->send_active_email($username);
+            if ($data)
             {
-                return true;
-            }
-            else
+                $email = $data['email'];
+                $code = $data['activate_code'];
+                $subject = $this->user_model->get_email_subject();
+                $html = $this->user_model->get_email_templates();
+                $html = str_replace('%{activate_link}%', site_url("user/activate/$code"), $html);
+                $this->load->helper('comm');
+                if (send_mail(null, null, $email, $subject, $html))
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            } else
             {
                 return false;
             }
         }
         else
         {
-            return false;
+            redirect(site_url('user/login'));
         }
     }
 
@@ -605,5 +610,122 @@ class User extends CI_Controller
             redirect(site_url('user/login'));
         }
         return;
+    }
+
+    function forget()
+    {
+        if ($this->is_login())
+        {
+            redirect(site_url('user/login'));
+        }
+        else
+        {
+            $this->load->view('user/user_forget');
+        }
+        return;
+    }
+
+    function reset_passwd()
+    {
+        $user_name = $this->input->post('username');
+        $email = $this->input->post('email');
+        if (!empty($user_name) && !empty($email))
+        {
+            $user = $this->user_model->u_select($user_name);
+            if ($user->email == $email)
+            {
+                $this->do_send_reset($user_name, $email);
+                echo '{"result" : "success" }';
+            }
+            else
+            {
+                echo '{"result" : "Not match!" }';
+            }
+        }
+        else
+        {
+            echo '{"result" : "Something missing!" }';
+        }
+    }
+
+    private function do_send_reset($user_name, $email)
+    {
+        $data = $this->user_model->generate_reset_code($user_name);
+        if ($data)
+        {
+            if ($email == $data['email'])
+            {
+                $code = $data['reset_code'];
+                $subject = $this->user_model->get_reset_subject();
+                $html = $this->user_model->get_reset_templates();
+                $html = str_replace('%{reset_link}%', site_url("user/resend_pass/$code"), $html);
+                $this->load->helper('comm');
+                if (send_mail(null, null, $email, $subject, $html))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    function resend_pass($code = null)
+    {
+        if ($code)
+        {
+            $data = $this->user_model->check_reset_code($code);
+            if ($data)
+            {
+                $new_password = $data['new_password'];
+                $username = $data['user_name'];
+                $email = $data['email'];
+                if ($this->do_resend_passwd($username, $new_password, $email))
+                {
+                    echo "<script>alert(\"Success!\\nPlease check your email!\"); window.location.href = \"" . site_url('user/login') . "\";</script>";
+                }
+                else
+                {
+                    echo "<script>alert(\"Send mail error!\"); window.location.href = \"" . site_url('user/forget') . "\";</script>";
+                }
+            }
+            else
+            {
+                echo "<script>alert(\"Failed! Please check again!\"); window.location.href = \"" . site_url('user/forget') . "\";</script>";
+            }
+        }
+        else
+        {
+            redirect('user/forget');
+        }
+        return;
+    }
+
+    private function do_resend_passwd($username, $new_password, $email)
+    {
+        $subject = $this->user_model->get_resend_subject();
+        $html = $this->user_model->get_resend_templates();
+        $html = str_replace('%{username}%', $username, $html);
+        $html = str_replace('%{password}%', $new_password, $html);
+        $this->load->helper('comm');
+        if (send_mail(null,null,$email,$subject,$html))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

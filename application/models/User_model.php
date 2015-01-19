@@ -346,6 +346,47 @@ class User_model extends CI_Model
         }
     }
 
+    function check_reset_code($code)
+    {
+        $this->db->where('reset_code', $code);
+        $query = $this->db->get('reset');
+        if ($query->num_rows() > 0 && !$query->result()[0]->used)
+        {
+            $data = array('used' => 1 );
+            $this->db->where('reset_code', $code);
+            $this->db->limit(1);
+            $this->db->update('reset',$data);
+
+            $result = $query->result()[0];
+            $new_password = $this->generate_passwd($result->user_name);
+            $new_password_md5 = md5($new_password);
+            $data = array(
+                'pass' => $new_password_md5
+            );
+            $this->db->where('uid', $result->uid);
+            $this->db->where('user_name', $result->user_name);
+            $this->db->where('email', $result->email);
+            $this->db->limit(1);
+            if ($this->db->update('user',$data))
+            {
+                $data = array(
+                    'user_name' => $result->user_name,
+                    'new_password' => $new_password,
+                    'email' => $result->email
+                );
+                return $data;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     function get_email_subject()
     {
         $this->db->where('option_name', 'email_subject');
@@ -364,6 +405,111 @@ class User_model extends CI_Model
     function get_email_templates()
     {
         $this->db->where('option_name', 'email_body');
+        $this->db->select('option_value');
+        $query = $this->db->get('options');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0]->option_value;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function generate_reset_code($username = null)
+    {
+        if (!empty($username))
+        {
+            $user = $this->u_select($username);
+            $this->db->where('user_name', $username);
+            $x = $username;
+            $x = md5($x);
+            $x = substr($x,rand(1,9),13);
+            $y = rand(10,1000);
+            $y = md5($y);
+            $y = substr($y,rand(1,9),13);
+            $code = md5($x.$y);
+            $data = array(
+                'reset_code' => $code,
+                'uid' => $user->uid,
+                'user_name' => $user->user_name,
+                'email' => $user->email,
+                'used' => 0
+            );
+            $this->db->insert('reset', $data);
+            $data = array(
+                'email' => $user->email,
+                'reset_code' => $code
+            );
+            return $data;
+        }
+    }
+
+    function generate_passwd($username = null)
+    {
+        if (!empty($username))
+        {
+            $this->db->where('user_name', $username);
+            $x = rand(10,1000);
+            $x = md5($x);
+            $x = substr($x,rand(1,9),13);
+            $y = rand(10,1000);
+            $y = md5($y);
+            $y = substr($y,rand(1,9),13);
+            $password = substr($x.$y, rand(2,15), 10);
+            return $password;
+        }
+    }
+
+    function get_reset_subject()
+    {
+        $this->db->where('option_name', 'reset_mail_subject');
+        $this->db->select('option_value');
+        $query = $this->db->get('options');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0]->option_value;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function get_reset_templates()
+    {
+        $this->db->where('option_name', 'reset_mail_body');
+        $this->db->select('option_value');
+        $query = $this->db->get('options');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0]->option_value;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function get_resend_subject()
+    {
+        $this->db->where('option_name', 'resend_mail_subject');
+        $this->db->select('option_value');
+        $query = $this->db->get('options');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0]->option_value;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function get_resend_templates()
+    {
+        $this->db->where('option_name', 'resend_mail_body');
         $this->db->select('option_value');
         $query = $this->db->get('options');
         if ($query->num_rows() > 0)

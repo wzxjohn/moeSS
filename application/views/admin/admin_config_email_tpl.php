@@ -29,12 +29,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <!-- form start -->
                     <form role="form" method="post" action="<?php echo site_url( "admin/email_tpl_update"); ?>">
                         <div class="box-body">
-                            <?php foreach ($configs as $config) : ?>
-                                <div class="form-group">
-                                    <label for="cate_title"><?php echo $config->display_name; ?>    <small><?php echo $config->option_name; ?></small></label>
-                                    <input type="text" class="form-control" name="<?php echo $config->option_name; ?>" value="<?php echo $config->option_value; ?>" >
-                                </div>
-                            <?php endforeach ?>
+                            <div class="form-group">
+                                <label for="cate_title"><?php echo $configs[0]->display_name; ?>    <small><?php echo $configs[0]->option_name; ?></small></label>
+                                <input type="text" class="form-control" name="<?php echo $configs[0]->option_name; ?>" value="<?php echo $configs[0]->option_value; ?>" >
+                            </div>
+                            <div class="form-group">
+                                <label for="cate_title"><?php echo $configs[1]->display_name; ?>    <small><?php echo $configs[1]->option_name; ?></small></label>
+                                <textarea rows="15" class="form-control" name="<?php echo $configs[1]->option_name; ?>"><?php echo $configs[1]->option_value; ?></textarea>
+                            </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
                             <button type="submit" name="action" value="add" class="btn btn-primary">提交</button>

@@ -264,6 +264,14 @@ class Admin_model extends CI_Model
         {
             $this->db->like('option_name', 'email', 'after');
         }
+        elseif ($mode == 'reset')
+        {
+            $this->db->like('option_name', 'reset', 'after');
+        }
+        elseif ($mode == 'resend')
+        {
+            $this->db->like('option_name', 'resend', 'after');
+        }
         else
         {
             $this->db->not_like('option_name', 'mail');
