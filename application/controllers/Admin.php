@@ -754,11 +754,11 @@ class Admin extends CI_Controller
                     $data = array(
                         array (
                             'option_name' => 'email_subject',
-                            'option_value' => $this->input->post('email_subject')
+                            'option_value' => htmlspecialchars_decode($this->input->post('email_subject'))
                         ),
                         array (
                             'option_name' => 'email_body',
-                            'option_value' => $this->input->post('email_body')
+                            'option_value' => htmlspecialchars_decode($this->input->post('email_body'))
                         )
                     );
                 }
@@ -767,11 +767,11 @@ class Admin extends CI_Controller
                     $data = array(
                         array (
                             'option_name' => 'reset_subject',
-                            'option_value' => $this->input->post('reset_subject')
+                            'option_value' => htmlspecialchars_decode($this->input->post('reset_subject'))
                         ),
                         array (
                             'option_name' => 'reset_body',
-                            'option_value' => $this->input->post('reset_body')
+                            'option_value' => htmlspecialchars_decode($this->input->post('reset_body'))
                         )
                     );
                 }
@@ -780,11 +780,11 @@ class Admin extends CI_Controller
                     $data = array(
                         array (
                             'option_name' => 'resend_subject',
-                            'option_value' => $this->input->post('resend_subject')
+                            'option_value' => htmlspecialchars_decode($this->input->post('resend_subject'))
                         ),
                         array (
                             'option_name' => 'resend_body',
-                            'option_value' => $this->input->post('resend_body')
+                            'option_value' => htmlspecialchars_decode($this->input->post('resend_body'))
                         )
                     );
                 }
