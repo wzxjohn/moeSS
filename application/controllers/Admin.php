@@ -730,7 +730,9 @@ class Admin extends CI_Controller
             $data['config_e_active'] = (bool) true;
             $this->load->view( 'admin/admin_sidebar', $data );
 
-            $data['configs'] = $this->admin_model->get_config('email');
+            $data['email'] = $this->admin_model->get_config('email');
+            $data['reset'] = $this->admin_model->get_config('reset');
+            $data['resend'] = $this->admin_model->get_config('resend');
             $this->load->view( 'admin/admin_config_email_tpl', $data );
             $this->load->view( 'admin/admin_footer' );
         }
