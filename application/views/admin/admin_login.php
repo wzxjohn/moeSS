@@ -21,9 +21,9 @@ $this->load->helper('form');
     <link href="<?php echo base_url("static/css/font-awesome.min.css"); ?>" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="<?php echo base_url("static/css/AdminLTE.css"); ?>" rel="stylesheet" type="text/css" />
-    <script src="assets/prettify/run_prettify.js"></script>
-    <link href="assets/bootstrap-dialog/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
-    <script src="assets/bootstrap-dialog/js/bootstrap-dialog.min.js"></script>
+    <script src="<?php echo base_url("static/prettify/run_prettify.js"); ?>"></script>
+    <link href="<?php echo base_url("static/bootstrap-dialog/css/bootstrap-dialog.min.css"); ?>"> rel="stylesheet" type="text/css" />
+    <script src="<?php echo base_url("static/bootstrap-dialog/js/bootstrap-dialog.min.js"); ?>"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
