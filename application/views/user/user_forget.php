@@ -54,7 +54,13 @@ $this->load->helper('form');
                         size: BootstrapDialog.SIZE_LARGE,
                         title: '资料修改',
                         message: '正在提交，请稍候。。。',
-                        closable: false
+                        closable: false,
+                        buttons: [{
+                            label: '关闭',
+                            action: function (dialogRef) {
+                                dialogRef.close();
+                            }
+                        }]
                     });
                     dialog.realize();
                     dialog.getModalBody().css('color', '#000');
@@ -113,7 +119,6 @@ $this->load->helper('form');
                         label: '关闭',
                         action: function (dialogRef) {
                             dialogRef.close();
-                            window.location.href = "<?php echo site_url('user'); ?>";
                         }
                     }]
                 });
