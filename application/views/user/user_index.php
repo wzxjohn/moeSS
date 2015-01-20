@@ -151,13 +151,7 @@ EOD;
             size: BootstrapDialog.SIZE_LARGE,
             title: '重发邮件',
             message: '正在重发激活邮件，请稍候。。。',
-            closable: false,
-            buttons: [{
-                label: '关闭',
-                action: function (dialogRef) {
-                    dialogRef.close();
-                }
-            }]
+            closable: false
         });
         dialog.realize();
         dialog.getModalBody().css('color', '#000');
@@ -184,6 +178,7 @@ EOD;
                         label: '关闭',
                         action: function (dialogRef) {
                             dialogRef.close();
+                            window.location.href = "<?php echo site_url('user'); ?>";
                         }
                     }]
                 });
