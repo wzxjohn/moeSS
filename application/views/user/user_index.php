@@ -108,6 +108,11 @@ EOD;
         <!-- END PROGRESS BARS -->
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
+<link href="<?php echo base_url("static/bootstrap-dialog/css/bootstrap-dialog.min.css"); ?>" rel="stylesheet" type="text/css" />
+<script src="<?php echo base_url("static/js/jquery-2.0.3.min.js"); ?>"></script>
+<script src="<?php echo base_url("static/js/bootstrap.min.js"); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url("static/prettify/run_prettify.js"); ?>"></script>
+<script src="<?php echo base_url("static/bootstrap-dialog/js/bootstrap-dialog.min.js"); ?>"></script>
 <script type="text/javascript">
     function do_check_in()
     {
@@ -141,6 +146,22 @@ EOD;
     }
     function do_resend_mail()
     {
+
+        var dialog = new BootstrapDialog({
+            size: BootstrapDialog.SIZE_LARGE,
+            title: '重发邮件',
+            message: '正在重发激活邮件，请稍候。。。',
+            closable: false,
+            buttons: [{
+                label: '关闭',
+                action: function (dialogRef) {
+                    dialogRef.close();
+                }
+            }]
+        });
+        dialog.realize();
+        dialog.getModalBody().css('color', '#000');
+        dialog.open();
         var xmlhttp;
         if (window.XMLHttpRequest)
         {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -154,7 +175,21 @@ EOD;
         {
             if (xmlhttp.readyState==4 && xmlhttp.status==200)
             {
-                alert(xmlhttp.responseText);
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    title: '重发邮件',
+                    message: xmlhttp.responseText,
+                    closable: false,
+                    buttons: [{
+                        label: '关闭',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                        }
+                    }]
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
             }
         }
         xmlhttp.open("GET","<?php echo site_url('user/resend_mail'); ?>",true);
