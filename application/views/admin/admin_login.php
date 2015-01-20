@@ -94,11 +94,11 @@ $this->load->helper('form');
                     closable: false,
                     buttons: [{
                         label: '关闭',
-                        action: function(dialogRef){
+                        action: function (dialogRef) {
                             dialogRef.close();
                             window.location.href = "<?php echo site_url('admin/login'); ?>";
                         }
-                    ]
+                    }]
                 });
                 dialog.realize();
                 dialog.getModalBody().css('color', '#000');
