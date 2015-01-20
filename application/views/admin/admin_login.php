@@ -52,7 +52,7 @@ $this->load->helper('form');
                     document.getElementById('password').value = md5(document.getElementById('pass').value);
                     document.getElementById('pass').value = '';
                     $(this).ajaxSubmit(options);
-                    var dialog = new BootstrapDialog.show({
+                    var dialog = new BootstrapDialog({
                         size: BootstrapDialog.SIZE_LARGE,
                         title: 'Login',
                         message: 'Still login ... Please wait ...',
@@ -86,7 +86,23 @@ $this->load->helper('form');
             if (data.result == "success") {
                 window.location.href = "<?php echo site_url('admin'); ?>";
             } else {
-                BootstrapDialog.alert(data.result);
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    type: BootstrapDialog.TYPE_WARNING,
+                    title: '错误',
+                    message: data.result,
+                    closable: false,
+                    buttons: [{
+                        label: '关闭',
+                        action: function(dialogRef){
+                            dialogRef.close();
+                            window.location.href = "<?php echo site_url('admin/login'); ?>";
+                        }
+                    ]
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
             }
         }
     </script>
