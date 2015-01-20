@@ -48,15 +48,19 @@ $this->load->helper('form');
             };
 
             $('#loginForm').submit(function() {
-                BootstrapDialog.show({
-                    title: 'Login',
-                    message: 'Still login ... Please wait ...',
-                    closable: false
-                });
                 if ($(this).valid()) {
                     document.getElementById('password').value = md5(document.getElementById('pass').value);
                     document.getElementById('pass').value = '';
                     $(this).ajaxSubmit(options);
+                    var dialog = new BootstrapDialog.show({
+                        size: BootstrapDialog.SIZE_LARGE,
+                        title: 'Login',
+                        message: 'Still login ... Please wait ...',
+                        closable: false
+                    });
+                    dialog.realize();
+                    dialog.getModalBody().css('color', '#fff');
+                    dialog.open();
                     return false;
                 }
             });
