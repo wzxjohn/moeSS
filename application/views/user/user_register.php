@@ -22,6 +22,7 @@ $this->load->helper('form');
     <link href="<?php echo base_url("static/css/font-awesome.min.css"); ?>" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="<?php echo base_url("static/css/AdminLTE.css"); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url("static/bootstrap-dialog/css/bootstrap-dialog.min.css"); ?>" rel="stylesheet" type="text/css" />
 
     <!-- jQuery 2.0.2 -->
     <script src="<?php echo base_url("static/js/jquery-2.0.3.min.js"); ?>"></script>
@@ -29,6 +30,8 @@ $this->load->helper('form');
     <script src="<?php echo base_url("static/js/jquery.form.min.js"); ?>"></script>
     <!-- Bootstrap -->
     <script src="<?php echo base_url("static/js/bootstrap.min.js"); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url("static/prettify/run_prettify.js"); ?>"></script>
+    <script src="<?php echo base_url("static/bootstrap-dialog/js/bootstrap-dialog.min.js"); ?>"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,6 +51,21 @@ $this->load->helper('form');
             $('#registerForm').submit(function() {
                 if ($(this).valid()) {
                     $(this).ajaxSubmit(options);
+                    var dialog = new BootstrapDialog({
+                        size: BootstrapDialog.SIZE_LARGE,
+                        title: '注册',
+                        message: '正在提交，请稍候。。。',
+                        closable: false,
+                        buttons: [{
+                            label: '关闭',
+                            action: function (dialogRef) {
+                                dialogRef.close();
+                            }
+                        }]
+                    });
+                    dialog.realize();
+                    dialog.getModalBody().css('color', '#000');
+                    dialog.open();
                     return false;
                 }
             });
@@ -91,7 +109,22 @@ $this->load->helper('form');
             if (data.result == "success") {
                 window.location.href = "<?php echo site_url('user/login'); ?>";
             } else {
-                alert(data.result);
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    type: BootstrapDialog.TYPE_WARNING,
+                    title: '错误',
+                    message: data.result,
+                    closable: false,
+                    buttons: [{
+                        label: '关闭',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                        }
+                    }]
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
             }
         }
     </script>
