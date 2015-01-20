@@ -100,7 +100,7 @@ $this->load->helper('form');
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
                 <input type="email"  id="email" name="email" class="form-control" placeholder="E-mail" required>
             </div>
         </div>

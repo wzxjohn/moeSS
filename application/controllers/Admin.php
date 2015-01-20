@@ -812,4 +812,26 @@ class Admin extends CI_Controller
         }
         return;
     }
+
+    function captcha_test()
+    {
+        if ($this->is_login())
+        {
+            $this->load->helper('captcha');
+            $vals = array(
+                'word_length' => 4,
+                'img_width' => 100,
+                'img_path' => 'captcha/',
+                'img_url' => base_url() . 'captcha/',
+                'pool' => '23456789abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ'
+            );
+            $cap = create_captcha($vals);
+            echo $cap['image'];
+        }
+        else
+        {
+            redirect('admin/login');
+        }
+        return;
+    }
 }
