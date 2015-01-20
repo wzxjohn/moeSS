@@ -59,7 +59,7 @@ $this->load->helper('form');
                         closable: false
                     });
                     dialog.realize();
-                    dialog.getModalBody().css('color', '#fff');
+                    dialog.getModalBody().css('color', '#000');
                     dialog.open();
                     return false;
                 }
@@ -86,7 +86,7 @@ $this->load->helper('form');
             if (data.result == "success") {
                 window.location.href = "<?php echo site_url('admin'); ?>";
             } else {
-                alert(data.result);
+                BootstrapDialog.alert(data.result);
             }
         }
     </script>
