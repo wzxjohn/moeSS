@@ -54,8 +54,8 @@ $this->load->helper('form');
                     $(this).ajaxSubmit(options);
                     var dialog = new BootstrapDialog({
                         size: BootstrapDialog.SIZE_LARGE,
-                        title: 'Login',
-                        message: 'Still login ... Please wait ...',
+                        title: '登陆',
+                        message: '正在登陆，请稍候。。。',
                         closable: false
                     });
                     dialog.realize();

@@ -23,6 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Theme style -->
     <link href="<?php echo base_url('static/css/AdminLTE.css'); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url("static/bootstrap-dialog/css/bootstrap-dialog.min.css"); ?>" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,6 +62,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Select js -->
     <script src="<?php echo base_url('static/js/bootstrap-select.js'); ?>"></script>
     <script src="<?php echo base_url('static/js/bootstrap-switch.js'); ?>"></script>
+    <script src="<?php echo base_url("static/prettify/run_prettify.js"); ?>"></script>
+    <script src="<?php echo base_url("static/bootstrap-dialog/js/bootstrap-dialog.min.js"); ?>"></script>
 
     <script type="text/javascript">
         $(window).on('load', function () {
@@ -83,6 +86,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $('#editForm').submit(function() {
                 if ($(this).valid()) {
                     $(this).ajaxSubmit(options);
+                    var dialog = new BootstrapDialog({
+                        size: BootstrapDialog.SIZE_LARGE,
+                        title: '资料修改',
+                        message: '正在提交，请稍候。。。',
+                        closable: false
+                    });
+                    dialog.realize();
+                    dialog.getModalBody().css('color', '#000');
+                    dialog.open();
                     return false;
                 }
             });
@@ -112,6 +124,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             $('#ssPass').submit(function() {
                 $(this).ajaxSubmit(options);
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    title: '密码修改',
+                    message: '正在提交，请稍候。。。',
+                    closable: false
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
                 return false;
             });
         });
@@ -120,10 +141,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         function showResponse(data) {
             if (data.result == "success")
             {
-                alert('Update Success!');
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    title: '成功',
+                    message: '修改成功！',
+                    closable: false,
+                    buttons: [{
+                        label: '关闭',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                            window.location.href = "<?php echo site_url('user/profile_update'); ?>";
+                        }
+                    }]
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
                 window.location.href = "<?php echo site_url('user/profile_update'); ?>";
             } else {
-                alert(data.result);
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    type: BootstrapDialog.TYPE_WARNING,
+                    title: '失败',
+                    message: data.result,
+                    closable: false,
+                    buttons: [{
+                        label: '关闭',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                            window.location.href = "<?php echo site_url('user/profile_update'); ?>";
+                        }
+                    }]
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
             }
         }
     </script>
