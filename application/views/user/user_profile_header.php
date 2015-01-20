@@ -90,7 +90,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         size: BootstrapDialog.SIZE_LARGE,
                         title: '资料修改',
                         message: '正在提交，请稍候。。。',
-                        closable: false
+                        closable: false,
+                        buttons: [{
+                            label: '关闭',
+                            action: function (dialogRef) {
+                                dialogRef.close();
+                            }
+                        }]
                     });
                     dialog.realize();
                     dialog.getModalBody().css('color', '#000');
@@ -169,7 +175,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         label: '关闭',
                         action: function (dialogRef) {
                             dialogRef.close();
-                            window.location.href = "<?php echo site_url('user/profile_update'); ?>";
                         }
                     }]
                 });
