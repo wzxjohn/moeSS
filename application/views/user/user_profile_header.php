@@ -158,7 +158,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 dialog.realize();
                 dialog.getModalBody().css('color', '#000');
                 dialog.open();
-                window.location.href = "<?php echo site_url('user/profile_update'); ?>";
             } else {
                 var dialog = new BootstrapDialog({
                     size: BootstrapDialog.SIZE_LARGE,
