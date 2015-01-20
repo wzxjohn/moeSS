@@ -11,7 +11,8 @@ $this->load->helper('form');
 ?><!DOCTYPE html>
 <html class="bg-black">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="google" value="notranslate" />
     <title><?php echo SITE_NAME; ?> - 注册</title>
     <link rel="icon" href="<?php echo base_url('favicon.ico'); ?>">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>

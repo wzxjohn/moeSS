@@ -12,6 +12,7 @@ $this->load->helper('form');
 <html class="bg-black">
 <head>
     <meta charset="utf-8">
+    <meta name="google" value="notranslate" />
     <title><?php echo SITE_NAME; ?> - 管理登陆</title>
     <link rel="icon" href="<?php echo site_url('favicon.ico'); ?>">
     <!-- bootstrap 3.0.2 -->
@@ -20,6 +21,9 @@ $this->load->helper('form');
     <link href="<?php echo base_url("static/css/font-awesome.min.css"); ?>" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="<?php echo base_url("static/css/AdminLTE.css"); ?>" rel="stylesheet" type="text/css" />
+    <script src="assets/prettify/run_prettify.js"></script>
+    <link href="assets/bootstrap-dialog/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+    <script src="assets/bootstrap-dialog/js/bootstrap-dialog.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,6 +48,11 @@ $this->load->helper('form');
             };
 
             $('#loginForm').submit(function() {
+                BootstrapDialog.show({
+                    title: 'Login',
+                    message: 'Still login ... Please wait ...',
+                    closable: false
+                });
                 if ($(this).valid()) {
                     document.getElementById('password').value = md5(document.getElementById('pass').value);
                     document.getElementById('pass').value = '';

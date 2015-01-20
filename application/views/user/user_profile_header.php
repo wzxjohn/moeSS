@@ -11,7 +11,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html>
 <head>
     <title><?php echo SITE_NAME;?></title>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="google" value="notranslate" />
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link href="<?php echo base_url('static/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url('static/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css" />

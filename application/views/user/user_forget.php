@@ -12,6 +12,7 @@ $this->load->helper('form');
 <html class="bg-black">
 <head>
     <meta charset="utf-8">
+    <meta name="google" value="notranslate" />
     <title><?php echo SITE_NAME; ?> - 忘记密码</title>
     <link rel="icon" href="<?php echo base_url('favicon.ico'); ?>">
     <!-- bootstrap 3.0.2 -->
