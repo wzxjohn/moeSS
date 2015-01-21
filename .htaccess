@@ -1,7 +1,12 @@
+Options -Indexes
+
 <IfModule mod_rewrite.c>
 
     RewriteEngine On
     RewriteBase /
+
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^(.*) https://%{SERVER_NAME}/$1 [L,R]
 
     ### Canonicalize codeigniter URLs
 

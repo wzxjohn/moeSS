@@ -146,7 +146,6 @@ EOD;
     }
     function do_resend_mail()
     {
-
         var dialog = new BootstrapDialog({
             size: BootstrapDialog.SIZE_LARGE,
             title: '重发邮件',

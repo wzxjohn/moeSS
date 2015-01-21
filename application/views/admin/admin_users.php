@@ -58,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td><?php echo $user->reg_date; ?></td>
                                         <td>
                                             <a class="btn btn-info btn-sm" href="<?php echo site_url( "admin/user_edit/$user->uid"); ?>">编辑</a>
-                                            <a class="btn btn-danger btn-sm" href="<?php echo site_url( "admin/user_del/$user->uid"); ?>">删除</a>
+                                            <button class="btn btn-danger btn-sm" onclick="del_user(<?php echo $user->uid; ?>)">删除</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; } ?>
@@ -70,3 +70,60 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
+<link href="<?php echo base_url("static/bootstrap-dialog/css/bootstrap-dialog.min.css"); ?>" rel="stylesheet" type="text/css" />
+<script src="<?php echo base_url("static/js/jquery-2.0.3.min.js"); ?>"></script>
+<script src="<?php echo base_url("static/js/bootstrap.min.js"); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url("static/prettify/run_prettify.js"); ?>"></script>
+<script src="<?php echo base_url("static/bootstrap-dialog/js/bootstrap-dialog.min.js"); ?>"></script>
+<script type="text/javascript">
+    function del_user($uid)
+    {
+        var dialog = new BootstrapDialog({
+            size: BootstrapDialog.SIZE_LARGE,
+            type: BootstrapDialog.TYPE_DANGER,
+            title: '删除用户',
+            message: '确认删除 UID 为：'.concat($uid,'的用户？该操作无法恢复！'),
+            closable: false,
+            buttons: [{
+                label: '确认',
+                cssClass: 'btn-danger',
+                action: function (dialogRef) {
+                    dialogRef.close();
+                    do_del_user($uid);
+                }},
+                {
+                    label: '取消',
+                    action: function (dialogRef) {
+                        dialogRef.close();
+                    }
+                }
+            ]
+        });
+        dialog.realize();
+        dialog.getModalBody().css('color', '#000');
+        dialog.open();
+    }
+
+    function do_del_user($uid)
+    {
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                alert(xmlhttp.responseText);
+            }
+        }
+        xmlhttp.open("GET","<?php echo base_url( "admin/user_del"); ?>".concat("/",$uid),true);
+        xmlhttp.send();
+    }
+</script>
+
