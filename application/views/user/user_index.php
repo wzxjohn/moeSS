@@ -111,6 +111,15 @@ EOD;
 <script type="text/javascript">
     function do_check_in()
     {
+        var dialog = new BootstrapDialog({
+            size: BootstrapDialog.SIZE_LARGE,
+            title: '每日签到',
+            message: '正在签到，请稍候。。。',
+            closable: false
+        });
+        dialog.realize();
+        dialog.getModalBody().css('color', '#000');
+        dialog.open();
         var xmlhttp;
         if (window.XMLHttpRequest)
         {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -129,6 +138,7 @@ EOD;
                 document.getElementById("check_in_result").innerHTML = str1.concat( xmlhttp.responseText, str2 );
                 var dialog = new BootstrapDialog({
                     size: BootstrapDialog.SIZE_LARGE,
+                    type: BootstrapDialog.TYPE_SUCCESS,
                     title: '每日签到',
                     message: xmlhttp.responseText,
                     closable: false,
