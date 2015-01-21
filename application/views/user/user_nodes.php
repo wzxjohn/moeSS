@@ -65,6 +65,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 function viewConfig($id) {
     var $url="<?php echo base_url('user/client_config'); ?>/".concat($id);
     $url=$url.concat(".html");
-    window.open($url, "_blank", "location=no, menubar=no, status=no, toolbar=no, scrollbars=no, resizable=no, top=0, left=0, width=280, height=400");
+    BootstrapDialog.show({
+        title: '查看配置',
+        size: BootstrapDialog.SIZE_LARGE,
+        type: BootstrapDialog.TYPE_INFO,
+        message: $('<div></div>').load($url)
+    });
+    //window.open($url, "_blank", "location=no, menubar=no, status=no, toolbar=no, scrollbars=no, resizable=no, top=0, left=0, width=280, height=400");
 }
 </script>
