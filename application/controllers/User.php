@@ -174,7 +174,6 @@ class User extends CI_Controller
             echo '{"result" : "缺少参数！" }';
             return;
         }
-        return;
     }
 
     //function guestbook()
@@ -559,32 +558,25 @@ class User extends CI_Controller
 
     private function do_send_mail($username)
     {
-        if ($this->is_login())
+        $data = $this->user_model->send_active_email($username);
+        if ($data)
         {
-            $data = $this->user_model->send_active_email($username);
-            if ($data)
+            $email = $data['email'];
+            $code = $data['activate_code'];
+            $subject = $this->user_model->get_email_subject();
+            $html = $this->user_model->get_email_templates();
+            $html = str_replace('%{activate_link}%', site_url("user/activate/$code"), $html);
+            $this->load->helper('comm');
+            if (send_mail(null, null, $email, $subject, $html))
             {
-                $email = $data['email'];
-                $code = $data['activate_code'];
-                $subject = $this->user_model->get_email_subject();
-                $html = $this->user_model->get_email_templates();
-                $html = str_replace('%{activate_link}%', site_url("user/activate/$code"), $html);
-                $this->load->helper('comm');
-                if (send_mail(null, null, $email, $subject, $html))
-                {
-                    return true;
-                } else
-                {
-                    return false;
-                }
+                return true;
             } else
             {
                 return false;
             }
-        }
-        else
+        } else
         {
-            redirect(site_url('user/login'));
+            return false;
         }
     }
 
