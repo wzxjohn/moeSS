@@ -901,7 +901,7 @@ class Admin extends CI_Controller
             {
                 $new_username = NULL;
             }
-            elseif ($this->admin_model->u_selete($new_username))
+            elseif ($this->admin_model->u_select($new_username))
             {
                 echo '{"result" : "用户名已存在！" }';
                 return;
