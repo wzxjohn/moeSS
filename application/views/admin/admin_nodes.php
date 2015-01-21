@@ -39,7 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td><?php echo $node->node_order; ?></td>
                                         <td>
                                             <a class="btn btn-info btn-sm" href="<?php echo site_url( "admin/node_edit/$node->id" ); ?>">编辑</a>
-                                            <a class="btn btn-danger btn-sm" href="<?php echo site_url( "admin/node_del/$node->id" ); ?>">删除</a>
+                                            <button class="btn btn-danger btn-sm" onclick="del_node(<?php echo $node->id; ?>)">删除</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; } ?>
@@ -50,3 +50,55 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
+<script type="text/javascript">
+    function del_node($id)
+    {
+        var dialog = new BootstrapDialog({
+            size: BootstrapDialog.SIZE_LARGE,
+            type: BootstrapDialog.TYPE_DANGER,
+            title: '删除节点',
+            message: '确认删除 ID 为：'.concat($id,' 的节点？该操作无法恢复！'),
+            closable: false,
+            buttons: [{
+                label: '确认',
+                cssClass: 'btn-danger',
+                action: function (dialogRef) {
+                    dialogRef.close();
+                    do_del_node($id);
+                }},
+                {
+                    label: '取消',
+                    action: function (dialogRef) {
+                        dialogRef.close();
+                    }
+                }
+            ]
+        });
+        dialog.realize();
+        dialog.getModalBody().css('color', '#000');
+        dialog.open();
+    }
+
+    function do_del_node($id)
+    {
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                alert(xmlhttp.responseText);
+                window.location.href = "<?php echo site_url('admin/nodes'); ?>";
+            }
+        }
+        xmlhttp.open("GET","<?php echo base_url( "admin/node_del"); ?>".concat("/",$id),true);
+        xmlhttp.send();
+    }
+</script>
