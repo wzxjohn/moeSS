@@ -25,11 +25,11 @@ class Admin_model extends CI_Model
         $query = $this->db->get('ss_admin');
         if ($query->num_rows() > 0)
         {
-            return (bool) true;
+            return (bool) TRUE;
         }
         else
         {
-            return (bool) false;
+            return (bool) FALSE;
         }
     }
 
@@ -51,7 +51,7 @@ class Admin_model extends CI_Model
         return $this->db->count_all('user');
     }
 
-    function get_users($uid = null)
+    function get_users($uid = NULL)
     {
         if ($uid)
         {
@@ -127,11 +127,11 @@ class Admin_model extends CI_Model
         }
         else
         {
-            return (bool) false;
+            return (bool) FALSE;
         }
     }
 
-    function get_nodes($id = null)
+    function get_nodes($id = NULL)
     {
         if ($id)
         {
@@ -142,7 +142,7 @@ class Admin_model extends CI_Model
         {
             return $query->result();
         }
-        return false;
+        return FALSE;
     }
 
     function del_node($id)
@@ -159,7 +159,7 @@ class Admin_model extends CI_Model
         return $this->db->delete('user');
     }
 
-    function update_node($mode = "insert", $id = null, $node_name, $node_server, $node_info, $node_type, $node_status, $node_order )
+    function update_node($mode = "insert", $id = NULL, $node_name, $node_server, $node_info, $node_type, $node_status, $node_order )
     {
         if ($mode == "update")
         {
@@ -178,7 +178,7 @@ class Admin_model extends CI_Model
             }
             else
             {
-                return false;
+                return FALSE;
             }
         }
         else
@@ -195,7 +195,7 @@ class Admin_model extends CI_Model
         }
     }
 
-    function update_user($mode = "insert", $uid = null, $user_name, $email, $pass, $passwd, $u, $d, $transfer_enable, $plan, $port, $switch, $enable )
+    function update_user($mode = "insert", $uid = NULL, $user_name, $email, $pass, $passwd, $u, $d, $transfer_enable, $plan, $port, $switch, $enable )
     {
         if ($mode == "update")
         {
@@ -219,7 +219,7 @@ class Admin_model extends CI_Model
             }
             else
             {
-                return false;
+                return FALSE;
             }
         }
         else
@@ -254,7 +254,7 @@ class Admin_model extends CI_Model
         return (int) $query->result()[0]->option_value;
     }
 
-    function get_config($mode = null)
+    function get_config($mode = NULL)
     {
         if ($mode == 'mail')
         {
@@ -283,12 +283,46 @@ class Admin_model extends CI_Model
         }
         else
         {
-            return false;
+            return FALSE;
         }
     }
 
     function update_config($data)
     {
         return $this->db->update_batch('options', $data, 'option_name');
+    }
+
+    function profile_update($uid, $username, $now_password, $password, $email, $new_username)
+    {
+        $this->db->where('uid', $uid);
+        $this->db->where('admin_name', $username);
+        $this->db->where('pass', $now_password);
+        $query = $this->db->get('ss_admin');
+        if ($query->num_rows() > 0)
+        {
+            $data = array(
+                'pass' => $password,
+                'email' => $email,
+                'admin_name' => $new_username
+            );
+            if ( !$password )
+            {
+                unset($data['pass']);
+            }
+            if ( !$email || $email == "" )
+            {
+                unset($data['email']);
+            }
+            if ( !$new_username || $new_username == "" )
+            {
+                unset($data['admin_name']);
+            }
+            $this->db->where('uid', $uid);
+            return $this->db->update('ss_admin', $data );
+        }
+        else
+        {
+            return (bool) FALSE;
+        }
     }
 }

@@ -123,6 +123,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         email: {
                             required: false,
                             email: true
+                        },
+                        username :{
+                            requited: false
                         }
                     }
                 }

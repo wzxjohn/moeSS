@@ -29,7 +29,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return false;
+            return FALSE;
         }
     }
 
@@ -39,11 +39,11 @@ class User_model extends CI_Model
         $query = $this->db->get('options');
         if ( $query->result()[0]->option_value == 'true' )
         {
-            return (bool) true;
+            return (bool) TRUE;
         }
         else
         {
-            return (bool) false;
+            return (bool) FALSE;
         }
     }
 
@@ -73,7 +73,7 @@ class User_model extends CI_Model
     function deactive_code($invitecode, $username)
     {
         $data = array(
-            'used' => (bool) true,
+            'used' => (bool) TRUE,
             'user_name' => $username
             );
         $this->db->where('code', $invitecode);
@@ -118,7 +118,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return (bool) false;
+            return (bool) FALSE;
         }
     }
 
@@ -133,7 +133,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return (bool) false;
+            return (bool) FALSE;
         }
     }
 
@@ -148,11 +148,11 @@ class User_model extends CI_Model
         }
         else
         {
-            return (bool) false;
+            return (bool) FALSE;
         }
     }
 
-    function get_nodes( $test = false, $id = null )
+    function get_nodes( $test = FALSE, $id = null )
     {
         if ($id)
         {
@@ -175,7 +175,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return (bool) false;
+            return (bool) FALSE;
         }
     }
 
@@ -190,7 +190,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return (bool) false;
+            return (bool) FALSE;
         }
     }
 
@@ -219,7 +219,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return (bool) false;
+            return (bool) FALSE;
         }
     }
 
@@ -273,7 +273,7 @@ class User_model extends CI_Model
             $this->db->select('transfer_enable');
             return $this->db->get('user')->result()[0]->transfer_enable;
         }
-        return (bool) false;
+        return (bool) FALSE;
     }
 
     function add_transfer($username = null, $amount)
@@ -315,7 +315,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return false;
+            return FALSE;
         }
     }
 
@@ -343,7 +343,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return false;
+            return FALSE;
         }
     }
 
@@ -379,12 +379,12 @@ class User_model extends CI_Model
             }
             else
             {
-                return false;
+                return FALSE;
             }
         }
         else
         {
-            return false;
+            return FALSE;
         }
     }
 
@@ -399,7 +399,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return false;
+            return FALSE;
         }
     }
 
@@ -414,7 +414,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return false;
+            return FALSE;
         }
     }
 
@@ -474,7 +474,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return false;
+            return FALSE;
         }
     }
 
@@ -489,7 +489,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return false;
+            return FALSE;
         }
     }
 
@@ -504,7 +504,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return false;
+            return FALSE;
         }
     }
 
@@ -519,7 +519,7 @@ class User_model extends CI_Model
         }
         else
         {
-            return false;
+            return FALSE;
         }
     }
 }

@@ -53,6 +53,10 @@ $this->load->helper('form');
                         <div class="form-group">
                             <input type="text" placeholder="邮箱(不修改请留空)" class="form-control" id="email" name="email">
                         </div>
+
+                        <div class="form-group">
+                            <input type="text" placeholder="用户名(不修改请留空)" class="form-control" id="username" name="username">
+                        </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">
                         <button type="submit" name="action" value="add" class="btn btn-primary">修改</button>

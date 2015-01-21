@@ -29,7 +29,7 @@ class Index_model extends CI_Model
         }
         else
         {
-            return (bool) false;
+            return (bool) FALSE;
         }
     }
 }

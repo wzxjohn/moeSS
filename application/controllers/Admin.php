@@ -19,15 +19,15 @@ class Admin extends CI_Controller
 
     function sidebar()
     {
-        $sidebar_data['index_active'] = (bool) false;
-        $sidebar_data['user_active'] = (bool) false;
-        $sidebar_data['node_active'] = (bool) false;
-        $sidebar_data['code_active'] = (bool) false;
-        $sidebar_data['system_active'] = (bool) false;
-        $sidebar_data['config_active'] = (bool) false;
-        $sidebar_data['config_g_active'] = (bool) false;
-        $sidebar_data['config_m_active'] = (bool) false;
-        $sidebar_data['config_e_active'] = (bool) false;
+        $sidebar_data['index_active'] = (bool) FALSE;
+        $sidebar_data['user_active'] = (bool) FALSE;
+        $sidebar_data['node_active'] = (bool) FALSE;
+        $sidebar_data['code_active'] = (bool) FALSE;
+        $sidebar_data['system_active'] = (bool) FALSE;
+        $sidebar_data['config_active'] = (bool) FALSE;
+        $sidebar_data['config_g_active'] = (bool) FALSE;
+        $sidebar_data['config_m_active'] = (bool) FALSE;
+        $sidebar_data['config_e_active'] = (bool) FALSE;
         return $sidebar_data;
     }
 
@@ -43,7 +43,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['index_active'] = (bool) true;
+            $data['index_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['node_count'] = $this->admin_model->c_nodes();
@@ -127,7 +127,7 @@ class Admin extends CI_Controller
         }
         else
         {
-            return false;
+            return FALSE;
         }
     }
 
@@ -143,7 +143,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['user_active'] = (bool) true;
+            $data['user_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['users'] = $this->admin_model->get_users();
@@ -169,7 +169,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['node_active'] = (bool) true;
+            $data['node_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['nodes'] = $this->admin_model->get_nodes();
@@ -195,7 +195,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['code_active'] = (bool) true;
+            $data['code_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['node_count'] = $this->admin_model->c_nodes();
@@ -222,7 +222,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['system_active'] = (bool) true;
+            $data['system_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['all_user'] = $this->admin_model->c_users();
@@ -256,7 +256,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['code_active'] = (bool) true;
+            $data['code_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $codes = $this->admin_model->get_invite_codes();
@@ -311,10 +311,10 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['user_active'] = (bool) true;
+            $data['user_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
-            $data['user'] = null;
+            $data['user'] = NULL;
             $this->load->view( 'admin/admin_user_edit', $data );
             $this->load->view( 'admin/admin_footer' );
         }
@@ -325,7 +325,7 @@ class Admin extends CI_Controller
         return;
     }
 
-    function user_del($uid = null)
+    function user_del($uid = NULL)
     {
         if ($this->is_login())
         {
@@ -349,7 +349,7 @@ class Admin extends CI_Controller
         return;
     }
 
-    function user_edit($uid = null)
+    function user_edit($uid = NULL)
     {
         if ($this->is_login())
         {
@@ -362,7 +362,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['user_active'] = (bool) true;
+            $data['user_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['user'] = $this->admin_model->get_users($uid)[0];
@@ -376,7 +376,7 @@ class Admin extends CI_Controller
         return;
     }
 
-    function user_update($uid = null)
+    function user_update($uid = NULL)
     {
         if ($this->is_login())
         {
@@ -397,7 +397,7 @@ class Admin extends CI_Controller
             $port = $this->input->post('port');
             $switch = $this->input->post('switch');
             $enable = $this->input->post('enable');
-            if ($user_name != "" && $email != "" && $pass != "" && $passwd != "" && $u != null && $d != null && $transfer_enable != null && $plan != "" && $port != "" && $switch != null && $enable != null )
+            if ($user_name != "" && $email != "" && $pass != "" && $passwd != "" && $u != NULL && $d != NULL && $transfer_enable != NULL && $plan != "" && $port != "" && $switch != NULL && $enable != NULL )
             {
                 if ($this->admin_model->update_user($mode, $uid, $user_name, $email, $pass, $passwd, $u, $d, $transfer_enable, $plan, $port, $switch, $enable ))
                 {
@@ -436,10 +436,10 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['node_active'] = (bool) true;
+            $data['node_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
-            $data['node'] = null;
+            $data['node'] = NULL;
             $this->load->view( 'admin/admin_node_edit', $data );
             $this->load->view( 'admin/admin_footer' );
         }
@@ -450,7 +450,7 @@ class Admin extends CI_Controller
         return;
     }
 
-    function node_del($id = null)
+    function node_del($id = NULL)
     {
         if ($this->is_login())
         {
@@ -474,7 +474,7 @@ class Admin extends CI_Controller
         return;
     }
 
-    function node_edit($id = null)
+    function node_edit($id = NULL)
     {
         if ($this->is_login())
         {
@@ -487,7 +487,7 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['node_active'] = (bool) true;
+            $data['node_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['node'] = $this->admin_model->get_nodes($id)[0];
@@ -501,7 +501,7 @@ class Admin extends CI_Controller
         return;
     }
 
-    function node_update($id = null)
+    function node_update($id = NULL)
     {
         if ($this->is_login())
         {
@@ -517,7 +517,7 @@ class Admin extends CI_Controller
             $node_type = $this->input->post('node_type');
             $node_status = $this->input->post('node_status');
             $node_order = $this->input->post('node_order');
-            if ($node_name != "" && $node_server != "" && $node_info != "" && $node_type != null && $node_status != "" && $node_order != null)
+            if ($node_name != "" && $node_server != "" && $node_info != "" && $node_type != NULL && $node_status != "" && $node_order != NULL)
             {
                 if ($this->admin_model->update_node($mode, $id, $node_name, $node_server, $node_info, $node_type, $node_status, $node_order ))
                 {
@@ -556,8 +556,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['config_active'] = (bool) true;
-            $data['config_g_active'] = (bool) true;
+            $data['config_active'] = (bool) TRUE;
+            $data['config_g_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['configs'] = $this->admin_model->get_config();
@@ -633,8 +633,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['config_active'] = (bool) true;
-            $data['config_m_active'] = (bool) true;
+            $data['config_active'] = (bool) TRUE;
+            $data['config_m_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['configs'] = $this->admin_model->get_config('mail');
@@ -726,8 +726,8 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_nav', $data );
 
             $data = $this->sidebar();
-            $data['config_active'] = (bool) true;
-            $data['config_e_active'] = (bool) true;
+            $data['config_active'] = (bool) TRUE;
+            $data['config_e_active'] = (bool) TRUE;
             $this->load->view( 'admin/admin_sidebar', $data );
 
             $data['email'] = $this->admin_model->get_config('email');
@@ -743,7 +743,7 @@ class Admin extends CI_Controller
         return;
     }
 
-    function email_tpl_update($part = null)
+    function email_tpl_update($part = NULL)
     {
         if ($this->is_login())
         {
@@ -841,8 +841,8 @@ class Admin extends CI_Controller
         {
             //$this->load->view('welcome_message');
             $this->load->helper('comm');
-            $data['user_name'] = $this->session->userdata('s_username');
-            $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
             $this->load->view( 'admin/admin_profile_header' );
             $this->load->view( 'admin/admin_nav', $data );
 
@@ -850,6 +850,89 @@ class Admin extends CI_Controller
             $this->load->view( 'admin/admin_sidebar', $data );
             $this->load->view( 'admin/admin_profile', $data );
             //$this->load->view( 'user/user_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function do_profile_update()
+    {
+        if ($this->is_login())
+        {
+            $username = $this->session->userdata('s_admin_username');
+            $uid = $this->session->userdata('s_admin_uid');
+            $nowpassword = $this->input->post('nowpassword');
+            if ($nowpassword == "")
+            {
+                $nowpassword = NULL;
+            }
+            else
+            {
+                $nowpassword = hash( 'md5', $nowpassword );
+            }
+            $password = $this->input->post('password');
+            if ($password == "")
+            {
+                $password = NULL;
+            }
+            else
+            {
+                $password = hash( 'md5', $password );
+            }
+            $repassword = $this->input->post('repassword');
+            if ($repassword == "")
+            {
+                $repassword = NULL;
+            }
+            else
+            {
+                $repassword = hash( 'md5', $repassword );
+            }
+            $email = $this->input->post('email');
+            if ($email == "")
+            {
+                $email = NULL;
+            }
+            $new_username = $this->input->post('username');
+            if ($new_username == "")
+            {
+                $new_username = NULL;
+            }
+            if ( ! $password && ! $email )
+            {
+                echo '{"result" : "没有需要修改的项目！" }';
+                return;
+            }
+            if ( $password == "" && $email == "")
+            {
+                echo '{"result" : "没有需要修改的项目！" }';
+                return;
+            }
+
+            if ( $password && $password != "" && $repassword && $password != $repassword )
+            {
+                echo '{"result" : "请输入相同的新密码！" }';
+                return;
+            }
+            if ( $email && $email != "" && ! filter_var($email, FILTER_VALIDATE_EMAIL) )
+            {
+                echo '{"result" : "邮箱不合法！" }';
+                return;
+            }
+            if ( $this->admin_model->profile_update($uid, $username, $nowpassword, $password, $email) )
+            {
+                echo '{"result" : "success" }';
+                return;
+            }
+            else
+            {
+                echo '{"result" : "密码错误！" }';
+                return;
+            }
+
         }
         else
         {
