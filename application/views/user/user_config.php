@@ -9,6 +9,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><html>
 <head>
+	<link rel="shortcut icon" type="image/ico" href="<?php echo base_url('favicon.ico'); ?>" />
 	<title><?php echo SITE_NAME; ?> - 配置文件</title>
 	<script src="<?php echo base_url('static/js/jquery-2.1.1.js'); ?>"></script>
 	<script src="<?php echo base_url('static/js/qrcode.min.js'); ?>"></script>

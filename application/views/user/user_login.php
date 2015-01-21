@@ -14,7 +14,7 @@ $this->load->helper('form');
     <meta charset="utf-8">
     <meta name="google" value="notranslate" />
     <title><?php echo SITE_NAME; ?> - 用戶登陆</title>
-    <link rel="icon" href="<?php echo base_url('favicon.ico'); ?>">
+    <link rel="shortcut icon" type="image/ico" href="<?php echo base_url('favicon.ico'); ?>" />
     <!-- bootstrap 3.0.2 -->
     <link href="<?php echo base_url("static/bootstrap/css/bootstrap.min.css"); ?>" rel="stylesheet" type="text/css" />
     <!-- font Awesome -->
