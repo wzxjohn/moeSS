@@ -5,6 +5,8 @@ Options -Indexes
     RewriteEngine On
     RewriteBase /
 
+    # Redirect users to HTTPS site.
+    # If your site don't have https, comment these lines.
     RewriteCond %{HTTPS} !=on
     RewriteRule ^(.*) https://%{SERVER_NAME}/$1 [L,R]
 

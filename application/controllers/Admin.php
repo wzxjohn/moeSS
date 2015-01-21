@@ -333,12 +333,12 @@ class Admin extends CI_Controller
             if ($this->admin_model->del_user($uid))
             {
                 //echo '{"result" : "success" }';
-                echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/users') . "\";</script>";
+                echo "Success!";
                 //redirect('admin/users');
             }
             else
             {
-                echo '{"result" : "Something Error!" }';
+                echo 'Something Error!';
             }
             return;
         }

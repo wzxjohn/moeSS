@@ -82,7 +82,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             size: BootstrapDialog.SIZE_LARGE,
             type: BootstrapDialog.TYPE_DANGER,
             title: '删除用户',
-            message: '确认删除 UID 为：'.concat($uid,'的用户？该操作无法恢复！'),
+            message: '确认删除 UID 为：'.concat($uid,' 的用户？该操作无法恢复！'),
             closable: false,
             buttons: [{
                 label: '确认',
@@ -120,6 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             if (xmlhttp.readyState==4 && xmlhttp.status==200)
             {
                 alert(xmlhttp.responseText);
+                window.location.href = "<?php echo site_url('admin/users'); ?>";
             }
         }
         xmlhttp.open("GET","<?php echo base_url( "admin/user_del"); ?>".concat("/",$uid),true);
