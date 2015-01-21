@@ -107,14 +107,14 @@ class User extends CI_Controller
         $username = $this->input->post('username');
         if ( strlen($username)<7||strlen($username)>32 )
         {
-            echo '{"result" : "Username not valid!" }';
+            echo '{"result" : "用户名不合法！" }';
             return;
         }
         $password = $this->input->post('password');
         $email = $this->input->post('email');
         if ( !filter_var($email, FILTER_VALIDATE_EMAIL) )
         {
-            echo '{"result" : "E-mail not valid!" }';
+            echo '{"result" : "邮箱不合法！" }';
             return;
         }
         $invitecode = $this->input->post('code');
@@ -124,7 +124,7 @@ class User extends CI_Controller
             $user = $this->user_model->u_select($username);
             if ($user)
             {
-                echo '{"result" : "Username already exist!" }';
+                echo '{"result" : "用户名已存在！" }';
                 return;
             }
             else
@@ -135,13 +135,13 @@ class User extends CI_Controller
                     {
                         if ( !$this->user_model->valid_code($invitecode) )
                         {
-                            echo '{"result" : "Invite Code Invalid!" }';
+                            echo '{"result" : "邀请码无效！" }';
                             return;
                         }
                     }
                     else
                     {
-                        echo '{"result" : "Please input Invite Code!" }';
+                        echo '{"result" : "请输入邀请码！" }';
                         return;
                     }
                 }
@@ -158,23 +158,22 @@ class User extends CI_Controller
                     }
                     else
                     {
-                        echo '{"result" : "E-mail send failed!" }';
+                        echo '{"result" : "邮件发送失败！" }';
                         return;
                     }
                 }
                 else
                 {
-                    echo '{"result" : "DB Failed!" }';
+                    echo '{"result" : "数据库错误！" }';
                     return;
                 }
             }
         }
         else
         {
-            echo '{"result" : "Something Missing!" }';
+            echo '{"result" : "缺少参数！" }';
             return;
         }
-        return;
     }
 
     //function guestbook()
@@ -205,19 +204,19 @@ class User extends CI_Controller
                 }
                 else
                 {
-                    echo '{"result" : "Wrong Username or Password!" }';
+                    echo '{"result" : "用户名或密码错误！" }';
                     //redirect(site_url('admin/login/'));
                 }
             }
             else
             {
-                echo '{"result" : "Wrong Username or Password!" }';
+                echo '{"result" : "用户名或密码错误！" }';
                 //redirect(site_url('admin/login/'));
             }
         }
         else
         {
-            echo '{"result" : "Wrong Username or Password!" }';
+            echo '{"result" : "用户名或密码错误！" }';
         }
         return;
     }
@@ -256,6 +255,7 @@ class User extends CI_Controller
             $test_nodes = $this->user_model->get_nodes( (bool) true );
             $data['nodes'] = $nodes;
             $data['test_nodes'] = $test_nodes;
+            $data['default_method'] = $this->user_model->get_default_method();
 
             $this->load->view( 'user/user_nodes', $data );
             $this->load->view( 'user/user_footer' );
@@ -318,19 +318,19 @@ class User extends CI_Controller
             $data['code_active'] = (bool) false;
             $this->load->view( 'user/user_sidebar', $data );
 
-            $user_info = $this->user_model->u_info($data['user_name']);
-            $data['transfers'] = $user_info->u + $user_info->d;
-            $data['all_transfer'] = $user_info->transfer_enable;
-            $data['unused_transfer'] = human_file_size( $data['all_transfer'] - $data['transfers'] );
-            $data['used_100'] = round( ($data['transfers'] / $data['all_transfer'] * 100), 2 );
-            $data['transfers'] = human_file_size( $data['transfers'] );
-            $data['all_transfer'] = human_file_size( $data['all_transfer'] );
-            $data['passwd'] = $user_info->passwd;
-            $data['plan'] = $user_info->plan;
-            $data['port'] = $user_info->port;
-            $data['last_check_in_time'] = $user_info->last_check_in_time;
-            $data['unix_time'] = $user_info->t;
-            $data['is_able_to_check_in'] = is_able_to_check_in( $user_info->last_check_in_time );
+//            $user_info = $this->user_model->u_info($data['user_name']);
+//            $data['transfers'] = $user_info->u + $user_info->d;
+//            $data['all_transfer'] = $user_info->transfer_enable;
+//            $data['unused_transfer'] = human_file_size( $data['all_transfer'] - $data['transfers'] );
+//            $data['used_100'] = round( ($data['transfers'] / $data['all_transfer'] * 100), 2 );
+//            $data['transfers'] = human_file_size( $data['transfers'] );
+//            $data['all_transfer'] = human_file_size( $data['all_transfer'] );
+//            $data['passwd'] = $user_info->passwd;
+//            $data['plan'] = $user_info->plan;
+//            $data['port'] = $user_info->port;
+//            $data['last_check_in_time'] = $user_info->last_check_in_time;
+//            $data['unix_time'] = $user_info->t;
+//            $data['is_able_to_check_in'] = is_able_to_check_in( $user_info->last_check_in_time );
 
             $this->load->view( 'user/user_profile', $data );
             //$this->load->view( 'user/user_footer' );
@@ -419,23 +419,23 @@ class User extends CI_Controller
             }
             if ( ! $password && ! $email )
             {
-                echo '{"result" : "Nothing to change!" }';
+                echo '{"result" : "没有需要修改的项目！" }';
                 return;
             }
             if ( $password == "" && $email == "")
             {
-                echo '{"result" : "Nothing to change!" }';
+                echo '{"result" : "没有需要修改的项目！" }';
                 return;
             }
 
             if ( $password && $password != "" && $repassword && $password != $repassword )
             {
-                echo '{"result" : "Please type same password twice!" }';
+                echo '{"result" : "请输入相同的新密码！" }';
                 return;
             }
             if ( $email && $email != "" && ! filter_var($email, FILTER_VALIDATE_EMAIL) )
             {
-                echo '{"result" : "E-mail not valid!" }';
+                echo '{"result" : "邮箱不合法！" }';
                 return;
             }
             if ( $this->user_model->profile_update($uid, $username, $nowpassword, $password, $email) )
@@ -445,7 +445,7 @@ class User extends CI_Controller
             }
             else
             {
-                echo '{"result" : "Wrong password!" }';
+                echo '{"result" : "密码错误！" }';
                 return;
             }
         }
@@ -464,7 +464,7 @@ class User extends CI_Controller
             $pass = $this->input->post('pass');
             if ( ! $pass )
             {
-                echo '{"result" : "Nothing to change!" }';
+                echo '{"result" : "没有需要修改的项目！" }';
                 return;
             }
             else
@@ -476,7 +476,7 @@ class User extends CI_Controller
                 }
                 else
                 {
-                    echo '{"result" : "Something Wrong!" }';
+                    echo '{"result" : "Opps，出错了。。。" }';
                     return;
                 }
             }
@@ -500,13 +500,13 @@ class User extends CI_Controller
                 $result = $this->user_model->check_in($username);
                 if ( $result )
                 {
-                    echo "You now have " . $result . "MB more trafic!";
+                    echo "你获得了 " . $result . "MB 流量！";
                     //redirect(site_url('user'));
                 }
             }
             else 
             {
-                echo 'Cannot Check In Now!';
+                echo '现在无法签到！';
                 //redirect(site_url('user'));
             }
         }
@@ -523,11 +523,11 @@ class User extends CI_Controller
         {
             if ( $this->user_model->activate($code) )
             {
-                echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('user/login') . "\";</script>";
+                echo "<script>alert(\"激活成功！\"); window.location.href = \"" . site_url('user/login') . "\";</script>";
             }
             else
             {
-                echo "<script>alert(\"Failed! Please check again!\"); window.location.href = \"" . site_url('user/login') . "\";</script>";
+                echo "<script>alert(\"激活失败！请检查链接！\"); window.location.href = \"" . site_url('user/login') . "\";</script>";
             }
         }
         else
@@ -541,13 +541,18 @@ class User extends CI_Controller
     {
         if ($this->is_login())
         {
+            if ($this->user_model->u_info($this->session->userdata('s_username'))->enable)
+            {
+                echo "该用户已经激活，无需重发！";
+                return;
+            }
             if ( $this->do_send_mail($this->session->userdata('s_username')) )
             {
-                echo "Success!";
+                echo "重发成功！";
             }
             else
             {
-                echo "Send mail error!";
+                echo "邮件发送失败！";
             }
         }
         else
@@ -559,32 +564,25 @@ class User extends CI_Controller
 
     private function do_send_mail($username)
     {
-        if ($this->is_login())
+        $data = $this->user_model->send_active_email($username);
+        if ($data)
         {
-            $data = $this->user_model->send_active_email($username);
-            if ($data)
+            $email = $data['email'];
+            $code = $data['activate_code'];
+            $subject = $this->user_model->get_email_subject();
+            $html = $this->user_model->get_email_templates();
+            $html = str_replace('%{activate_link}%', site_url("user/activate/$code"), $html);
+            $this->load->helper('comm');
+            if (send_mail(null, null, $email, $subject, $html))
             {
-                $email = $data['email'];
-                $code = $data['activate_code'];
-                $subject = $this->user_model->get_email_subject();
-                $html = $this->user_model->get_email_templates();
-                $html = str_replace('%{activate_link}%', site_url("user/activate/$code"), $html);
-                $this->load->helper('comm');
-                if (send_mail(null, null, $email, $subject, $html))
-                {
-                    return true;
-                } else
-                {
-                    return false;
-                }
+                return true;
             } else
             {
                 return false;
             }
-        }
-        else
+        } else
         {
-            redirect(site_url('user/login'));
+            return false;
         }
     }
 
@@ -592,7 +590,7 @@ class User extends CI_Controller
     {
         if ($id == null)
         {
-            echo "<script>alert('No server select!');</script>";
+            echo "<script>alert('请选择服务器！');</script>";
         }
         if ($this->is_login())
         {
@@ -601,7 +599,7 @@ class User extends CI_Controller
             $data['server'] = $node->node_server;
             $data['port'] = $user->port;
             $data['password'] = $user->passwd;
-            $data['method'] = 'rc4-md5';
+            $data['method'] = $node->node_method;
             $data['ssurl'] = 'ss://' . base64_encode($data['method'] . ":" . $data['password'] . "@" . $data['server'] . ":" . $data['port']);
             $this->load->view('user/user_config', $data);
         }
@@ -639,12 +637,12 @@ class User extends CI_Controller
             }
             else
             {
-                echo '{"result" : "Not match!" }';
+                echo '{"result" : "用户名和邮箱不匹配！" }';
             }
         }
         else
         {
-            echo '{"result" : "Something missing!" }';
+            echo '{"result" : "请填写用户名和邮箱！" }';
         }
     }
 
@@ -693,16 +691,16 @@ class User extends CI_Controller
                 $email = $data['email'];
                 if ($this->do_resend_passwd($username, $new_password, $email))
                 {
-                    echo "<script>alert(\"Success!\\nPlease check your email!\"); window.location.href = \"" . site_url('user/login') . "\";</script>";
+                    echo "<script>alert(\"密码重置成功！\\n请查收邮件！\"); window.location.href = \"" . site_url('user/login') . "\";</script>";
                 }
                 else
                 {
-                    echo "<script>alert(\"Send mail error!\"); window.location.href = \"" . site_url('user/forget') . "\";</script>";
+                    echo "<script>alert(\"邮件发送失败！\"); window.location.href = \"" . site_url('user/forget') . "\";</script>";
                 }
             }
             else
             {
-                echo "<script>alert(\"Failed! Please check again!\"); window.location.href = \"" . site_url('user/forget') . "\";</script>";
+                echo "<script>alert(\"密码重置失败！请检查链接！\"); window.location.href = \"" . site_url('user/forget') . "\";</script>";
             }
         }
         else

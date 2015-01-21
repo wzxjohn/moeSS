@@ -12,6 +12,7 @@ $this->load->helper('form');
 <html class="bg-black">
 <head>
     <meta charset="utf-8">
+    <meta name="google" value="notranslate" />
     <title><?php echo SITE_NAME; ?> - 忘记密码</title>
     <link rel="icon" href="<?php echo base_url('favicon.ico'); ?>">
     <!-- bootstrap 3.0.2 -->
@@ -20,6 +21,7 @@ $this->load->helper('form');
     <link href="<?php echo base_url("static/css/font-awesome.min.css"); ?>" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="<?php echo base_url("static/css/AdminLTE.css"); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url("static/bootstrap-dialog/css/bootstrap-dialog.min.css"); ?>" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,6 +37,8 @@ $this->load->helper('form');
     <!-- Bootstrap -->
     <script src="<?php echo base_url("static/js/bootstrap.min.js"); ?>" type="text/javascript"></script>
     <script src="<?php echo base_url("static/js/md5.js"); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url("static/prettify/run_prettify.js"); ?>"></script>
+    <script src="<?php echo base_url("static/bootstrap-dialog/js/bootstrap-dialog.min.js"); ?>"></script>
     <script language="javascript">
         $(document).ready(function() {
             var options = {
@@ -46,6 +50,21 @@ $this->load->helper('form');
             $('#forgetForm').submit(function() {
                 if ($(this).valid()) {
                     $(this).ajaxSubmit(options);
+                    var dialog = new BootstrapDialog({
+                        size: BootstrapDialog.SIZE_LARGE,
+                        title: '资料修改',
+                        message: '正在提交，请稍候。。。',
+                        closable: false,
+                        buttons: [{
+                            label: '关闭',
+                            action: function (dialogRef) {
+                                dialogRef.close();
+                            }
+                        }]
+                    });
+                    dialog.realize();
+                    dialog.getModalBody().css('color', '#000');
+                    dialog.open();
                     return false;
                 }
             });
@@ -72,10 +91,40 @@ $this->load->helper('form');
         // post-submit callback
         function showResponse(data) {
             if (data.result == "success") {
-                alert('Success!');
-                window.location.href = "<?php echo site_url('user'); ?>";
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    title: '成功',
+                    message: '找回成功！请查收邮件！',
+                    closable: false,
+                    buttons: [{
+                        label: '关闭',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                            window.location.href = "<?php echo site_url('user'); ?>";
+                        }
+                    }]
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
             } else {
-                alert(data.result);
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    type: BootstrapDialog.TYPE_WARNING,
+                    title: '失败',
+                    message: data.result,
+                    closable: false,
+                    buttons: [{
+                        label: '关闭',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                        }
+                    }]
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
             }
         }
     </script>
@@ -100,7 +149,7 @@ $this->load->helper('form');
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
                 <input type="email"  id="email" name="email" class="form-control" placeholder="E-mail" required>
             </div>
         </div>

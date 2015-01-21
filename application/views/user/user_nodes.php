@@ -29,9 +29,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box-body">
                         <div class="callout callout-info">
                             <h4>加密方式</h4>
-                            <p>无特殊说明加密方式均为<code>rc4-md5</code></p>
+                            <p>无特殊说明加密方式均为<code><?php echo $default_method; ?></code></p>
                         </div><?php if ($nodes) { foreach ($nodes as $node): ?>
-                            <p><?php echo $node->node_name; ?>:  <code><?php echo $node->node_server; ?></code> <?php echo $node->node_info; ?> </p>
+                            <p><?php echo $node->node_name; ?>:  <code><?php echo $node->node_server; ?></code> <?php echo $node->node_info; ?><?php if ($node->node_method != $default_method) {echo " <code>$node->node_method</code>";} ?> </p>
                             <button class="btn btn-info btn-sm" onclick="viewConfig(<?php echo $node->id; ?>)">查看配置</button>
                             <p></p>
                         <?php endforeach; } ?>
@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <h4>注意!</h4>
                             <p>测试节点可能随时撤销，有问题请反馈.</p>
                         </div><?php if ($test_nodes) { foreach ($test_nodes as $node): ?>
-                            <p><?php echo $node->node_name; ?>:  <code><?php echo $node->node_server; ?></code> <?php echo $node->node_info; ?> </p>
+                            <p><?php echo $node->node_name; ?>:  <code><?php echo $node->node_server; ?></code> <?php echo $node->node_info; ?><?php if ($node->node_method != $default_method) {echo " <code>$node->node_method</code>";} ?> </p>
                             <button class="btn btn-info btn-sm" onclick="viewConfig(<?php echo $node->id; ?>)">查看配置</button>
                             <p></p>
                         <?php endforeach; } ?>
@@ -65,6 +65,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 function viewConfig($id) {
     var $url="<?php echo base_url('user/client_config'); ?>/".concat($id);
     $url=$url.concat(".html");
-    window.open($url, "_blank", "location=no, menubar=no, status=no, toolbar=no, scrollbars=no, resizable=no, top=0, left=0, width=280, height=400");
+    BootstrapDialog.show({
+        title: '查看配置',
+        size: BootstrapDialog.SIZE_SMALL,
+        type: BootstrapDialog.TYPE_INFO,
+        message: $('<div></div>').load($url)
+    });
+    //window.open($url, "_blank", "location=no, menubar=no, status=no, toolbar=no, scrollbars=no, resizable=no, top=0, left=0, width=280, height=400");
 }
 </script>

@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: John
- * Date: 1/12/15
- * Time: 23:06
+ * Date: 1/21/15
+ * Time: 14:17
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -123,6 +123,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         email: {
                             required: false,
                             email: true
+                        },
+                        username :{
+                            requited: false
                         }
                     }
                 }
@@ -157,7 +160,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         label: '关闭',
                         action: function (dialogRef) {
                             dialogRef.close();
-                            window.location.href = "<?php echo site_url('user/profile_update'); ?>";
+                            window.location.href = "<?php echo site_url('admin/my_info'); ?>";
                         }
                     }]
                 });

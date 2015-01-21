@@ -12,6 +12,7 @@ $this->load->helper('form');
 <html class="bg-black">
 <head>
     <meta charset="utf-8">
+    <meta name="google" value="notranslate" />
     <title><?php echo SITE_NAME; ?> - 用戶登陆</title>
     <link rel="icon" href="<?php echo base_url('favicon.ico'); ?>">
     <!-- bootstrap 3.0.2 -->
@@ -20,6 +21,7 @@ $this->load->helper('form');
     <link href="<?php echo base_url("static/css/font-awesome.min.css"); ?>" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="<?php echo base_url("static/css/AdminLTE.css"); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url("static/bootstrap-dialog/css/bootstrap-dialog.min.css"); ?>" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,6 +37,8 @@ $this->load->helper('form');
     <!-- Bootstrap -->
     <script src="<?php echo base_url("static/js/bootstrap.min.js"); ?>" type="text/javascript"></script>
     <script src="<?php echo base_url("static/js/md5.js"); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url("static/prettify/run_prettify.js"); ?>"></script>
+    <script src="<?php echo base_url("static/bootstrap-dialog/js/bootstrap-dialog.min.js"); ?>"></script>
     <script language="javascript">
         $(document).ready(function() {
             var options = {
@@ -48,6 +52,15 @@ $this->load->helper('form');
                     document.getElementById('password').value = md5(document.getElementById('pass').value);
                     document.getElementById('pass').value = '';
                     $(this).ajaxSubmit(options);
+                    var dialog = new BootstrapDialog({
+                        size: BootstrapDialog.SIZE_LARGE,
+                        title: '登陆',
+                        message: '正在登陆，请稍候。。。',
+                        closable: false
+                    });
+                    dialog.realize();
+                    dialog.getModalBody().css('color', '#000');
+                    dialog.open();
                     return false;
                 }
             });
@@ -73,7 +86,23 @@ $this->load->helper('form');
             if (data.result == "success") {
                 window.location.href = "<?php echo site_url('user'); ?>";
             } else {
-                alert(data.result);
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    type: BootstrapDialog.TYPE_WARNING,
+                    title: '错误',
+                    message: data.result,
+                    closable: false,
+                    buttons: [{
+                        label: '关闭',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                            window.location.href = "<?php echo site_url('user/login'); ?>";
+                        }
+                    }]
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
             }
         }
     </script>

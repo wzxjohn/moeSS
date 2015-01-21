@@ -37,7 +37,7 @@ INSERT INTO `options` VALUES(2, 'default_transfer', '5368709120', '默认流量(
 INSERT INTO `options` VALUES(3, 'default_invite_number', '1', '默认邀请数量');
 INSERT INTO `options` VALUES(4, 'check_min', '50', '签到下限(MB)');
 INSERT INTO `options` VALUES(5, 'check_max', '100', '签到上限(MB)');
-INSERT INTO `options` VALUES(6, 'version', '0.1', '程序版本');
+INSERT INTO `options` VALUES(6, 'version', '1.0', '程序版本');
 INSERT INTO `options` VALUES(7, 'default_method', 'rc4-md5', '默认加密方式');
 INSERT INTO `options` VALUES(8, 'mail_protocol', 'sendgrid', '邮件引擎');
 INSERT INTO `options` VALUES(9, 'mail_mailpath', '/usr/sbin/sendmail', 'Sendmail路径');
@@ -50,12 +50,12 @@ INSERT INTO `options` VALUES(15, 'mail_sender_address', 'admin@gmail.com', '发�
 INSERT INTO `options` VALUES(16, 'mail_sender_name', 'John Stephen', '发件人姓名');
 INSERT INTO `options` VALUES(17, 'mail_sg_user', 'api_user', 'SendGrid API User');
 INSERT INTO `options` VALUES(18, 'mail_sg_pass', 'api_key', 'SendGrid API Key');
-INSERT INTO `options` VALUES(19, 'email_subject', '[ACTION REQUIRED] Activate your account', '邮件标题');
-INSERT INTO `options` VALUES(20, 'email_body', '<html>\n<head></head>\n<body>\n<p>请点击下方链接激活账户：<br />\n<a href="%{activate_link}%" target="_blank">激活账户</a><br />\n%{activate_link}%<br />\n</p>\n</body>\n</html>', '邮件正文(%{activate_link}%将被替换为链接)');
+INSERT INTO `options` VALUES(19, 'email_subject', '请激活您的账户', '邮件标题');
+INSERT INTO `options` VALUES(20, 'email_body', '<html>\n<head></head>\n<body>\n<h1>感谢注册本站服务</h1><br>\n<p>请点击下方链接激活账户：<br>\n<a href="%{activate_link}%" target="_blank">激活账户</a><br>\n%{activate_link}%<br>\n</p>\n</body>\n</html>', '邮件正文(%{activate_link}%将被替换为链接)');
 INSERT INTO `options` VALUES(21, 'reset_mail_subject', '请确认您的密码重置请求', '邮件标题');
-INSERT INTO `options` VALUES(22, 'reset_mail_body', '<html>\n<head></head>\n<body>\n<p>请点击下方链确认重置：<br />\n<a href="%{reset_link}%" target="_blank">重置密码</a><br />\n%{reset_link}%\n</p>\n</body>\n</html>', '邮件正文(%{reset_link}%将被替换为链接)');
+INSERT INTO `options` VALUES(22, 'reset_mail_body', '<html>\n<head></head>\n<body>\n<p>请点击下方链确认重置：<br>\n<a href="%{reset_link}%" target="_blank">重置密码</a><br>\n%{reset_link}%\n</p>\n</body>\n</html>', '邮件正文(%{reset_link}%将被替换为链接)');
 INSERT INTO `options` VALUES(23, 'resend_mail_subject', '您的密码已经重置', '邮件标题');
-INSERT INTO `options` VALUES(24, 'resend_mail_body', '<html>\n<head></head>\n<body>\n<p>您的密码已经重置，这是您的账户信息：<br />\nUsername: %{username}%<br />\nPassword: %{password}%<br />\n</p>\n</body>\n</html>', '邮件正文(%{username}%和%{password}%将被替换为账号密码)');
+INSERT INTO `options` VALUES(24, 'resend_mail_body', '<html>\n<head></head>\n<body>\n<p>您的密码已经重置，这是您的账户信息：<br>\nUsername: %{username}%<br>\nPassword: %{password}%<br>\n</p>\n</body>\n</html>', '邮件正文(%{username}%和%{password}%将被替换为账号密码)');
 
 CREATE TABLE IF NOT EXISTS `reset` (
   `id` int(11) NOT NULL,
@@ -82,10 +82,11 @@ CREATE TABLE IF NOT EXISTS `ss_node` (
   `node_server` varchar(128) NOT NULL,
   `node_info` varchar(128) NOT NULL,
   `node_status` varchar(128) NOT NULL,
-  `node_order` int(3) NOT NULL
+  `node_order` int(3) NOT NULL,
+  `node_method` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `ss_node` VALUES(1, '默认节点', 0, '1.2.3.4', '默认节点', '可用', 0);
+INSERT INTO `ss_node` VALUES(1, '默认节点', 0, '1.2.3.4', '默认节点', '可用', 0, 'rc4-md5');
 
 CREATE TABLE IF NOT EXISTS `user` (
   `uid` int(11) NOT NULL,
@@ -105,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `last_get_gift_time` int(11) NOT NULL DEFAULT '0',
   `last_check_in_time` int(11) NOT NULL DEFAULT '0',
   `last_rest_pass_time` int(11) NOT NULL DEFAULT '0',
-  `reg_date` datetime NOT NULL,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `invite_num` int(8) NOT NULL,
   `money` decimal(12,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -133,24 +134,19 @@ ALTER TABLE `ss_node`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`uid`);
 
+
 ALTER TABLE `activate`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE `invite_code`
   MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE `options`
   MODIFY `option_id` int(20) unsigned NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE `reset`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE `ss_admin`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE `ss_node`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE `user`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

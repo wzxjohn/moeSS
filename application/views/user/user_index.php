@@ -141,6 +141,15 @@ EOD;
     }
     function do_resend_mail()
     {
+        var dialog = new BootstrapDialog({
+            size: BootstrapDialog.SIZE_LARGE,
+            title: '重发邮件',
+            message: '正在重发激活邮件，请稍候。。。',
+            closable: false
+        });
+        dialog.realize();
+        dialog.getModalBody().css('color', '#000');
+        dialog.open();
         var xmlhttp;
         if (window.XMLHttpRequest)
         {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -154,7 +163,22 @@ EOD;
         {
             if (xmlhttp.readyState==4 && xmlhttp.status==200)
             {
-                alert(xmlhttp.responseText);
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    title: '重发邮件',
+                    message: xmlhttp.responseText,
+                    closable: false,
+                    buttons: [{
+                        label: '关闭',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                            window.location.href = "<?php echo site_url('user'); ?>";
+                        }
+                    }]
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
             }
         }
         xmlhttp.open("GET","<?php echo site_url('user/resend_mail'); ?>",true);
