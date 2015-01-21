@@ -67,7 +67,7 @@ function viewConfig($id) {
     $url=$url.concat(".html");
     BootstrapDialog.show({
         title: '查看配置',
-        size: BootstrapDialog.SIZE_LARGE,
+        size: BootstrapDialog.SIZE_SMALL,
         type: BootstrapDialog.TYPE_INFO,
         message: $('<div></div>').load($url)
     });
