@@ -837,6 +837,24 @@ class Admin extends CI_Controller
 
     function my_info()
     {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
+            $this->load->view( 'admin/admin_profile_header' );
+            $this->load->view( 'admin/admin_nav', $data );
 
+            $data = $this->sidebar();
+            $this->load->view( 'admin/admin_sidebar', $data );
+            $this->load->view( 'admin/admin_profile', $data );
+            //$this->load->view( 'user/user_footer' );
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
     }
 }

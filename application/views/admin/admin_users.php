@@ -70,11 +70,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
-<link href="<?php echo base_url("static/bootstrap-dialog/css/bootstrap-dialog.min.css"); ?>" rel="stylesheet" type="text/css" />
-<script src="<?php echo base_url("static/js/jquery-2.0.3.min.js"); ?>"></script>
-<script src="<?php echo base_url("static/js/bootstrap.min.js"); ?>" type="text/javascript"></script>
-<script src="<?php echo base_url("static/prettify/run_prettify.js"); ?>"></script>
-<script src="<?php echo base_url("static/bootstrap-dialog/js/bootstrap-dialog.min.js"); ?>"></script>
 <script type="text/javascript">
     function del_user($uid)
     {

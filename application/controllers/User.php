@@ -317,19 +317,19 @@ class User extends CI_Controller
             $data['code_active'] = (bool) false;
             $this->load->view( 'user/user_sidebar', $data );
 
-            $user_info = $this->user_model->u_info($data['user_name']);
-            $data['transfers'] = $user_info->u + $user_info->d;
-            $data['all_transfer'] = $user_info->transfer_enable;
-            $data['unused_transfer'] = human_file_size( $data['all_transfer'] - $data['transfers'] );
-            $data['used_100'] = round( ($data['transfers'] / $data['all_transfer'] * 100), 2 );
-            $data['transfers'] = human_file_size( $data['transfers'] );
-            $data['all_transfer'] = human_file_size( $data['all_transfer'] );
-            $data['passwd'] = $user_info->passwd;
-            $data['plan'] = $user_info->plan;
-            $data['port'] = $user_info->port;
-            $data['last_check_in_time'] = $user_info->last_check_in_time;
-            $data['unix_time'] = $user_info->t;
-            $data['is_able_to_check_in'] = is_able_to_check_in( $user_info->last_check_in_time );
+//            $user_info = $this->user_model->u_info($data['user_name']);
+//            $data['transfers'] = $user_info->u + $user_info->d;
+//            $data['all_transfer'] = $user_info->transfer_enable;
+//            $data['unused_transfer'] = human_file_size( $data['all_transfer'] - $data['transfers'] );
+//            $data['used_100'] = round( ($data['transfers'] / $data['all_transfer'] * 100), 2 );
+//            $data['transfers'] = human_file_size( $data['transfers'] );
+//            $data['all_transfer'] = human_file_size( $data['all_transfer'] );
+//            $data['passwd'] = $user_info->passwd;
+//            $data['plan'] = $user_info->plan;
+//            $data['port'] = $user_info->port;
+//            $data['last_check_in_time'] = $user_info->last_check_in_time;
+//            $data['unix_time'] = $user_info->t;
+//            $data['is_able_to_check_in'] = is_able_to_check_in( $user_info->last_check_in_time );
 
             $this->load->view( 'user/user_profile', $data );
             //$this->load->view( 'user/user_footer' );
