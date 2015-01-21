@@ -522,4 +522,19 @@ class User_model extends CI_Model
             return FALSE;
         }
     }
+
+    function get_default_method()
+    {
+        $this->db->where('option_name', 'default_method');
+        $this->db->select('option_value');
+        $query = $this->db->get('options');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0]->option_value;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
 }

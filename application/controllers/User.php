@@ -255,6 +255,7 @@ class User extends CI_Controller
             $test_nodes = $this->user_model->get_nodes( (bool) true );
             $data['nodes'] = $nodes;
             $data['test_nodes'] = $test_nodes;
+            $data['default_method'] = $this->user_model->get_default_method();
 
             $this->load->view( 'user/user_nodes', $data );
             $this->load->view( 'user/user_footer' );
