@@ -62,7 +62,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Select js -->
     <script src="<?php echo base_url('static/js/bootstrap-select.js'); ?>"></script>
     <script src="<?php echo base_url('static/js/bootstrap-switch.js'); ?>"></script>
-    <script src="<?php echo base_url("static/prettify/run_prettify.js"); ?>"></script>
     <script src="<?php echo base_url("static/bootstrap-dialog/js/bootstrap-dialog.min.js"); ?>"></script>
 
     <script type="text/javascript">

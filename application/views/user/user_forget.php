@@ -37,7 +37,6 @@ $this->load->helper('form');
     <!-- Bootstrap -->
     <script src="<?php echo base_url("static/js/bootstrap.min.js"); ?>" type="text/javascript"></script>
     <script src="<?php echo base_url("static/js/md5.js"); ?>" type="text/javascript"></script>
-    <script src="<?php echo base_url("static/prettify/run_prettify.js"); ?>"></script>
     <script src="<?php echo base_url("static/bootstrap-dialog/js/bootstrap-dialog.min.js"); ?>"></script>
     <script language="javascript">
         $(document).ready(function() {

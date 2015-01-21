@@ -111,6 +111,15 @@ EOD;
 <script type="text/javascript">
     function do_check_in()
     {
+        var dialog = new BootstrapDialog({
+            size: BootstrapDialog.SIZE_LARGE,
+            title: '每日签到',
+            message: '正在签到，请稍候。。。',
+            closable: false
+        });
+        dialog.realize();
+        dialog.getModalBody().css('color', '#000');
+        dialog.open();
         var xmlhttp;
         if (window.XMLHttpRequest)
         {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -127,13 +136,25 @@ EOD;
                 var str1 = "<code>";
                 var str2 = "</code>";
                 document.getElementById("check_in_result").innerHTML = str1.concat( xmlhttp.responseText, str2 );
-                alert(xmlhttp.responseText);
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    title: '每日签到',
+                    message: xmlhttp.responseText,
+                    closable: false,
+                    buttons: [{
+                        label: '关闭',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                            window.location.reload();
+                        }
+                    }]
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
                 document.getElementById("check_in_button").href = "";
                 document.getElementById("check_in_button").innerHTML = "不能签到";
-                setTimeout(function()
-                {
-                    window.location.reload();
-                }, 3000);
             }
         }
         xmlhttp.open("GET","<?php echo site_url('user/check_in'); ?>",true);
@@ -172,7 +193,7 @@ EOD;
                         label: '关闭',
                         action: function (dialogRef) {
                             dialogRef.close();
-                            window.location.href = "<?php echo site_url('user'); ?>";
+                            window.location.reload();
                         }
                     }]
                 });

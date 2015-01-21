@@ -30,7 +30,6 @@ $this->load->helper('form');
     <script src="<?php echo base_url("static/js/jquery.form.min.js"); ?>"></script>
     <!-- Bootstrap -->
     <script src="<?php echo base_url("static/js/bootstrap.min.js"); ?>" type="text/javascript"></script>
-    <script src="<?php echo base_url("static/prettify/run_prettify.js"); ?>"></script>
     <script src="<?php echo base_url("static/bootstrap-dialog/js/bootstrap-dialog.min.js"); ?>"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
