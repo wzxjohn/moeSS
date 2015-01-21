@@ -458,12 +458,12 @@ class Admin extends CI_Controller
             if ($this->admin_model->del_node($id))
             {
                 //echo '{"result" : "success" }';
-                echo "<script>alert(\"Success!\"); window.location.href = \"" . site_url('admin/nodes') . "\";</script>";
+                echo "Success!";
                 //redirect('admin/nodes');
             }
             else
             {
-                echo '{"result" : "Something Error!" }';
+                echo 'Something Error!';
             }
             return;
         }
@@ -599,6 +599,10 @@ class Admin extends CI_Controller
                 array(
                     'option_name' => 'version',
                     'option_value' => $this->input->post('version'),
+                ),
+                array(
+                    'option_name' => 'default_method',
+                    'option_value' => $this->input->post('default_method'),
                 ),
                 //array(
                 //    'option_name' => '',
