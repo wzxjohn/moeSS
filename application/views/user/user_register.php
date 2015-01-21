@@ -107,7 +107,23 @@ $this->load->helper('form');
         // post-submit callback
         function showResponse(data) {
             if (data.result == "success") {
-                window.location.href = "<?php echo site_url('user/login'); ?>";
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    title: '注册成功',
+                    message: data.result,
+                    closable: false,
+                    buttons: [{
+                        label: '关闭',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                            window.location.href = "<?php echo site_url('user/login'); ?>";
+                        }
+                    }]
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
             } else {
                 var dialog = new BootstrapDialog({
                     size: BootstrapDialog.SIZE_LARGE,
