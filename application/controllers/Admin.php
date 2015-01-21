@@ -834,4 +834,9 @@ class Admin extends CI_Controller
         }
         return;
     }
+
+    function my_info()
+    {
+
+    }
 }
