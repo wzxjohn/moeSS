@@ -901,12 +901,12 @@ class Admin extends CI_Controller
             {
                 $new_username = NULL;
             }
-            if ( ! $password && ! $email )
+            if ( ! $password && ! $email && ! $new_username )
             {
                 echo '{"result" : "没有需要修改的项目！" }';
                 return;
             }
-            if ( $password == "" && $email == "")
+            if ( $password == "" && $email == "" && $new_username == "")
             {
                 echo '{"result" : "没有需要修改的项目！" }';
                 return;
