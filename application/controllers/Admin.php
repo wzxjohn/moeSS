@@ -901,6 +901,11 @@ class Admin extends CI_Controller
             {
                 $new_username = NULL;
             }
+            elseif ($this->admin_model->u_selete($new_username))
+            {
+                echo '{"result" : "用户名已存在！" }';
+                return;
+            }
             if ( ! $password && ! $email && ! $new_username )
             {
                 echo '{"result" : "没有需要修改的项目！" }';
@@ -922,7 +927,7 @@ class Admin extends CI_Controller
                 echo '{"result" : "邮箱不合法！" }';
                 return;
             }
-            if ( $this->admin_model->profile_update($uid, $username, $nowpassword, $password, $email) )
+            if ( $this->admin_model->profile_update($uid, $username, $nowpassword, $password, $email, $new_username) )
             {
                 echo '{"result" : "success" }';
                 return;
