@@ -297,7 +297,7 @@ class User_model extends CI_Model
             $z = rand(10, 10000);
             $x = md5($x).md5($y).md5($z);
             $x = base64_encode($x);
-            $x = md5($x).md5($user->uid);
+            $x = base64_encode(md5(md5($x).md5($user->uid)));
             $code = substr($x, rand(1, 13), 24);
             $data = array(
                 'activate_code' => $code,

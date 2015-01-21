@@ -540,6 +540,11 @@ class User extends CI_Controller
     {
         if ($this->is_login())
         {
+            if ($this->user_model->u_info($this->session->userdata('s_username'))->enable)
+            {
+                echo "该用户已经激活，无需重发！";
+                return;
+            }
             if ( $this->do_send_mail($this->session->userdata('s_username')) )
             {
                 echo "重发成功！";
