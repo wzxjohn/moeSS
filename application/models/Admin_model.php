@@ -159,7 +159,7 @@ class Admin_model extends CI_Model
         return $this->db->delete('user');
     }
 
-    function update_node($mode = "insert", $id = NULL, $node_name, $node_server, $node_info, $node_type, $node_status, $node_order )
+    function update_node($mode = "insert", $id = NULL, $node_name, $node_server, $node_info, $node_method, $node_type, $node_status, $node_order )
     {
         if ($mode == "update")
         {
@@ -170,6 +170,7 @@ class Admin_model extends CI_Model
                     'node_name' => $node_name,
                     'node_server' => $node_server,
                     'node_info' => $node_info,
+                    'node_method' => $node_method,
                     'node_type' => $node_type,
                     'node_status' => $node_status,
                     'node_order' => $node_order
@@ -187,6 +188,7 @@ class Admin_model extends CI_Model
                 'node_name' => $node_name,
                 'node_server' => $node_server,
                 'node_info' => $node_info,
+                'node_method' => $node_method,
                 'node_type' => $node_type,
                 'node_status' => $node_status,
                 'node_order' => $node_order

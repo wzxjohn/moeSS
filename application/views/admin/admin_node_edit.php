@@ -45,6 +45,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
 
                             <div class="form-group">
+                                <label for="cate_title">加密类型</label>
+                                <input type="text" class="form-control" name="node_method" <?php if ($node) {echo "value=\"$node->node_method\""; } ?> >
+                            </div>
+
+                            <div class="form-group">
                                 <label for="cate_order">分类(0或者1)</label>
                                 <input type="text" class="form-control" name="node_type" <?php if ($node) {echo "value=\"$node->node_type\""; } ?> >
                             </div>
