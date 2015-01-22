@@ -131,11 +131,11 @@ class Admin extends CI_Controller
                     );
                     if ($remember_me == "week")
                     {
-                        $this->session->sess_expiration = 60 * 60 * 24 * 31;
+                        $this->session->sess_expiration = 60 * 60 * 24 * 7;
                     }
                     else
                     {
-                        $this->Session->sess_expiration = NULL;
+                        $this->session->sess_expiration = NULL;
                     }
                     $this->session->set_userdata($arr);
                     echo '{"result" : "success" }';
