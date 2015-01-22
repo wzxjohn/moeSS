@@ -86,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td><?php echo human_file_size($user->transfer_enable); ?></td>
                                         <td><?php echo $user->port; ?></td>
                                         <td><?php echo date("m-j G:i", $user->last_check_in_time); ?></td>
-                                        <td><?php echo $user->reg_date; ?></td>
+                                        <td><?php echo date("m-j G:i", $user->reg_date); ?></td>
                                         <td>
                                             <a class="btn btn-info btn-sm" href="<?php echo site_url( "admin/user_edit/$user->uid"); ?>">编辑</a>
                                             <button class="btn btn-danger btn-sm" onclick="del_user(<?php echo $user->uid; ?>)">删除</button>

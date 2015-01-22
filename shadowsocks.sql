@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `last_get_gift_time` int(11) NOT NULL DEFAULT '0',
   `last_check_in_time` int(11) NOT NULL DEFAULT '0',
   `last_rest_pass_time` int(11) NOT NULL DEFAULT '0',
-  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reg_date` int(11) NOT NULL DEFAULT '0',
   `invite_num` int(8) NOT NULL,
   `money` decimal(12,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
