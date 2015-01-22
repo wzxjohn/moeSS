@@ -648,6 +648,10 @@ class Admin extends CI_Controller
                     'option_name' => 'default_method',
                     'option_value' => $this->input->post('default_method'),
                 ),
+                array(
+                    'option_name' => 'need_activate',
+                    'option_value' => $this->input->post('need_activate'),
+                ),
                 //array(
                 //    'option_name' => '',
                 //    'option_value' => $this->input->post(''),

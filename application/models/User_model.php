@@ -128,13 +128,23 @@ class User_model extends CI_Model
             'plan' => 'A',
             'transfer_enable' => $this->get_default_transfer(),
             'port' => $this->get_last_port() + rand( 2, 7 ),
-            'switch' => '0',
-            'enable' => '0',
+            //'switch' => '0',
+            //'enable' => '0',
             'type' => '7',
             'reg_date' => time(),
             'invite_num' => $this->get_default_invite_number(),
             'money' => '0'
         );
+        if ($this->need_activate())
+        {
+            $this->db->set('switch', '0', FALSE);
+            $this->db->set('enable', '0', FALSE);
+        }
+        else
+        {
+            $this->db->set('switch', '1', FALSE);
+            $this->db->set('enable', '1', FALSE);
+        }
         //$this->db->set('reg_date', 'NOW()', FALSE);
         return $this->db->insert('user', $data);
     }
@@ -593,5 +603,16 @@ class User_model extends CI_Model
             'time' => time()
         );
         return $this->db->insert('mail_log', $data);
+    }
+
+    function need_activate()
+    {
+        $this->db->select('option_value');
+        $this->db->where('option_name', 'need_activate');
+        $query = $this->db->get('options');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0]->option_value;
+        }
     }
 }

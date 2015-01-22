@@ -181,15 +181,22 @@ class User extends CI_Controller
                 $password = hash('md5', $password );
                 if ( $this->user_model->new_user($username, $password, $email, $invitecode) )
                 {
-                    if ( $this->do_send_mail($username) )
+                    if ($this->user_model->need_activate())
                     {
-                        echo '{"result" : "success" }';
-                        return;
+                        if ($this->do_send_mail($username))
+                        {
+                            echo '{"result" : "success" }';
+                            return;
+                        }
+                        else
+                        {
+                            echo '{"result" : "邮件发送失败！" }';
+                            return;
+                        }
                     }
                     else
                     {
-                        echo '{"result" : "邮件发送失败！" }';
-                        return;
+                        echo '{"result" : "success" }';
                     }
                 }
                 else

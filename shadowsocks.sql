@@ -76,6 +76,7 @@ INSERT INTO `options` VALUES(21, 'reset_mail_subject', '请确认您的密码重
 INSERT INTO `options` VALUES(22, 'reset_mail_body', '<html>\n<head></head>\n<body>\n<p>请点击下方链确认重置：<br>\n<a href="%{reset_link}%" target="_blank">重置密码</a><br>\n%{reset_link}%\n</p>\n</body>\n</html>', '邮件正文(%{reset_link}%将被替换为链接)');
 INSERT INTO `options` VALUES(23, 'resend_mail_subject', '您的密码已经重置', '邮件标题');
 INSERT INTO `options` VALUES(24, 'resend_mail_body', '<html>\n<head></head>\n<body>\n<p>您的密码已经重置，这是您的账户信息：<br>\nUsername: %{username}%<br>\nPassword: %{password}%<br>\n</p>\n</body>\n</html>', '邮件正文(%{username}%和%{password}%将被替换为账号密码)');
+INSERT INTO `options` VALUES(25, 'need_activate', 'false', '账户需要激活');
 
 CREATE TABLE IF NOT EXISTS `reset` (
   `id` int(11) NOT NULL,
