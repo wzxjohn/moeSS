@@ -91,6 +91,13 @@ class CI_Session extends CI_Driver_Library {
 	 */
 	protected $userdata = array();
 
+	/**
+	 * Session expriation
+	 *
+	 * @var int
+	 */
+	public $sess_expiration;
+
 	// ------------------------------------------------------------------------
 
 	const FLASHDATA_KEY = 'flash';
@@ -299,7 +306,14 @@ class CI_Session extends CI_Driver_Library {
 		}
 
 		// Tell driver data changed
-		$this->current->sess_save();
+		if ($this->sess_expiration)
+		{
+			$this->current->sess_save($this->sess_expiration);
+		}
+		else
+		{
+			$this->current->sess_save();
+		}
 	}
 
 	// ------------------------------------------------------------------------

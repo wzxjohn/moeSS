@@ -300,7 +300,7 @@ class CI_Session_cookie extends CI_Session_driver {
 	 *
 	 * @return	void
 	 */
-	public function sess_save()
+	public function sess_save($sess_expiration = NULL)
 	{
 		// Check for database
 		if ($this->sess_use_database === TRUE)
@@ -310,7 +310,14 @@ class CI_Session_cookie extends CI_Session_driver {
 		}
 
 		// Write the cookie
-		$this->_set_cookie();
+		if ($sess_expiration)
+		{
+			$this->_set_cookie($sess_expiration);
+		}
+		else
+		{
+			$this->_set_cookie();
+		}
 	}
 
 	// ------------------------------------------------------------------------
@@ -723,7 +730,7 @@ class CI_Session_cookie extends CI_Session_driver {
 	 *
 	 * @return	void
 	 */
-	protected function _set_cookie()
+	protected function _set_cookie($sess_expiration = NULL)
 	{
 		// Get userdata (only defaults if database)
 		$cookie_data = ($this->sess_use_database === TRUE)
@@ -753,7 +760,15 @@ class CI_Session_cookie extends CI_Session_driver {
 			$cookie_data .= hash_hmac('sha1', $cookie_data, $this->encryption_key);
 		}
 
-		$expire = ($this->sess_expire_on_close === TRUE) ? 0 : $this->sess_expiration + time();
+		if ($sess_expiration)
+		{
+			$expire = ($this->sess_expire_on_close === TRUE) ? 0 : $sess_expiration + time();
+
+		}
+		else
+		{
+			$expire = ($this->sess_expire_on_close === TRUE) ? 0 : $this->sess_expiration + time();
+		}
 
 		// Set the cookie
 		$this->_setcookie($this->sess_cookie_name, $cookie_data, $expire, $this->cookie_path, $this->cookie_domain,
