@@ -576,7 +576,8 @@ class User_model extends CI_Model
             'pass' => $password,
             'ip' => $ip,
             'ua' => $ua,
-            'result' => $result
+            'result' => $result,
+            'time' => time()
         );
         return $this->db->insert('user_login', $data);
     }
@@ -588,7 +589,8 @@ class User_model extends CI_Model
             'email' => $email,
             'ip' => $ip,
             'ua' => $ua,
-            'result' => $result
+            'result' => $result,
+            'time' => time()
         );
         return $this->db->insert('mail_log', $data);
     }
