@@ -26,8 +26,10 @@ Currently supprt php mail(), sendmail, SMTP and SendGrid Web API. (Send test E-m
 - Many notices and sentences are **written directly in the view files**, so you need to **edit the file** to change them. They may moved to database in the future.
 
 # License
-See [LICENSE](https://github.com/wzxjohn/moeSS/blob/master/LICENSE)
-Please do not change the CopyRight information.
+The license under which the moeSS is released is the GPLv3 (or later) from the Free Software Foundation.
+A copy of the license is included with every copy of moeSS,
+but you can also read the text of the license [here](https://github.com/wzxjohn/moeSS/blob/master/LICENSE).
+In addition, I request anyone who uses this software do not change the CopyRight information.
 
 # Requires
 - This system is using [CodeIgniter 3.0](https://github.com/bcit-ci/CodeIgniter) to build, so you need PHP 5.2.4 or newer, MySQL (5.1+), curl to run.
