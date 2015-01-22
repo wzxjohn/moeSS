@@ -568,4 +568,16 @@ class User_model extends CI_Model
             return FALSE;
         }
     }
+
+    function log_login($username, $password, $ip, $ua, $result)
+    {
+        $data = array(
+            'user_name' => $username,
+            'pass' => $password,
+            'ip' => $ip,
+            'ua' => $ua,
+            'result' => $result
+        );
+        return $this->db->insert('user_login', $data);
+    }
 }

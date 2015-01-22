@@ -139,17 +139,20 @@ class Admin extends CI_Controller
                     }
                     $this->session->set_userdata($arr);
                     echo '{"result" : "success" }';
+                    $this->admin_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), TRUE);
                     //redirect(site_url('admin'));
                 }
                 else
                 {
                     echo '{"result" : "Wrong Username or Password!" }';
+                    $this->admin_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), FALSE);
                     //redirect(site_url('admin/login/'));
                 }
             }
             else
             {
                 echo '{"result" : "Wrong Username or Password!" }';
+                $this->admin_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), FALSE);
                 //redirect(site_url('admin/login/'));
             }
         }

@@ -16,6 +16,16 @@ CREATE TABLE IF NOT EXISTS `activate` (
   `used` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `admin_login` (
+  `id` int(32) NOT NULL,
+  `admin_name` varchar(128) NOT NULL,
+  `pass` varchar(128) NOT NULL,
+  `ip` varchar(128) NOT NULL,
+  `ua` varchar(128) NOT NULL,
+  `result` tinyint(1) NOT NULL,
+  `time` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `invite_code` (
   `id` int(32) NOT NULL,
   `code` varchar(32) NOT NULL,
@@ -111,9 +121,22 @@ CREATE TABLE IF NOT EXISTS `user` (
   `money` decimal(12,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `user_login` (
+  `id` int(32) NOT NULL,
+  `user_name` varchar(128) NOT NULL,
+  `pass` varchar(128) NOT NULL,
+  `ip` varchar(128) NOT NULL,
+  `ua` varchar(128) NOT NULL,
+  `result` tinyint(1) NOT NULL,
+  `time` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 INSERT INTO `user` VALUES(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'A', '0000000', 0, 0, 0, 5368709120, 50000, 1, 1, 7, 0, 0, 0, '2015-01-01 00:00:00', 0, 0.00);
 
 ALTER TABLE `activate`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `admin_login`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `invite_code`
@@ -134,9 +157,14 @@ ALTER TABLE `ss_node`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`uid`);
 
+ALTER TABLE `user_login`
+  ADD PRIMARY KEY (`id`);
+
 
 ALTER TABLE `activate`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `admin_login`
+  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `invite_code`
   MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `options`
@@ -149,6 +177,8 @@ ALTER TABLE `ss_node`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `user`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `user_login`
+  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

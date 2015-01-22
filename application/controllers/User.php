@@ -239,17 +239,20 @@ class User extends CI_Controller
                     }
                     $this->session->set_userdata($arr);
                     echo '{"result" : "success" }';
+                    $this->user_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), TRUE);
                     //redirect(site_url('admin'));
                 }
                 else
                 {
                     echo '{"result" : "用户名或密码错误！" }';
+                    $this->user_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), FALSE);
                     //redirect(site_url('admin/login/'));
                 }
             }
             else
             {
                 echo '{"result" : "用户名或密码错误！" }';
+                $this->user_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), FALSE);
                 //redirect(site_url('admin/login/'));
             }
         }
