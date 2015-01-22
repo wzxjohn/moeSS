@@ -61,10 +61,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <th>用户名</th>
                                         <th>电子邮件</th>
                                         <th>SS 密码</th>
-                                        <th>上次连接时间</th>
+                                        <th>上次连接</th>
                                         <th>上传量</th>
                                         <th>下载量</th>
-                                        <th>套餐</th>
+                                        <!-- <th>套餐</th> -->
                                         <th>总量</th>
                                         <th>端口</th>
                                         <th>上次签到</th>
@@ -82,7 +82,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td><?php echo date("m-j G:i", $user->t); ?></td>
                                         <td><?php echo human_file_size($user->u); ?></td>
                                         <td><?php echo human_file_size($user->d); ?></td>
-                                        <td><?php echo $user->plan; ?></td>
+                                        <!-- <td><?php //echo $user->plan; ?></td> -->
                                         <td><?php echo human_file_size($user->transfer_enable); ?></td>
                                         <td><?php echo $user->port; ?></td>
                                         <td><?php echo date("m-j G:i", $user->last_check_in_time); ?></td>
