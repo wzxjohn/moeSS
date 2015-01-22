@@ -32,5 +32,5 @@ but you can also read the text of the license [here](https://github.com/wzxjohn/
 In addition, I request anyone who uses this software do not change the CopyRight information.
 
 # Requires
-- This system is using [CodeIgniter 3.0](https://github.com/bcit-ci/CodeIgniter) to build, so you need PHP 5.2.4 or newer, MySQL (5.1+), curl to run.
+- This system is using [CodeIgniter 3.0](https://github.com/bcit-ci/CodeIgniter) to build, so you need PHP 5.4 or newer, MySQL (5.1+), curl to run.
 - Apache is the best one because it support *.htaccess* file, which is needed to rewrite the request uri to index.php.
