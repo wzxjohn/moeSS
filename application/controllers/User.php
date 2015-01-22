@@ -181,15 +181,22 @@ class User extends CI_Controller
                 $password = hash('md5', $password );
                 if ( $this->user_model->new_user($username, $password, $email, $invitecode) )
                 {
-                    if ( $this->do_send_mail($username) )
+                    if ($this->user_model->need_activate() == 'true')
                     {
-                        echo '{"result" : "success" }';
-                        return;
+                        if ($this->do_send_mail($username))
+                        {
+                            echo '{"result" : "success" }';
+                            return;
+                        }
+                        else
+                        {
+                            echo '{"result" : "邮件发送失败！" }';
+                            return;
+                        }
                     }
                     else
                     {
-                        echo '{"result" : "邮件发送失败！" }';
-                        return;
+                        echo '{"result" : "success" }';
                     }
                 }
                 else
@@ -239,17 +246,20 @@ class User extends CI_Controller
                     }
                     $this->session->set_userdata($arr);
                     echo '{"result" : "success" }';
+                    $this->user_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), TRUE);
                     //redirect(site_url('admin'));
                 }
                 else
                 {
                     echo '{"result" : "用户名或密码错误！" }';
+                    $this->user_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), FALSE);
                     //redirect(site_url('admin/login/'));
                 }
             }
             else
             {
                 echo '{"result" : "用户名或密码错误！" }';
+                $this->user_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), FALSE);
                 //redirect(site_url('admin/login/'));
             }
         }
@@ -614,9 +624,12 @@ class User extends CI_Controller
             $this->load->helper('comm');
             if (send_mail(null, null, $email, $subject, $html))
             {
+                $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
                 return true;
-            } else
+            }
+            else
             {
+                $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), FALSE);
                 return false;
             }
         } else
@@ -699,10 +712,12 @@ class User extends CI_Controller
                 $this->load->helper('comm');
                 if (send_mail(null, null, $email, $subject, $html))
                 {
+                    $this->user_model->log_send_mail($user_name, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
                     return true;
                 }
                 else
                 {
+                    $this->user_model->log_send_mail($user_name, $email, $this->input->ip_address(), $this->input->user_agent(), FALSE);
                     return false;
                 }
             }
@@ -758,10 +773,12 @@ class User extends CI_Controller
         $this->load->helper('comm');
         if (send_mail(null,null,$email,$subject,$html))
         {
+            $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
             return true;
         }
         else
         {
+            $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), FALSE);
             return false;
         }
     }

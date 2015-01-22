@@ -139,17 +139,20 @@ class Admin extends CI_Controller
                     }
                     $this->session->set_userdata($arr);
                     echo '{"result" : "success" }';
+                    $this->admin_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), TRUE);
                     //redirect(site_url('admin'));
                 }
                 else
                 {
                     echo '{"result" : "Wrong Username or Password!" }';
+                    $this->admin_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), FALSE);
                     //redirect(site_url('admin/login/'));
                 }
             }
             else
             {
                 echo '{"result" : "Wrong Username or Password!" }';
+                $this->admin_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), FALSE);
                 //redirect(site_url('admin/login/'));
             }
         }
@@ -619,7 +622,7 @@ class Admin extends CI_Controller
             $data = array(
                 array(
                     'option_name' => 'invite_only',
-                    'option_value' => $this->input->post('invite_only'),
+                    'option_value' => strtolower($this->input->post('invite_only')),
                 ),
                 array(
                     'option_name' => 'default_transfer',
@@ -644,6 +647,10 @@ class Admin extends CI_Controller
                 array(
                     'option_name' => 'default_method',
                     'option_value' => $this->input->post('default_method'),
+                ),
+                array(
+                    'option_name' => 'need_activate',
+                    'option_value' => strtolower($this->input->post('need_activate')),
                 ),
                 //array(
                 //    'option_name' => '',

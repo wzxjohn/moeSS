@@ -357,4 +357,17 @@ class Admin_model extends CI_Model
             return (bool) FALSE;
         }
     }
+
+    function log_login($username, $password, $ip, $ua, $result)
+    {
+        $data = array(
+            'admin_name' => $username,
+            'pass' => $password,
+            'ip' => $ip,
+            'ua' => $ua,
+            'result' => $result,
+            'time' => time()
+        );
+        return $this->db->insert('admin_login', $data);
+    }
 }

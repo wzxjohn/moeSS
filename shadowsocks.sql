@@ -16,6 +16,16 @@ CREATE TABLE IF NOT EXISTS `activate` (
   `used` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `admin_login` (
+  `id` int(32) NOT NULL,
+  `admin_name` varchar(128) NOT NULL,
+  `pass` varchar(128) NOT NULL,
+  `ip` varchar(128) NOT NULL,
+  `ua` varchar(128) NOT NULL,
+  `result` tinyint(1) NOT NULL,
+  `time` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `invite_code` (
   `id` int(32) NOT NULL,
   `code` varchar(32) NOT NULL,
@@ -23,6 +33,16 @@ CREATE TABLE IF NOT EXISTS `invite_code` (
   `used` tinyint(1) DEFAULT '0',
   `owner` int(11) DEFAULT '1',
   `user_name` varchar(128) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `mail_log` (
+  `id` int(32) NOT NULL,
+  `user_name` varchar(128) NOT NULL,
+  `email` varchar(32) NOT NULL,
+  `ip` varchar(128) NOT NULL,
+  `ua` varchar(128) NOT NULL,
+  `result` tinyint(1) NOT NULL,
+  `time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `options` (
@@ -56,6 +76,7 @@ INSERT INTO `options` VALUES(21, 'reset_mail_subject', '请确认您的密码重
 INSERT INTO `options` VALUES(22, 'reset_mail_body', '<html>\n<head></head>\n<body>\n<p>请点击下方链确认重置：<br>\n<a href="%{reset_link}%" target="_blank">重置密码</a><br>\n%{reset_link}%\n</p>\n</body>\n</html>', '邮件正文(%{reset_link}%将被替换为链接)');
 INSERT INTO `options` VALUES(23, 'resend_mail_subject', '您的密码已经重置', '邮件标题');
 INSERT INTO `options` VALUES(24, 'resend_mail_body', '<html>\n<head></head>\n<body>\n<p>您的密码已经重置，这是您的账户信息：<br>\nUsername: %{username}%<br>\nPassword: %{password}%<br>\n</p>\n</body>\n</html>', '邮件正文(%{username}%和%{password}%将被替换为账号密码)');
+INSERT INTO `options` VALUES(25, 'need_activate', 'false', '账户需要激活');
 
 CREATE TABLE IF NOT EXISTS `reset` (
   `id` int(11) NOT NULL,
@@ -106,9 +127,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   `last_get_gift_time` int(11) NOT NULL DEFAULT '0',
   `last_check_in_time` int(11) NOT NULL DEFAULT '0',
   `last_rest_pass_time` int(11) NOT NULL DEFAULT '0',
-  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reg_date` int(11) NOT NULL DEFAULT '0',
   `invite_num` int(8) NOT NULL,
   `money` decimal(12,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `user_login` (
+  `id` int(32) NOT NULL,
+  `user_name` varchar(128) NOT NULL,
+  `pass` varchar(128) NOT NULL,
+  `ip` varchar(128) NOT NULL,
+  `ua` varchar(128) NOT NULL,
+  `result` tinyint(1) NOT NULL,
+  `time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `user` VALUES(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'A', '0000000', 0, 0, 0, 5368709120, 50000, 1, 1, 7, 0, 0, 0, '2015-01-01 00:00:00', 0, 0.00);
@@ -116,7 +147,13 @@ INSERT INTO `user` VALUES(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a
 ALTER TABLE `activate`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `admin_login`
+  ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `invite_code`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `mail_log`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `options`
@@ -134,10 +171,17 @@ ALTER TABLE `ss_node`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`uid`);
 
+ALTER TABLE `user_login`
+  ADD PRIMARY KEY (`id`);
+
 
 ALTER TABLE `activate`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `admin_login`
+  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `invite_code`
+  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `mail_log`
   MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `options`
   MODIFY `option_id` int(20) unsigned NOT NULL AUTO_INCREMENT;
@@ -149,6 +193,8 @@ ALTER TABLE `ss_node`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `user`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `user_login`
+  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
