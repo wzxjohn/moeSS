@@ -27,6 +27,7 @@ Currently supprt php mail(), sendmail, SMTP and SendGrid Web API. (Send test E-m
 
 # License
 See [LICENSE](https://github.com/wzxjohn/moeSS/blob/master/LICENSE)
+Please do not change the CopyRight information.
 
 # Requires
 - This system is using [CodeIgniter 3.0](https://github.com/bcit-ci/CodeIgniter) to build, so you need PHP 5.2.4 or newer, MySQL (5.1+), curl to run.
