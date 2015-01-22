@@ -1,8 +1,8 @@
 # moeSS
-Moe SS
-Moe SS id a front end for https://github.com/mengskysama/shadowsocks/tree/manyuser
+moeSS
+moeSS is a front end for https://github.com/mengskysama/shadowsocks/tree/manyuser
 
-Thanks to ss-panal https://github.com/orvice/ss-panel
+Thanks to ss-panel https://github.com/orvice/ss-panel
 
 Demo: https://ss.qaq.moe
 
@@ -11,7 +11,7 @@ Demo: https://ss.qaq.moe
 - Rename config-sample.php and database-sample.php in application/config/, then change the settings.
 - Use admin/admin to login the admin dashboard, and change settings in http://your.domain.com/admin/system_config.html
 - To prevent spam register, users need to click a link to activate the account. So you need to set a method to send e-mail.
-Currently supprt php mail(), sendmail, SMTP and SendGrid Web API. (Send test E-mail function will be added soon)
+Currently support php mail(), sendmail, SMTP and SendGrid Web API. (Send test E-mail function will be added soon)
 
 | Method     | option_value |
 | ---------- | ------------ |
