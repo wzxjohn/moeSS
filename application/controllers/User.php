@@ -710,7 +710,7 @@ class User extends CI_Controller
                 }
                 else
                 {
-                    $this->user_model->log_send_mail($user_name, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
+                    $this->user_model->log_send_mail($user_name, $email, $this->input->ip_address(), $this->input->user_agent(), FALSE);
                     return false;
                 }
             }
@@ -771,7 +771,7 @@ class User extends CI_Controller
         }
         else
         {
-            $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
+            $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), FALSE);
             return false;
         }
     }
