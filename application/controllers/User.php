@@ -617,9 +617,12 @@ class User extends CI_Controller
             $this->load->helper('comm');
             if (send_mail(null, null, $email, $subject, $html))
             {
+                $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
                 return true;
-            } else
+            }
+            else
             {
+                $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), FALSE);
                 return false;
             }
         } else
@@ -702,10 +705,12 @@ class User extends CI_Controller
                 $this->load->helper('comm');
                 if (send_mail(null, null, $email, $subject, $html))
                 {
+                    $this->user_model->log_send_mail($user_name, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
                     return true;
                 }
                 else
                 {
+                    $this->user_model->log_send_mail($user_name, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
                     return false;
                 }
             }
@@ -761,10 +766,12 @@ class User extends CI_Controller
         $this->load->helper('comm');
         if (send_mail(null,null,$email,$subject,$html))
         {
+            $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
             return true;
         }
         else
         {
+            $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
             return false;
         }
     }

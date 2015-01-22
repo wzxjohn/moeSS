@@ -35,6 +35,16 @@ CREATE TABLE IF NOT EXISTS `invite_code` (
   `user_name` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `mail_log` (
+  `id` int(32) NOT NULL,
+  `user_name` varchar(128) NOT NULL,
+  `email` varchar(32) NOT NULL,
+  `ip` varchar(128) NOT NULL,
+  `ua` varchar(128) NOT NULL,
+  `result` tinyint(1) NOT NULL,
+  `time` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `options` (
   `option_id` int(20) unsigned NOT NULL,
   `option_name` varchar(64) NOT NULL,
@@ -142,6 +152,9 @@ ALTER TABLE `admin_login`
 ALTER TABLE `invite_code`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `mail_log`
+  ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `options`
   ADD PRIMARY KEY (`option_id`);
 
@@ -166,6 +179,8 @@ ALTER TABLE `activate`
 ALTER TABLE `admin_login`
   MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `invite_code`
+  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `mail_log`
   MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `options`
   MODIFY `option_id` int(20) unsigned NOT NULL AUTO_INCREMENT;

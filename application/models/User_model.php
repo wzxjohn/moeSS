@@ -580,4 +580,16 @@ class User_model extends CI_Model
         );
         return $this->db->insert('user_login', $data);
     }
+
+    function log_send_mail($username, $email, $ip, $ua, $result)
+    {
+        $data = array(
+            'user_name' => $username,
+            'email' => $email,
+            'ip' => $ip,
+            'ua' => $ua,
+            'result' => $result
+        );
+        return $this->db->insert('mail_log', $data);
+    }
 }
