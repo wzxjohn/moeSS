@@ -181,7 +181,7 @@ class User extends CI_Controller
                 $password = hash('md5', $password );
                 if ( $this->user_model->new_user($username, $password, $email, $invitecode) )
                 {
-                    if ($this->user_model->need_activate())
+                    if ($this->user_model->need_activate() == 'true')
                     {
                         if ($this->do_send_mail($username))
                         {

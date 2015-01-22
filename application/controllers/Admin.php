@@ -622,7 +622,7 @@ class Admin extends CI_Controller
             $data = array(
                 array(
                     'option_name' => 'invite_only',
-                    'option_value' => $this->input->post('invite_only'),
+                    'option_value' => strtolower($this->input->post('invite_only')),
                 ),
                 array(
                     'option_name' => 'default_transfer',
@@ -650,7 +650,7 @@ class Admin extends CI_Controller
                 ),
                 array(
                     'option_name' => 'need_activate',
-                    'option_value' => $this->input->post('need_activate'),
+                    'option_value' => strtolower($this->input->post('need_activate')),
                 ),
                 //array(
                 //    'option_name' => '',

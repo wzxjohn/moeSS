@@ -135,7 +135,7 @@ class User_model extends CI_Model
             'invite_num' => $this->get_default_invite_number(),
             'money' => '0'
         );
-        if ($this->need_activate())
+        if ($this->need_activate() == 'true')
         {
             $this->db->set('switch', '0', FALSE);
             $this->db->set('enable', '0', FALSE);
