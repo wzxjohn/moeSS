@@ -9,7 +9,7 @@ Demo: https://ss.qaq.moe
 # Install
 - Import shadowsocks.sql to your database. **May delete your existing data!**
 - Rename config-sample.php and database-sample.php in application/config/, then change the settings.
-- Use admin/admin to login the admin dashboard, and change settings in http://your.domain.com/admin/system_config.html
+- Use admin/admin12345 to login the admin dashboard, and change settings in http://your.domain.com/admin/system_config.html
 - To prevent spam register, users need to click a link to activate the account. So you need to set a method to send e-mail.
 Currently support php mail(), sendmail, SMTP and SendGrid Web API. (Send test E-mail function will be added soon)
 

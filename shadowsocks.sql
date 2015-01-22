@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `ss_admin` (
   `pass` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `ss_admin` VALUES(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3');
+INSERT INTO `ss_admin` VALUES(1, 'admin', 'admin@gmail.com', '7488e331b8b64e5794da3fa4eb10ad5d');
 
 CREATE TABLE IF NOT EXISTS `ss_node` (
   `id` int(11) NOT NULL,
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `user_login` (
   `time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `user` VALUES(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'A', '0000000', 0, 0, 0, 5368709120, 50000, 1, 1, 7, 0, 0, 0, '2015-01-01 00:00:00', 0, 0.00);
+INSERT INTO `user` VALUES(1, 'admin', 'admin@gmail.com', '7488e331b8b64e5794da3fa4eb10ad5d', 'A', '0000000', 0, 0, 0, 5368709120, 50000, 1, 1, 7, 0, 0, 0, '2015-01-01 00:00:00', 0, 0.00);
 
 ALTER TABLE `activate`
   ADD PRIMARY KEY (`id`);
