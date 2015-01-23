@@ -8,6 +8,7 @@ Demo: https://ss.qaq.moe
 
 # Install
 - [中文安装说明](https://www.evernote.com/shard/s42/sh/7a30525d-a949-4132-9916-1f4fbdbf4828/6eca7d1ce520e173b1a5ebf9489a766d)
+- [Wiki](https://github.com/wzxjohn/moeSS/wiki)
 - Import shadowsocks.sql to your database. **May delete your existing data!**
 - Rename config-sample.php and database-sample.php in application/config/, then change the settings.
 - Use admin/admin12345 to login the admin dashboard, and change settings in http://your.domain.com/admin/system_config.html
