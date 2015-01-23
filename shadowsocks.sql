@@ -132,6 +132,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `money` decimal(12,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `user` VALUES(1, 'admin', 'admin@gmail.com', '7488e331b8b64e5794da3fa4eb10ad5d', 'A', '0000000', 0, 0, 0, 5368709120, 50000, 1, 1, 7, 0, 0, 0, '2015-01-01 00:00:00', 0, 0.00);
+
 CREATE TABLE IF NOT EXISTS `user_login` (
   `id` int(32) NOT NULL,
   `user_name` varchar(128) NOT NULL,
@@ -141,8 +143,6 @@ CREATE TABLE IF NOT EXISTS `user_login` (
   `result` tinyint(1) NOT NULL,
   `time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO `user` VALUES(1, 'admin', 'admin@gmail.com', '7488e331b8b64e5794da3fa4eb10ad5d', 'A', '0000000', 0, 0, 0, 5368709120, 50000, 1, 1, 7, 0, 0, 0, '2015-01-01 00:00:00', 0, 0.00);
 
 ALTER TABLE `activate`
   ADD PRIMARY KEY (`id`);

@@ -27,6 +27,9 @@ Currently support php mail(), sendmail, SMTP and SendGrid Web API. (Send test E-
 - Because I don't use any encrypt function when post the data, you are suggesting to secure your site by using SSL certs.
 - Many notices and sentences are **written directly in the view files**, so you need to **edit the file** to change them. They may moved to database in the future.
 
+# Upgrade
+If database structure has been changed after update, I will upload a sql file in update folder. Just use that sql file to update database structures.
+
 # License
 The license under which the moeSS is released is the GPLv3 (or later) from the Free Software Foundation.
 A copy of the license is included with every copy of moeSS,
