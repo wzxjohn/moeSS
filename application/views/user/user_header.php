@@ -43,6 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title><?php echo SITE_NAME;?> - 用户中心</title>
     <meta charset="utf-8">
     <meta name="google" value="notranslate" />
+	<meta name="format-detection" content="telephone=no" />
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link rel="shortcut icon" type="image/ico" href="<?php echo base_url('favicon.ico'); ?>" />
     <link href="<?php echo base_url('static/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" type="text/css" />

@@ -43,6 +43,7 @@ $this->load->helper('form');
 <head>
     <meta charset="utf-8">
     <meta name="google" value="notranslate" />
+	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <title><?php echo SITE_NAME; ?> - 用戶登陆</title>
     <link rel="shortcut icon" type="image/ico" href="<?php echo base_url('favicon.ico'); ?>" />
     <!-- bootstrap 3.0.2 -->
@@ -154,7 +155,7 @@ $this->load->helper('form');
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                <input type="username"  id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+                <input type="text"  id="username" name="username" class="form-control" placeholder="Username" required autofocus>
             </div>
         </div>
         <div class="form-group">

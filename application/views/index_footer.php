@@ -39,5 +39,5 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="footer">
-    <p>&copy; <?php echo SITE_NAME." &#169; ".date('Y'); ?>  Powered by <a href="https://github.com/wzxjohn/moeSS" target="_blank">moeSS 1.0</a></p>
+    <p>&copy; <?php echo "2014-".date('Y'); ?>&nbsp;<?php echo SITE_NAME; ?> <br>Powered by <a href="https://github.com/wzxjohn/moeSS" target="_blank">moeSS 1.0</a></p>
 </div>
