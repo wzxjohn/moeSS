@@ -50,8 +50,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link href="<?php echo base_url('static/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
     <link href="<?php echo base_url('static/css/ionicons.min.css'); ?>" rel="stylesheet" type="text/css" />
-    <!-- Morris chart -->
-    <link href="<?php echo base_url('static/css/morris/morris.css'); ?>" rel="stylesheet" type="text/css" />
 
     <!-- Theme style -->
     <link href="<?php echo base_url('static/css/AdminLTE.css'); ?>" rel="stylesheet" type="text/css" />
