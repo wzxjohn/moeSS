@@ -88,7 +88,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <li class="treeview<?php if ($log_active) { echo ' active';};?>">
         <a href="#">
-            <i class="fa fa-cog"></i> <span>查看日志</span>
+            <i class="fa fa-file-text"></i> <span>查看日志</span>
         </a>
         <ul class="treeview-menu">
             <li <?php if ($log_u_active) { echo 'class="active"';};?>><a href="<?php echo site_url('admin/user_log'); ?>"><i class="fa fa-angle-double-right"></i> 用户登陆</a></li>
