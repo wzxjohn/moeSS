@@ -56,6 +56,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="<?php echo base_url('static/js/plugins/daterangepicker/daterangepicker.js'); ?>" type="text/javascript"></script>
 <!-- datepicker -->
 <script src="<?php echo base_url('static/js/plugins/datepicker/bootstrap-datepicker.js'); ?>" type="text/javascript"></script>
+<!-- dateTable -->
+<script src="<?php echo base_url('static/js/plugins/datatables/dataTables.bootstrap.js'); ?>" type="text/javascript"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?php echo base_url('static/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'); ?>" type="text/javascript"></script>
 <!-- iCheck -->
@@ -76,6 +78,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         });
 
         // $('.selectpicker').selectpicker('hide');
+    });
+    $(function() {
+        $("#userTable").dataTable();
     });
 </script>
 <?php $this->load->view('ana') ;?>

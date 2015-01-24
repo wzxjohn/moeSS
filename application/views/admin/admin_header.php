@@ -58,6 +58,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link href="<?php echo base_url('static/css/datepicker/datepicker3.css'); ?>" rel="stylesheet" type="text/css" />
     <!-- Daterange picker -->
     <link href="<?php echo base_url('static/css/daterangepicker/daterangepicker-bs3.css'); ?>" rel="stylesheet" type="text/css" />
+    <!-- DataTable -->
+    <link href="<?php echo base_url('static/css/datatables/dataTables.bootstrap.css'); ?>" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="<?php echo base_url('static/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
