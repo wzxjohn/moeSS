@@ -382,7 +382,7 @@ class Admin_model extends CI_Model
                 case "mail":
                     return $this->db->get('mail_log')->result();
                 case "admin":
-                    return $this->db->get('admin_log')->result();
+                    return $this->db->get('admin_login')->result();
             }
         }
     }
