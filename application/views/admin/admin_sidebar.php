@@ -86,6 +86,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </a>
     </li>
 
+    <li class="treeview<?php if ($log_active) { echo ' active';};?>">
+        <a href="#">
+            <i class="fa fa-cog"></i> <span>查看日志</span>
+        </a>
+        <ul class="treeview-menu">
+            <li <?php if ($log_u_active) { echo 'class="active"';};?>><a href="<?php echo site_url('admin/user_log'); ?>"><i class="fa fa-angle-double-right"></i> 用户登陆</a></li>
+            <li <?php if ($log_m_active) { echo 'class="active"';};?>><a href="<?php echo site_url('admin/mail_log'); ?>"><i class="fa fa-angle-double-right"></i> 邮件发送</a></li>
+            <li <?php if ($log_a_active) { echo 'class="active"';};?>><a href="<?php echo site_url('admin/admin_log'); ?>"><i class="fa fa-angle-double-right"></i> 管理登陆</a></li>
+        </ul>
+    </li>
+
     <li class="treeview<?php if ($config_active) { echo ' active';};?>">
         <a href="#">
             <i class="fa fa-cog"></i> <span>系统设置</span>

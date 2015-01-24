@@ -58,6 +58,10 @@ class Admin extends CI_Controller
         $sidebar_data['config_g_active'] = (bool) FALSE;
         $sidebar_data['config_m_active'] = (bool) FALSE;
         $sidebar_data['config_e_active'] = (bool) FALSE;
+        $sidebar_data['log_active'] = (bool) FALSE;
+        $sidebar_data['log_u_active'] = (bool) FALSE;
+        $sidebar_data['log_m_active'] = (bool) FALSE;
+        $sidebar_data['log_a_active'] = (bool) FALSE;
         return $sidebar_data;
     }
 
@@ -989,6 +993,93 @@ class Admin extends CI_Controller
                 echo '{"result" : "密码错误！" }';
                 return;
             }
+
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function user_log()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data = $this->sidebar();
+            $data['log_active'] = (bool) TRUE;
+            $data['log_u_active'] = (bool) TRUE;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['mode'] = "user";
+            $data['logs'] = $this->admin_model->get_log('user');
+            $this->load->view( 'admin/admin_log', $data );
+            $this->load->view( 'admin/admin_footer' );
+
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function mail_log()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data = $this->sidebar();
+            $data['log_active'] = (bool) TRUE;
+            $data['log_m_active'] = (bool) TRUE;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['mode'] = "mail";
+            $data['logs'] = $this->admin_model->get_log('mail');
+            $this->load->view( 'admin/admin_log_mail', $data );
+            $this->load->view( 'admin/admin_footer' );
+
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function admin_log()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data = $this->sidebar();
+            $data['log_active'] = (bool) TRUE;
+            $data['log_a_active'] = (bool) TRUE;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['mode'] = "admin";
+            $data['logs'] = $this->admin_model->get_log('admin');
+            $this->load->view( 'admin/admin_log', $data );
+            $this->load->view( 'admin/admin_footer' );
 
         }
         else
