@@ -370,4 +370,20 @@ class Admin_model extends CI_Model
         );
         return $this->db->insert('admin_login', $data);
     }
+
+    function get_log($mode = null)
+    {
+        if ($mode)
+        {
+            switch($mode)
+            {
+                case "user":
+                    return $this->db->get('user_login')->result();
+                case "mail":
+                    return $this->db->get('mail_log')->result();
+                case "admin":
+                    return $this->db->get('admin_login')->result();
+            }
+        }
+    }
 }

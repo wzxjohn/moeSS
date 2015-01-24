@@ -155,13 +155,13 @@ $this->load->helper('form');
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                <input type="text"  id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+                <input type="text"  id="username" name="username" class="form-control" tabindex=1 placeholder="Username" required autofocus>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                <input type="password"  id="pass" name="pass" class="form-control" placeholder="Password" required>
+                <input type="password"  id="pass" name="pass" class="form-control" tabindex=2 placeholder="Password" required>
             </div>
         </div>
         <div class="form-group">
@@ -171,13 +171,13 @@ $this->load->helper('form');
         </div>
         <div class="form-group">
             <div class="input-group">
-                <input type="checkbox" name="remember_me" value="week"/> 保存Cookie7天
+                <input type="checkbox" name="remember_me" value="week" tabindex=3> 保存Cookie7天
             </div>
         </div>
         <div class="input-group" id="loginResult"></div>
     </div>
     <div class="footer">
-        <button type="submit" class="btn bg-olive btn-block"  name="login" >登录</button>
+        <button type="submit" class="btn bg-olive btn-block" name="login" tabindex=4>登录</button>
         <a href="<?php echo site_url('user/register')?>" class="text-center">没有注册？</a>
         <a href="<?php echo site_url('user/forget')?>" class="text-center">忘记密码？</a>
     </div>
