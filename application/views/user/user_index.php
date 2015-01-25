@@ -54,13 +54,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-md-6">
                 <div class="box box-solid">
                     <div class="box-header">
+                        <i class="fa fa-bullhorn"></i>
                         <h3 class="box-title">公告&FAQ</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="callout callout-warning">
                             <h4>注意!</h4>
-                            <p>测试中，测试期间随时删号，不保证可用。<br />所有节点均不支持外发邮件。</p>
+                            <p>测试中，测试期间随时删号，不保证可用。<br>所有节点均不支持外发邮件。</p>
                         </div>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+
+                <div class="box box-solid">
+                    <div class="box-header">
+                        <i class="fa fa-info-circle"></i>
+                        <h3 class="box-title">连接信息</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <p> 端口: <code><?php echo $port; ?></code> </p>
+                        <p> 密码: <?php echo $passwd; ?> </p>
+                        <p> 套餐: <span class="label label-info"> <?php echo $plan; ?> </span> </p>
+                        <p> 最后使用时间: <code><?php echo date('Y-m-d H:i:s',$unix_time); ?></code> </p>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div><!-- /.col (right) -->
@@ -70,6 +84,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-md-6">
                 <div class="box box-solid">
                     <div class="box-header">
+                        <i class="fa fa-exclamation-triangle"></i>
                         <h3 class="box-title">注意</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
@@ -80,11 +95,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
-            </div><!-- /.col (right) -->
 EOD;
             }?>
 
-            <div class="col-md-6">
+            <?php if ($enable) echo '<div class="col-md-6">'."\n"; ?>
                 <div class="box box-solid">
                     <div class="box-header">
                         <h3 class="box-title">流量使用情况</h3>
@@ -100,9 +114,7 @@ EOD;
                         <p> 剩余流量: <?php echo  $unused_transfer; ?> </p>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
-            </div><!-- /.col (left) -->
 
-            <div class="col-md-6">
                 <div class="box box-solid">
                     <div class="box-header">
                         <h3 class="box-title">签到获取流量</h3>
@@ -116,21 +128,6 @@ EOD;
                         <?php  } ?>
                         <p>上次签到时间<code><?php echo date('Y-m-d H:i:s', $last_check_in_time );?></code></p>
                         <p id="check_in_result"></p>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
-            </div><!-- /.col (right) -->
-
-
-            <div class="col-md-6">
-                <div class="box box-solid">
-                    <div class="box-header">
-                        <h3 class="box-title">连接信息</h3>
-                    </div><!-- /.box-header -->
-                    <div class="box-body">
-                        <p> 端口: <code><?php echo $port; ?></code> </p>
-                        <p> 密码: <?php echo $passwd; ?> </p>
-                        <p> 套餐: <span class="label label-info"> <?php echo $plan; ?> </span> </p>
-                        <p> 最后使用时间: <code><?php echo date('Y-m-d H:i:s',$unix_time); ?></code> </p>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div><!-- /.col (right) -->
