@@ -44,8 +44,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="google" value="notranslate" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="moeSS, a shadowsocks manage system">
+    <meta name="author" content="wzxjohn">
+    <meta name="apple-itunes-app" content="app-id=665729974">
     <link rel="shortcut icon" type="image/ico" href="<?php echo base_url('favicon.ico'); ?>" />
 
     <title><?php echo SITE_NAME; ?></title>
