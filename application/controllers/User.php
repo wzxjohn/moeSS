@@ -152,9 +152,15 @@ class User extends CI_Controller
         if ( $username && $password && $email )
         {
             $user = $this->user_model->u_select($username);
+            $old_email = $this->user_model->email_select($email);
             if ($user)
             {
                 echo '{"result" : "用户名已存在！" }';
+                return;
+            }
+            elseif ($old_email)
+            {
+                echo '{"result" : "邮箱已存在！" }';
                 return;
             }
             else
@@ -437,7 +443,7 @@ class User extends CI_Controller
             $nowpassword = $this->input->post('nowpassword');
             if ($nowpassword == "")
             {
-                $nowpassword = null;
+                $nowpassword = NULL;
             }
             else
             {
@@ -446,7 +452,7 @@ class User extends CI_Controller
             $password = $this->input->post('password');
             if ($password == "")
             {
-                $password = null;
+                $password = NULL;
             }
             else
             {
@@ -455,7 +461,7 @@ class User extends CI_Controller
             $repassword = $this->input->post('repassword');
             if ($repassword == "")
             {
-                $repassword = null;
+                $repassword = NULL;
             }
             else
             {
@@ -464,7 +470,12 @@ class User extends CI_Controller
             $email = $this->input->post('email');
             if ($email == "")
             {
-                $email = null;
+                $email = NULL;
+            }
+            elseif ($this->user_model->email_select($email))
+            {
+                echo '{"result" : "邮件地址已存在！" }';
+                return;
             }
             if ( ! $password && ! $email )
             {
@@ -489,8 +500,32 @@ class User extends CI_Controller
             }
             if ( $this->user_model->profile_update($uid, $username, $nowpassword, $password, $email) )
             {
-                echo '{"result" : "success" }';
-                return;
+                if ($email != "" && $email != NULL)
+                {
+                    if ($this->user_model->need_activate() == 'true')
+                    {
+                        if ($this->do_send_mail($username))
+                        {
+                            echo '{"result" : "success" }';
+                            return;
+                        }
+                        else
+                        {
+                            echo '{"result" : "邮件发送失败！" }';
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        echo '{"result" : "success" }';
+                        return;
+                    }
+                }
+                else
+                {
+                    echo '{"result" : "success" }';
+                    return;
+                }
             }
             else
             {
