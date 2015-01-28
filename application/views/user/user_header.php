@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta charset="utf-8">
     <meta name="google" value="notranslate" />
     <meta name="format-detection" content="telephone=no" />
-    <meta name="apple-itunes-app" content="app-id=665729974">
+    <meta name="apple-itunes-app" content="app-id=665729974, affiliate-data=11lRnc">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link rel="shortcut icon" type="image/ico" href="<?php echo base_url('favicon.ico'); ?>" />
     <link href="<?php echo base_url('static/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" type="text/css" />

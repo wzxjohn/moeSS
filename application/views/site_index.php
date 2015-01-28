@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="moeSS, a shadowsocks manage system">
     <meta name="author" content="wzxjohn">
-    <meta name="apple-itunes-app" content="app-id=665729974">
+    <meta name="apple-itunes-app" content="app-id=665729974, affiliate-data=11lRnc">
     <link rel="shortcut icon" type="image/ico" href="<?php echo base_url('favicon.ico'); ?>" />
 
     <title><?php echo SITE_NAME; ?></title>
@@ -87,7 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
 
         <div class="col-lg-6">
-            <a href="https://itunes.apple.com/us/app/shadowsocks/id665729974?mt=8" target="_blank"><h4>iOS</h4></a>
+            <a href="https://itunes.apple.com/us/app/shadowsocks/id665729974?mt=8&at=11lRnc" target="_blank"><h4>iOS</h4></a>
             <p>iOS客户端</p>
 
             <h4><a href="https://github.com/ohdarling/GoAgentX/releases" target="_blank">GoAgentX</a></h4>
