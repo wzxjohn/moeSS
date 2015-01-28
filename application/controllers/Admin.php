@@ -118,7 +118,6 @@ class Admin extends CI_Controller
         //$this->output->enable_profiler(TRUE);
         $username = $this->input->post('username');
         $password = $this->input->post('password');
-        $remember_me = $this->input->post('remember_me');
         if ($username && $password)
         {
             $this->load->model('admin_model');
@@ -133,14 +132,6 @@ class Admin extends CI_Controller
                         's_admin_email' => $user[0]->email,
                         'admin' => 'true'
                     );
-                    if ($remember_me == "week")
-                    {
-                        $this->session->sess_expiration = 60 * 60 * 24 * 7;
-                    }
-                    else
-                    {
-                        $this->session->sess_expiration = NULL;
-                    }
                     $this->session->set_userdata($arr);
                     echo '{"result" : "success" }';
                     $this->admin_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), TRUE);

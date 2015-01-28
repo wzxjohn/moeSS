@@ -229,7 +229,6 @@ class User extends CI_Controller
     {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
-        $remember_me = $this->input->post('remember_me');
         if ($username && $password)
         {
             $this->load->model('user_model');
@@ -242,14 +241,6 @@ class User extends CI_Controller
                         's_username' => $user->user_name,
                         's_email' => $user->email
                     );
-                    if ($remember_me == "week")
-                    {
-                        $this->session->sess_expiration = 60 * 60 * 24 * 7;
-                    }
-                    else
-                    {
-                        $this->session->sess_expiration = NULL;
-                    }
                     $this->session->set_userdata($arr);
                     echo '{"result" : "success" }';
                     $this->user_model->log_login($username, $password, $this->input->ip_address(), $this->input->user_agent(), TRUE);
