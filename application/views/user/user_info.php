@@ -54,6 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header">
+                        <i class="fa fa-user"></i>
                         <h3 class="box-title">我的信息</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
