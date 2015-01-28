@@ -101,6 +101,7 @@ EOD;
             <?php if ($enable) echo '<div class="col-md-6">'."\n"; ?>
                 <div class="box box-solid">
                     <div class="box-header">
+                        <i class="fa fa-exchange"></i>
                         <h3 class="box-title">流量使用情况</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
@@ -117,6 +118,7 @@ EOD;
 
                 <div class="box box-solid">
                     <div class="box-header">
+                        <i class="fa fa-check-square-o"></i>
                         <h3 class="box-title">签到获取流量</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">

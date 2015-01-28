@@ -375,6 +375,7 @@ class Admin_model extends CI_Model
     {
         if ($mode)
         {
+            $this->db->limit(100);
             switch($mode)
             {
                 case "user":

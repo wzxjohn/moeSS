@@ -55,6 +55,7 @@ $this->load->helper('form');
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header">
+                        <i class="fa fa-pencil-square-o"></i>
                         <h3 class="box-title">资料修改</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->

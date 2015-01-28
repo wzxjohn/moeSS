@@ -169,11 +169,6 @@ $this->load->helper('form');
                 <input type="hidden"  id="password" name="password" class="form-control">
             </div>
         </div>
-        <div class="form-group">
-            <div class="input-group">
-                <input type="checkbox" name="remember_me" value="week" tabindex=3> 保存Cookie7天
-            </div>
-        </div>
         <div class="input-group" id="loginResult"></div>
     </div>
     <div class="footer">
