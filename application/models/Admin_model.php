@@ -378,10 +378,13 @@ class Admin_model extends CI_Model
             switch($mode)
             {
                 case "user":
+                    $this->db->order_by('time', 'DESC');
                     return $this->db->get('user_login')->result();
                 case "mail":
+                    $this->db->order_by('time', 'DESC');
                     return $this->db->get('mail_log')->result();
                 case "admin":
+                    $this->db->order_by('time', 'DESC');
                     return $this->db->get('admin_login')->result();
             }
         }

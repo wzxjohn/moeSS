@@ -63,6 +63,21 @@ class User_model extends CI_Model
         }
     }
 
+    function email_select($email)
+    {
+        $this->db->where('email', $email);
+        $this->db->select('uid, email');
+        $query = $this->db->get('user');
+        if ($query->num_rows() > 0)
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
     function need_invite()
     {
         $this->db->where('option_name', 'invite_only');
@@ -245,7 +260,9 @@ class User_model extends CI_Model
         {
             $data = array(
                 'pass' => $password,
-                'email' => $email
+                'email' => $email,
+                'switch' => 0,
+                'enable' => 0
             );
             if ( !$password )
             {
@@ -254,6 +271,8 @@ class User_model extends CI_Model
             if ( !$email || $email == "" )
             {
                 unset($data['email']);
+                unset($data['switch']);
+                unset($data['enable']);
             }
             $this->db->where('uid', $uid);
             return $this->db->update('user', $data );
