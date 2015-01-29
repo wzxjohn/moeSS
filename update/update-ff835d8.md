@@ -22,9 +22,21 @@ config.php
     $config['sess_driver']			= 'files';
     $config['sess_cookie_name']		= 'asiass_session';
     $config['sess_expiration']		= 7200;
+    $config['sess_save_path']		= 'moess_session';
     $config['sess_encrypt_cookie']	= TRUE;
     $config['sess_match_ip']		= FALSE;
     $config['sess_time_to_update']	= 300;
+
+并且需要执行下面的语句初始化 session 数据库：
+
+    CREATE TABLE IF NOT EXISTS `moess_sessions` (
+            `id` varchar(40) NOT NULL,
+            `ip_address` varchar(45) NOT NULL,
+            `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
+            `data` blob DEFAULT '' NOT NULL,
+            PRIMARY KEY (id),
+            KEY `ci_sessions_timestamp` (`timestamp`)
+    );
 
 database.php
 
