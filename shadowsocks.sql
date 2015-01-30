@@ -45,6 +45,15 @@ CREATE TABLE IF NOT EXISTS `mail_log` (
   `time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `moess_sessions` (
+  `id` varchar(40) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
+  `data` blob DEFAULT '' NOT NULL,
+  PRIMARY KEY (id),
+  KEY `ci_sessions_timestamp` (`timestamp`)
+);
+
 CREATE TABLE IF NOT EXISTS `options` (
   `option_id` int(20) unsigned NOT NULL,
   `option_name` varchar(64) NOT NULL,
