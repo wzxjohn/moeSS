@@ -66,7 +66,7 @@ INSERT INTO `options` VALUES(2, 'default_transfer', '5368709120', '默认流量(
 INSERT INTO `options` VALUES(3, 'default_invite_number', '1', '默认邀请数量');
 INSERT INTO `options` VALUES(4, 'check_min', '50', '签到下限(MB)');
 INSERT INTO `options` VALUES(5, 'check_max', '100', '签到上限(MB)');
-INSERT INTO `options` VALUES(6, 'version', '1.0', '程序版本');
+INSERT INTO `options` VALUES(6, 'version', '1.1', '程序版本');
 INSERT INTO `options` VALUES(7, 'default_method', 'rc4-md5', '默认加密方式');
 INSERT INTO `options` VALUES(8, 'mail_protocol', 'sendgrid', '邮件引擎');
 INSERT INTO `options` VALUES(9, 'mail_mailpath', '/usr/sbin/sendmail', 'Sendmail路径');
