@@ -93,7 +93,7 @@ $this->load->helper('form');
             </div>
 
             <div class="col-md-6">
-                <div class="box box-solid">
+                <div class="box box-primary">
                     <div class="box-header">
                         <i class="fa fa-align-left"></i>
                         <h3 class="box-title">Shadowsocks连接密码修改</h3>

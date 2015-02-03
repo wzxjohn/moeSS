@@ -62,6 +62,9 @@ class Admin extends CI_Controller
         $sidebar_data['log_u_active'] = (bool) FALSE;
         $sidebar_data['log_m_active'] = (bool) FALSE;
         $sidebar_data['log_a_active'] = (bool) FALSE;
+        $sidebar_data['log_p_active'] = (bool) FALSE;
+        $sidebar_data['log_o_active'] = (bool) FALSE;
+        $sidebar_data['goods_active'] = (bool) FALSE;
         return $sidebar_data;
     }
 
@@ -427,6 +430,18 @@ class Admin extends CI_Controller
             $user_name = $this->input->post('user_name');
             $email = $this->input->post('email');
             $pass = $this->input->post('pass');
+            if ($mode == "update" && ($pass == "" || $pass == NULL))
+            {
+                $pass = "!MOESS_NO_CHANGE!";
+            }
+            elseif ($mode == "insert" && ($pass == "" || $pass == NULL))
+            {
+                echo "<script>alert(\"密碼不能為空!\");</script>";
+            }
+            else
+            {
+                $pass = md5($pass);
+            }
             $passwd = $this->input->post('passwd');
             $u = $this->input->post('u');
             $d = $this->input->post('d');
@@ -813,12 +828,12 @@ class Admin extends CI_Controller
                 {
                     $data = array(
                         array (
-                            'option_name' => 'reset_subject',
-                            'option_value' => htmlspecialchars_decode($this->input->post('reset_subject'))
+                            'option_name' => 'reset_mail_subject',
+                            'option_value' => htmlspecialchars_decode($this->input->post('reset_mail_subject'))
                         ),
                         array (
-                            'option_name' => 'reset_body',
-                            'option_value' => htmlspecialchars_decode($this->input->post('reset_body'))
+                            'option_name' => 'reset_mail_body',
+                            'option_value' => htmlspecialchars_decode($this->input->post('reset_mail_body'))
                         )
                     );
                 }
@@ -826,12 +841,12 @@ class Admin extends CI_Controller
                 {
                     $data = array(
                         array (
-                            'option_name' => 'resend_subject',
-                            'option_value' => htmlspecialchars_decode($this->input->post('resend_subject'))
+                            'option_name' => 'resend_mail_subject',
+                            'option_value' => htmlspecialchars_decode($this->input->post('resend_mail_subject'))
                         ),
                         array (
-                            'option_name' => 'resend_body',
-                            'option_value' => htmlspecialchars_decode($this->input->post('resend_body'))
+                            'option_name' => 'resend_mail_body',
+                            'option_value' => htmlspecialchars_decode($this->input->post('resend_mail_body'))
                         )
                     );
                 }
@@ -1070,6 +1085,64 @@ class Admin extends CI_Controller
             $data['mode'] = "admin";
             $data['logs'] = $this->admin_model->get_log('admin');
             $this->load->view( 'admin/admin_log', $data );
+            $this->load->view( 'admin/admin_footer' );
+
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function pay_log()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data = $this->sidebar();
+            $data['log_active'] = (bool) TRUE;
+            $data['log_p_active'] = (bool) TRUE;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['mode'] = "admin";
+            $data['logs'] = $this->admin_model->get_log('pay');
+            $this->load->view( 'admin/admin_log_pay', $data );
+            $this->load->view( 'admin/admin_footer' );
+
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function order_log()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_admin_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_admin_email'));
+            $this->load->view( 'admin/admin_header' );
+            $this->load->view( 'admin/admin_nav', $data );
+
+            $data = $this->sidebar();
+            $data['log_active'] = (bool) TRUE;
+            $data['log_o_active'] = (bool) TRUE;
+            $this->load->view( 'admin/admin_sidebar', $data );
+
+            $data['mode'] = "admin";
+            $data['logs'] = $this->admin_model->get_log('order');
+            $this->load->view( 'admin/admin_log_order', $data );
             $this->load->view( 'admin/admin_footer' );
 
         }

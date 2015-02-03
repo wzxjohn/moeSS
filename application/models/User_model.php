@@ -181,7 +181,7 @@ class User_model extends CI_Model
     function u_info( $username )
     {
         $this->db->where('user_name', $username);
-        $this->db->select('t, u, d, plan, transfer_enable, passwd, port, enable, last_check_in_time');
+        $this->db->select('t, u, d, plan, transfer_enable, passwd, port, enable, last_check_in_time, money');
         $query = $this->db->get('user');
         if ($query->num_rows() > 0)
         {
@@ -632,6 +632,82 @@ class User_model extends CI_Model
         if ($query->num_rows() > 0)
         {
             return $query->result()[0]->option_value;
+        }
+    }
+
+    function create_transaction($trade_no, $user_name, $amount, $ip)
+    {
+        $data = array(
+            'trade_no' => $trade_no,
+            'user_name' => $user_name,
+            'amount' => $amount,
+            'ip' => $ip,
+            'result' => FALSE,
+            'ctime' => time(),
+            'ftime' => 0
+        );
+
+        return $this->db->insert('transactions', $data);
+    }
+
+    function insert_trade_form($trade_no, $user_name, $body)
+    {
+        $data = array(
+            'trade_no' => $trade_no,
+            'user_name' => $user_name,
+            'body' => $body,
+            'time' => time()
+        );
+
+        return $this->db->insert('transaction_form', $data);
+    }
+
+    function t_select($trade_no)
+    {
+        $this->db->where('trade_no', $trade_no);
+        $query = $this->db->get('transactions');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0];
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    function t_f_select($trade_no)
+    {
+        $this->db->where('trade_no', $trade_no);
+        $query = $this->db->get('transaction_form');
+        if ($query->num_rows() > 0)
+        {
+            return $query->result()[0];
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    function get_log($mode = NULL, $user_name)
+    {
+        if ($mode)
+        {
+            $this->db->limit(100);
+            switch($mode)
+            {
+                case "login":
+                    $this->db->order_by('time', 'DESC');
+                    $this->db->where('user_name', $user_name);
+                    return $this->db->get('user_login')->result();
+                case "pay":
+                    $this->db->where('user_name', $user_name);
+                    return $this->db->get('transactions')->result();
+                case "order":
+                    $this->db->where('user_name', $user_name);
+                    return $this->db->get('orders')->result();
+            }
         }
     }
 }

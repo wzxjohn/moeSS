@@ -27,9 +27,6 @@ Currently support php mail(), sendmail, SMTP and SendGrid Web API. (Send test E-
 - Because I don't use any encrypt function when post the data, you are suggesting to secure your site by using SSL certs.
 - Many notices and sentences are **written directly in the view files**, so you need to **edit the file** to change them. They may moved to database in the future.
 
-# Config Guide
-Please read [Wiki](https://github.com/wzxjohn/moeSS/wiki) to learn how to config your Nginx or Apache.
-
 # Upgrade
 If database structure has been changed after update, I will upload a sql file in update folder. Just use that sql file to update database structures.
 

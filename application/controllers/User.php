@@ -47,6 +47,21 @@ class User extends CI_Controller
         return;
     }
 
+    function sidebar()
+    {
+        $sidebar_data['index_active'] = (bool) FALSE;
+        $sidebar_data['node_active'] = (bool) FALSE;
+        $sidebar_data['info_active'] = (bool) FALSE;
+        $sidebar_data['update_active'] = (bool) FALSE;
+        $sidebar_data['code_active'] = (bool) FALSE;
+        $sidebar_data['goods_active'] = (bool) FALSE;
+        $sidebar_data['logs_active'] = (bool) FALSE;
+        $sidebar_data['logs_l_active'] = (bool) FALSE;
+        $sidebar_data['logs_p_active'] = (bool) FALSE;
+        $sidebar_data['logs_o_active'] = (bool) FALSE;
+        return $sidebar_data;
+    }
+
     function index()
     {
         if ($this->is_login())
@@ -58,12 +73,9 @@ class User extends CI_Controller
             $this->load->view( 'user/user_header' );
             $this->load->view( 'user/user_nav', $data );
 
-            $data['index_active'] = (bool) true;
-            $data['node_active'] = (bool) false;
-            $data['info_active'] = (bool) false;
-            $data['update_active'] = (bool) false;
-            $data['code_active'] = (bool) false;
-            $this->load->view( 'user/user_sidebar', $data );
+            $side_data = $this->sidebar();
+            $side_data['index_active'] = (bool) TRUE;
+            $this->load->view( 'user/user_sidebar', $side_data );
 
             $user_info = $this->user_model->u_info($data['user_name']);
             $data['transfers'] = $user_info->u + $user_info->d;
@@ -121,12 +133,12 @@ class User extends CI_Controller
     {
         if ( $this->user_model->need_invite() )
         {
-            $data['invite_only'] = true;
+            $data['invite_only'] = TRUE;
             $data['code'] = $code;
         }
         else
         {
-            $data['invite_only'] = false;
+            $data['invite_only'] = FALSE;
         }
         $this->load->view('user/user_register', $data);
         return;
@@ -138,6 +150,11 @@ class User extends CI_Controller
         if ( strlen($username)<7||strlen($username)>32 )
         {
             echo '{"result" : "用户名不合法！" }';
+            return;
+        }
+        if (!ctype_alnum($username))
+        {
+            echo '{"result" : "用户名只允许包含字母和数字！" }';
             return;
         }
         $password = $this->input->post('password');
@@ -290,15 +307,12 @@ class User extends CI_Controller
             $this->load->view( 'user/user_header' );
             $this->load->view( 'user/user_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['node_active'] = (bool) true;
-            $data['info_active'] = (bool) false;
-            $data['update_active'] = (bool) false;
-            $data['code_active'] = (bool) false;
-            $this->load->view( 'user/user_sidebar', $data );
+            $side_data = $this->sidebar();
+            $side_data['node_active'] = (bool) TRUE;
+            $this->load->view( 'user/user_sidebar', $side_data );
 
-            $nodes = $this->user_model->get_nodes( (bool) false );
-            $test_nodes = $this->user_model->get_nodes( (bool) true );
+            $nodes = $this->user_model->get_nodes( (bool) FALSE );
+            $test_nodes = $this->user_model->get_nodes( (bool) TRUE );
             $data['nodes'] = $nodes;
             $data['test_nodes'] = $test_nodes;
             $data['default_method'] = $this->user_model->get_default_method();
@@ -324,12 +338,9 @@ class User extends CI_Controller
             $this->load->view( 'user/user_header' );
             $this->load->view( 'user/user_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['node_active'] = (bool) false;
-            $data['info_active'] = (bool) true;
-            $data['update_active'] = (bool) false;
-            $data['code_active'] = (bool) false;
-            $this->load->view( 'user/user_sidebar', $data );
+            $side_data = $this->sidebar();
+            $side_data['info_active'] = (bool) TRUE;
+            $this->load->view( 'user/user_sidebar', $side_data );
 
             $user_info = $this->user_model->u_basic_info($data['user_name']);
             $data['user_email'] = $user_info->email;
@@ -357,12 +368,9 @@ class User extends CI_Controller
             $this->load->view( 'user/user_profile_header' );
             $this->load->view( 'user/user_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['node_active'] = (bool) false;
-            $data['info_active'] = (bool) false;
-            $data['update_active'] = (bool) true;
-            $data['code_active'] = (bool) false;
-            $this->load->view( 'user/user_sidebar', $data );
+            $side_data = $this->sidebar();
+            $side_data['update_active'] = (bool) TRUE;
+            $this->load->view( 'user/user_sidebar', $side_data );
 
 //            $user_info = $this->user_model->u_info($data['user_name']);
 //            $data['transfers'] = $user_info->u + $user_info->d;
@@ -399,12 +407,9 @@ class User extends CI_Controller
             $this->load->view( 'user/user_header' );
             $this->load->view( 'user/user_nav', $data );
 
-            $data['index_active'] = (bool) false;
-            $data['node_active'] = (bool) false;
-            $data['info_active'] = (bool) false;
-            $data['update_active'] = (bool) false;
-            $data['code_active'] = (bool) true;
-            $this->load->view( 'user/user_sidebar', $data );
+            $side_data = $this->sidebar();
+            $side_data['code_active'] = (bool) TRUE;
+            $this->load->view( 'user/user_sidebar', $side_data );
 
             $codes = $this->user_model->get_invite_codes();
             $data['codes'] = $codes;
@@ -419,10 +424,75 @@ class User extends CI_Controller
         return;
     }
 
-    function pay()
+    function pay($money = NULL)
     {
-        redirect(site_url('user'));
+        if ($this->is_login())
+        {
+            echo "开源版无此功能！";
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
         return;
+    }
+
+    function view_order($trade_no)
+    {
+        if ($this->is_login())
+        {
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
+            $this->load->view( 'user/user_header' );
+            $this->load->view( 'user/user_nav', $data );
+
+            $data = NULL;
+            $side_data = $this->sidebar();
+            $side_data['info_active'] = (bool) TRUE;
+            $this->load->view( 'user/user_sidebar', $side_data );
+
+            $trade = $this->user_model->t_select($trade_no);
+            if ($trade)
+            {
+                $data = NULL;
+                if ($trade->user_name != $this->session->userdata('s_username'))
+                {
+                    $data['error'] = TRUE;
+                }
+                else
+                {
+                    $data['error'] = FALSE;
+                    $form = $this->user_model->t_f_select($trade_no)->body;
+                    $data['form'] = str_replace("<script>document.forms['alipaysubmit'].submit();</script>", "", $form);
+                    $data['trade_no'] = $trade_no;
+                    $data['user_name'] = $trade->user_name;
+                    $data['amount'] = $trade->amount;
+                    $data['time'] = date('Y-m-d H:i:s', $trade->ctime);
+                    if ($trade->result)
+                    {
+                        $data['order_result'] = "完成";
+                        $data['form'] = "<div></div>";
+                    }
+                    else
+                    {
+                        $data['order_result'] = "进行中";
+                    }
+                }
+            }
+            else
+            {
+                $data['error'] = TRUE;
+            }
+            $this->load->view( 'user/user_order', $data );
+            $this->load->view( 'user/user_footer' );
+            return;
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+            return;
+        }
     }
 
     function do_profile_update()
@@ -592,7 +662,7 @@ class User extends CI_Controller
         return;
     }
 
-    function activate($code = null)
+    function activate($code = NULL)
     {
         if ($code)
         {
@@ -648,32 +718,32 @@ class User extends CI_Controller
             $html = $this->user_model->get_email_templates();
             $html = str_replace('%{activate_link}%', site_url("user/activate/$code"), $html);
             $this->load->helper('comm');
-            if (send_mail(null, null, $email, $subject, $html))
+            if (send_mail(NULL, NULL, $email, $subject, $html))
             {
                 $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
-                return true;
+                return TRUE;
             }
             else
             {
                 $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), FALSE);
-                return false;
+                return FALSE;
             }
         } else
         {
-            return false;
+            return FALSE;
         }
     }
 
-    function client_config($id = null)
+    function client_config($id = NULL)
     {
-        if ($id == null)
+        if ($id == NULL)
         {
             echo "<script>alert('请选择服务器！');</script>";
         }
         if ($this->is_login())
         {
             $user = $this->user_model->u_info($this->session->userdata('s_username'));
-            $node = $this->user_model->get_nodes( false, $id )[0];
+            $node = $this->user_model->get_nodes( FALSE, $id )[0];
             $data['server'] = $node->node_server;
             $data['port'] = $user->port;
             $data['password'] = $user->passwd;
@@ -704,6 +774,11 @@ class User extends CI_Controller
     function reset_passwd()
     {
         $user_name = $this->input->post('username');
+        if (!ctype_alnum($user_name))
+        {
+            echo '{"result" : "用户名只允许包含字母和数字！" }';
+            return;
+        }
         $email = $this->input->post('email');
         if (!empty($user_name) && !empty($email))
         {
@@ -736,30 +811,30 @@ class User extends CI_Controller
                 $html = $this->user_model->get_reset_templates();
                 $html = str_replace('%{reset_link}%', site_url("user/resend_pass/$code"), $html);
                 $this->load->helper('comm');
-                if (send_mail(null, null, $email, $subject, $html))
+                if (send_mail(NULL, NULL, $email, $subject, $html))
                 {
                     $this->user_model->log_send_mail($user_name, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
-                    return true;
+                    return TRUE;
                 }
                 else
                 {
                     $this->user_model->log_send_mail($user_name, $email, $this->input->ip_address(), $this->input->user_agent(), FALSE);
-                    return false;
+                    return FALSE;
                 }
             }
             else
             {
-                return false;
+                return FALSE;
             }
         }
         else
         {
-            return false;
+            return FALSE;
         }
 
     }
 
-    function resend_pass($code = null)
+    function resend_pass($code = NULL)
     {
         if ($code)
         {
@@ -797,15 +872,125 @@ class User extends CI_Controller
         $html = str_replace('%{username}%', $username, $html);
         $html = str_replace('%{password}%', $new_password, $html);
         $this->load->helper('comm');
-        if (send_mail(null,null,$email,$subject,$html))
+        if (send_mail(NULL,NULL,$email,$subject,$html))
         {
             $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), TRUE);
-            return true;
+            return TRUE;
         }
         else
         {
             $this->user_model->log_send_mail($username, $email, $this->input->ip_address(), $this->input->user_agent(), FALSE);
-            return false;
+            return FALSE;
         }
+    }
+
+    function view_goods()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
+            $this->load->view( 'user/user_header' );
+            $this->load->view( 'user/user_nav', $data );
+
+            $side_data = $this->sidebar();
+            $side_data['goods_active'] = (bool) TRUE;
+            $this->load->view( 'user/user_sidebar', $side_data );
+
+            $data['goods'] = $this->user_model->get_goods();
+            $this->load->view( 'user/user_goods', $data );
+            $this->load->view( 'user/user_footer' );
+        }
+        else
+        {
+            redirect('user/login');
+        }
+        return;
+    }
+	
+    function login_log()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
+            $this->load->view( 'user/user_header' );
+            $this->load->view( 'user/user_nav', $data );
+
+            $data = $this->sidebar();
+            $data['logs_active'] = (bool) TRUE;
+            $data['logs_l_active'] = (bool) TRUE;
+            $this->load->view( 'user/user_sidebar', $data );
+
+            $data['logs'] = $this->user_model->get_log('login', $this->session->userdata('s_username'));
+            $this->load->view( 'user/user_log_login', $data );
+            $this->load->view( 'user/user_footer' );
+
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
+        return;
+    }
+
+    function pay_log()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
+            $this->load->view( 'user/user_header' );
+            $this->load->view( 'user/user_nav', $data );
+
+            $data = $this->sidebar();
+            $data['logs_active'] = (bool) TRUE;
+            $data['logs_p_active'] = (bool) TRUE;
+            $this->load->view( 'user/user_sidebar', $data );
+
+            $data['logs'] = $this->user_model->get_log('pay', $this->session->userdata('s_username'));
+            $this->load->view( 'user/user_log_pay', $data );
+            $this->load->view( 'user/user_footer' );
+
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
+        return;
+    }
+
+    function order_log()
+    {
+        if ($this->is_login())
+        {
+            //$this->load->view('welcome_message');
+            $this->load->helper('comm');
+            $data['user_name'] = $this->session->userdata('s_username');
+            $data['gravatar'] = get_gravatar($this->session->userdata('s_email'));
+            $this->load->view( 'user/user_header' );
+            $this->load->view( 'user/user_nav', $data );
+
+            $data = $this->sidebar();
+            $data['logs_active'] = (bool) TRUE;
+            $data['logs_o_active'] = (bool) TRUE;
+            $this->load->view( 'user/user_sidebar', $data );
+
+            $data['logs'] = $this->user_model->get_log('order', $this->session->userdata('s_username'));
+            $this->load->view( 'user/user_log_order', $data );
+            $this->load->view( 'user/user_footer' );
+
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
+        return;
     }
 }

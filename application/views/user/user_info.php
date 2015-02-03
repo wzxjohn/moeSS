@@ -61,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <p>用户名: <?php echo $user_name; ?></p>
                         <p>邮箱: <?php echo $user_email;  ?></p>
                         <p> 套餐: <span class="label label-info"> <?php echo $plan; ?> </span> </p>
-                        <p> 账户余额: <?php echo $money; ?>元 <a class="btn btn-info btn-sm" href="<?php echo site_url('user/pay'); ?>">充值</a></p>
+                        <p> 账户余额: <?php echo $money; ?>元 <a class="btn btn-info btn-sm" href="<?php echo site_url('user/pay'); ?>" target="_blank">充值</a></p>
                     </div><!-- /.box -->
                 </div>
             </div>

@@ -247,6 +247,10 @@ class Admin_model extends CI_Model
                     'switch' => $switch,
                     'enable' => $enable
                 );
+                if ($pass == "!MOESS_NO_CHANGE!")
+                {
+                    unset($data['pass']);
+                }
                 return $this->db->update('user', $data);
             }
             else
@@ -387,6 +391,10 @@ class Admin_model extends CI_Model
                 case "admin":
                     $this->db->order_by('time', 'DESC');
                     return $this->db->get('admin_login')->result();
+                case "pay":
+                    return $this->db->get('transactions')->result();
+                case "order":
+                    return $this->db->get('orders')->result();
             }
         }
     }

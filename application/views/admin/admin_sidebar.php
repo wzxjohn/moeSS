@@ -80,6 +80,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </a>
     </li>
 
+    <li <?php if ($goods_active) { echo 'class="active"';};?>>
+        <a href="<?php echo site_url('admin/goods');?>">
+            <i class="fa fa-shopping-cart"></i> <span>套餐管理</span>
+        </a>
+    </li>
+
     <li <?php if ($system_active) { echo 'class="active"';};?>>
         <a href="<?php echo site_url('admin/system_info');?>">
             <i class="fa fa-pencil"></i> <span>系统信息</span>
@@ -94,6 +100,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li <?php if ($log_u_active) { echo 'class="active"';};?>><a href="<?php echo site_url('admin/user_log'); ?>"><i class="fa fa-angle-double-right"></i> 用户登陆</a></li>
             <li <?php if ($log_m_active) { echo 'class="active"';};?>><a href="<?php echo site_url('admin/mail_log'); ?>"><i class="fa fa-angle-double-right"></i> 邮件发送</a></li>
             <li <?php if ($log_a_active) { echo 'class="active"';};?>><a href="<?php echo site_url('admin/admin_log'); ?>"><i class="fa fa-angle-double-right"></i> 管理登陆</a></li>
+            <li <?php if ($log_p_active) { echo 'class="active"';};?>><a href="<?php echo site_url('admin/pay_log'); ?>"><i class="fa fa-angle-double-right"></i> 充值记录</a></li>
+            <li <?php if ($log_o_active) { echo 'class="active"';};?>><a href="<?php echo site_url('admin/order_log'); ?>"><i class="fa fa-angle-double-right"></i> 购买记录</a></li>
         </ul>
     </li>
 
