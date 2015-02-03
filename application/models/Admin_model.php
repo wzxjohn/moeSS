@@ -398,4 +398,14 @@ class Admin_model extends CI_Model
             }
         }
     }
+	
+	function set_traffic($user_name = NULL, $traffic = NULL)
+    {
+        if ($user_name && $traffic)
+        {
+            $this->db->where('user_name', $user_name);
+            $data = array('transfer_enable' => $traffic);
+            return $this->db->update('user', $data);
+        }
+    }
 }

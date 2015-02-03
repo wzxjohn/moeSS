@@ -1152,4 +1152,59 @@ class Admin extends CI_Controller
         }
         return;
     }
+	
+    function add_traffic($uid)
+    {
+        if ($this->is_login())
+        {
+            $user = $this->admin_model->get_users($uid)[0];
+            $data['user'] = $user;
+            $this->load->view('admin/admin_add_traffic', $data);
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
+    function do_add_traffic($uid)
+    {
+        if ($this->is_login())
+        {
+            $user_name = $this->input->post('user_name');
+            $traffic = (int) $this->input->post('traffic');
+            if ($traffic == 0)
+            {
+                echo "<script>alert('Success!'); window.location.href=\"".site_url('admin/users')."\";</script>";
+                return;
+            }
+            $traffic = (int) $traffic * 1024 * 1024;
+            $user = $this->admin_model->get_users($uid)[0];
+            if ($user->user_name == $user_name)
+            {
+                $new_traffic = $user->transfer_enable + $traffic;
+                if ($this->admin_model->set_traffic($user_name, $new_traffic))
+                {
+                    echo "<script>alert('Success!'); window.location.href=\"".site_url('admin/users')."\";</script>";
+                    return;
+                }
+                else
+                {
+                    echo "<script>alert('Database Error!'); window.location.href=\"".site_url('admin/users')."\";</script>";
+                    return;
+                }
+            }
+            else
+            {
+                echo "<script>alert('Error!'); window.location.href=\"".site_url('admin/users')."\";</script>";
+                return;
+            }
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
 }
