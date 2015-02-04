@@ -74,6 +74,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </a>
     </li>
 
+    <li <?php if ($goods_active) { echo 'class="active"';};?>>
+        <a href="<?php echo site_url('user/view_goods');?>">
+            <i class="fa fa-shopping-cart"></i> <span>购买流量</span>
+        </a>
+    </li>
+
+    <li class="treeview<?php if ($logs_active) { echo ' active';};?>">
+        <a href="#">
+            <i class="fa fa-file-text"></i> <span>查看记录</span>
+        </a>
+        <ul class="treeview-menu">
+            <li <?php if ($logs_l_active) { echo 'class="active"';};?>><a href="<?php echo site_url('user/login_log'); ?>"><i class="fa fa-angle-double-right"></i> 登陆记录</a></li>
+            <li <?php if ($logs_p_active) { echo 'class="active"';};?>><a href="<?php echo site_url('user/pay_log'); ?>"><i class="fa fa-angle-double-right"></i> 充值记录</a></li>
+            <li <?php if ($logs_o_active) { echo 'class="active"';};?>><a href="<?php echo site_url('user/order_log'); ?>"><i class="fa fa-angle-double-right"></i> 购买记录</a></li>
+        </ul>
+    </li>
+
     <li <?php if ($update_active) { echo 'class="active"';};?>>
         <a href="<?php echo site_url('user/profile_update');?>">
             <i class="fa  fa-pencil"></i> <span>修改资料</span>

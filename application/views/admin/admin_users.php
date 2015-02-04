@@ -83,7 +83,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td><?php echo human_file_size($user->u); ?></td>
                                         <td><?php echo human_file_size($user->d); ?></td>
                                         <!-- <td><?php //echo $user->plan; ?></td> -->
-                                        <td><?php echo human_file_size($user->transfer_enable); ?></td>
+                                        <td><?php echo human_file_size($user->transfer_enable); ?> <button class="btn btn-info btn-sm" onclick="add_transfer('<?php echo $user->uid;?>');">添加</button></td>
                                         <td><?php echo $user->port; ?></td>
                                         <td><?php echo date("m-j G:i", $user->last_check_in_time); ?></td>
                                         <td><?php echo date("m-j G:i", $user->reg_date); ?></td>
@@ -151,6 +151,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
         xmlhttp.open("GET","<?php echo base_url( "admin/user_del"); ?>".concat("/",$uid),true);
         xmlhttp.send();
+    }
+
+    function add_transfer($user_name)
+    {
+        var $url="<?php echo base_url('admin/add_traffic'); ?>/".concat($user_name);
+        $url=$url.concat(".html");
+        BootstrapDialog.show({
+            title: '添加流量',
+            size: BootstrapDialog.SIZE_SMALL,
+            type: BootstrapDialog.TYPE_INFO,
+            message: $('<div></div>').load($url)
+        });
     }
 </script>
 

@@ -52,9 +52,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <!-- left column -->
             <div class="col-md-6">
                 <!-- general form elements -->
-                <div class="box box-primary">
+                <div class="box box-solid bg-red">
                     <div class="box-header">
-                        <h3 class="box-title"><?php if ($user) { echo "编辑"; } else { echo "添加"; } ?>用户</h3>
+                        <h3 class="box-title">
+                            <?php if ($user) { echo "编辑"; } else { echo "添加"; } ?>用户
+                            <code>极不推荐使用本功能</code>
+                        </h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     <form role="form" method="post" action="<?php if ($user) { echo site_url( "admin/user_update/$user->uid"); } else { echo site_url( 'admin/user_update'); } ?>">
@@ -71,7 +74,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                             <div class="form-group">
                                 <label for="cate_title">密码</label>
-                                <input type="text" class="form-control" name="pass" <?php if ($user) {echo "value=\"$user->pass\""; } ?> >
+                                <input type="text" class="form-control" name="pass" >
                             </div>
 
                             <div class="form-group">

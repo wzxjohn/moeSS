@@ -26,6 +26,25 @@ CREATE TABLE IF NOT EXISTS `admin_login` (
   `time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `goods` (
+  `id` int(128) NOT NULL,
+  `good_name` varchar(256) NOT NULL,
+  `good_description` longtext NOT NULL,
+  `good_price` decimal(12,2) NOT NULL,
+  `good_traffic` bigint(20) NOT NULL,
+  `good_enable` tinyint(1) NOT NULL,
+  `good_order` int(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `goods` VALUES(1, '1G Plan', 'SS 流量 1GB', 1.00, 1073741824, 1, 0);
+INSERT INTO `goods` VALUES(2, '2G Plan', 'SS 流量 2GB', 2.00, 2147483648, 1, 0);
+INSERT INTO `goods` VALUES(3, '3G Plan', 'SS 流量 3GB', 3.00, 3221225472, 1, 0);
+INSERT INTO `goods` VALUES(4, '4G Plan', 'SS 流量 4GB', 4.00, 4294967296, 1, 0);
+INSERT INTO `goods` VALUES(5, '5G Plan', 'SS 流量 5GB', 5.00, 5368709120, 1, 0);
+INSERT INTO `goods` VALUES(6, '6G Plan', 'SS 流量 6GB', 1.00, 1073741824, 0, 0);
+INSERT INTO `goods` VALUES(7, '7G Plan', 'SS 流量 7GB', 1.00, 1073741824, 0, 0);
+INSERT INTO `goods` VALUES(8, '8G Plan', 'SS 流量 8GB', 1.00, 1073741824, 0, 0);
+
 CREATE TABLE IF NOT EXISTS `invite_code` (
   `id` int(32) NOT NULL,
   `code` varchar(32) NOT NULL,
@@ -66,7 +85,7 @@ INSERT INTO `options` VALUES(2, 'default_transfer', '5368709120', '默认流量(
 INSERT INTO `options` VALUES(3, 'default_invite_number', '1', '默认邀请数量');
 INSERT INTO `options` VALUES(4, 'check_min', '50', '签到下限(MB)');
 INSERT INTO `options` VALUES(5, 'check_max', '100', '签到上限(MB)');
-INSERT INTO `options` VALUES(6, 'version', '1.1', '程序版本');
+INSERT INTO `options` VALUES(6, 'version', '1.2', '程序版本');
 INSERT INTO `options` VALUES(7, 'default_method', 'rc4-md5', '默认加密方式');
 INSERT INTO `options` VALUES(8, 'mail_protocol', 'mail', '邮件引擎');
 INSERT INTO `options` VALUES(9, 'mail_mailpath', '/usr/sbin/sendmail', 'Sendmail路径');
@@ -118,6 +137,27 @@ CREATE TABLE IF NOT EXISTS `ss_node` (
 
 INSERT INTO `ss_node` VALUES(1, '默认节点', 0, '1.2.3.4', '默认节点', '可用', 0, 'rc4-md5');
 
+CREATE TABLE IF NOT EXISTS `transactions` (
+  `id` int(128) NOT NULL,
+  `trade_no` varchar(128) NOT NULL,
+  `user_name` varchar(128) NOT NULL,
+  `amount` int(8) NOT NULL,
+  `ip` varchar(64) NOT NULL,
+  `result` tinyint(1) NOT NULL,
+  `ctime` int(11) NOT NULL,
+  `ftime` int(11) NOT NULL,
+  `notify_id` longtext NOT NULL,
+  `buyer_email` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `transaction_form` (
+  `id` int(128) NOT NULL,
+  `trade_no` varchar(128) NOT NULL,
+  `user_name` varchar(128) NOT NULL,
+  `body` longtext NOT NULL,
+  `time` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `user` (
   `uid` int(11) NOT NULL,
   `user_name` varchar(128) NOT NULL,
@@ -159,6 +199,9 @@ ALTER TABLE `activate`
 ALTER TABLE `admin_login`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `goods`
+  ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `invite_code`
   ADD PRIMARY KEY (`id`);
 
@@ -177,6 +220,12 @@ ALTER TABLE `ss_admin`
 ALTER TABLE `ss_node`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `transaction_form`
+  ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `user`
   ADD PRIMARY KEY (`uid`);
 
@@ -188,6 +237,8 @@ ALTER TABLE `activate`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `admin_login`
   MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `goods`
+  MODIFY `id` int(128) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `invite_code`
   MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `mail_log`
@@ -200,6 +251,10 @@ ALTER TABLE `ss_admin`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `ss_node`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `transactions`
+  MODIFY `id` int(128) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `transaction_form`
+  MODIFY `id` int(128) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `user`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `user_login`

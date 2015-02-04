@@ -86,12 +86,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                             <div class="form-group">
                                 <label for="cate_order">状态</label>
-                                <input type="text" class="form-control" name="node_status"  value="可用" <?php if ($node) {echo "value=\"$node->node_status\""; } ?> >
+                                <input type="text" class="form-control" name="node_status" <?php if ($node) {echo "value=\"$node->node_status\""; } else {echo 'value="可用"';} ?> >
                             </div>
 
                             <div class="form-group">
                                 <label for="cate_order">排序</label>
-                                <input type="text" class="form-control" name="node_order"  value="0" <?php if ($node) {echo "value=\"$node->node_order\""; } ?> >
+                                <input type="text" class="form-control" name="node_order" <?php if ($node) {echo "value=\"$node->node_order\""; } else {echo 'value="0"';} ?> >
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
