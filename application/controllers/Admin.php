@@ -337,6 +337,35 @@ class Admin extends CI_Controller
         return;
     }
 
+    function add_invite_num()
+    {
+        if ($this->is_login())
+        {
+            $user_name = $this->input->post('user_name');
+            $uid = $this->input->post('uid');
+            $num = $this->input->post('code_num');
+            if ($num == "" || $num == 0 || ($user_name == "" && $uid == "" ))
+            {
+                echo '{"result" : "Not enougth args!" }';
+                return;
+            }
+            if ($this->admin_model->add_code_num($user_name, $uid, $num))
+            {
+                echo '{"result" : "success" }';
+            }
+            else
+            {
+                echo '{"result" : "Database Error!" }';
+            }
+            return;
+        }
+        else
+        {
+            redirect(site_url('admin/login'));
+        }
+        return;
+    }
+
     function user_add()
     {
         if ($this->is_login())

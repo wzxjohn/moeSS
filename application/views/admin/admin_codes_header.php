@@ -80,6 +80,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             }
         });
 
+        $('#addCodeNumForm').submit(function() {
+            if ($(this).valid()) {
+                $(this).ajaxSubmit(options);
+                return false;
+            }
+        });
+
         $('#addCodeForm').validate( {
             rules:{
                 code_cub: {
@@ -90,7 +97,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     maxlength: 1
                 },
                 code_num: {
-                    required: true,
+                    required: true
+                }
+            }
+        });
+
+        $('#addCodeNumForm').validate( {
+            rules:{
+                user_name: {
+                    required: false
+                },
+                uid: {
+                    required: false
+                },
+                code_num: {
+                    required: true
                 }
             }
         })

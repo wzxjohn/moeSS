@@ -79,7 +79,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </table>
                     </div>
                 </div>
+                <div class="box-footer">
+                    <?php if ($code_num > 0) { echo '<button class="btn btn-info" onclick="get_code()">获取邀请码</button>'; }?>
+                </div>
             </div><!-- /.box -->
         </div>   <!-- /.row -->
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
+<script>
+    function get_code()
+    {
+        var dialog = new BootstrapDialog({
+            size: BootstrapDialog.SIZE_LARGE,
+            title: '获取邀请码',
+            message: '正在获取，请稍候。。。',
+            closable: false
+        });
+        dialog.realize();
+        dialog.getModalBody().css('color', '#000');
+        dialog.open();
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                var dialog = new BootstrapDialog({
+                    size: BootstrapDialog.SIZE_LARGE,
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    title: '获取邀请码',
+                    message: xmlhttp.responseText,
+                    closable: false,
+                    buttons: [{
+                        label: '关闭',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                            window.location.reload();
+                        }
+                    }]
+                });
+                dialog.realize();
+                dialog.getModalBody().css('color', '#000');
+                dialog.open();
+            }
+        }
+        xmlhttp.open("GET","<?php echo site_url('user/get_invite_code'); ?>",true);
+        xmlhttp.send();
+    }
+</script>

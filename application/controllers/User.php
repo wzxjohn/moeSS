@@ -406,11 +406,37 @@ class User extends CI_Controller
             $data['code_active'] = (bool) true;
             $this->load->view( 'user/user_sidebar', $data );
 
-            $codes = $this->user_model->get_invite_codes();
+            $codes = $this->user_model->get_invite_codes($this->session->userdata('s_uid'));
             $data['codes'] = $codes;
+            $code_num = $this->user_model->get_code_number($this->session->userdata('s_uid'));
+            $data['code_num'] = $code_num;
 
             $this->load->view( 'user/user_code', $data );
             $this->load->view( 'user/user_footer' );
+        }
+        else
+        {
+            redirect(site_url('user/login'));
+        }
+        return;
+    }
+
+    function get_invite_code()
+    {
+        if ($this->is_login())
+        {
+            $uid = $this->session->userdata('s_uid');
+            $result = $this->user_model->generate_user_code($uid);
+            if ($result && $result['result'])
+            {
+                echo "您本次获得的邀请码是：" . $result['code'];
+                return;
+            }
+            else
+            {
+                echo "暂时没有邀请资格！";
+                return;
+            }
         }
         else
         {

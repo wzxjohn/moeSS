@@ -146,6 +146,38 @@ class Admin_model extends CI_Model
         return $this->db->insert_batch('invite_code', $datas);
     }
 
+    function add_code_num($user_name = NULL, $uid = NULL, $num = NULL)
+    {
+        if ( ($num == NULL || $num == 0) || (($user_name == NULL || $user_name == "") && ($uid == NULL || $uid == "")) )
+        {
+            return FALSE;
+        }
+        $this->db->select('invite_num');
+        $this->db->where('user_name', $user_name);
+        $user = $this->db->get('user');
+        if ($user->num_rows() > 0)
+        {
+            $data = array(
+                'invite_num' => (int) $user->result()[0]->invite_num + $num
+            );
+            $this->db->where('user_name', $user_name);
+            $this->db->limit(1);
+            return $this->db->update('user', $data);
+        }
+        $this->db->select('invite_num');
+        $this->db->where('uid', $uid);
+        $user = $this->db->get('user');
+        if ($user->num_rows() > 0)
+        {
+            $data = array(
+                'invite_num' => (int) $user->result()[0]->invite_num + $num
+            );
+            $this->db->where('uid', $uid);
+            $this->db->limit(1);
+            return $this->db->update('user', $data);
+        }
+    }
+
     function get_invite_codes()
     {
         $this->db->where('user', '1');
