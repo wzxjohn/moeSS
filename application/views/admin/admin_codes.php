@@ -73,6 +73,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <label for="cate_title">邀请码数量</label>
                                 <input  class="form-control" id="code_num" name="code_num" placeholder="要生成的邀请码数量"  >
                             </div>
+                            <div class="form-group">
+                                <label for="cate_title">邀请码所有者</label>
+                                <input  class="form-control" id="code_owner" name="code_owner" placeholder="如果不填写或填写0，所有人可见；否则只有该ID用户才能看到这一邀请码"  >
+                            </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
                             <button type="submit" name="action" value="add" class="btn btn-primary">添加</button>

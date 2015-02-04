@@ -316,11 +316,12 @@ class Admin extends CI_Controller
             $sub = $this->input->post('code_sub');
             $type = $this->input->post('code_type');
             $num = $this->input->post('code_num');
+            $owner = $this->input->post('code_owner');
             if ($type == "" || $num == "") {
                 echo '{"result" : "Not enougth args!" }';
                 return;
             }
-            if ($this->admin_model->add_code($sub, $type, $num))
+            if ($this->admin_model->add_code($sub, $type, $num, $owner))
             {
                 echo '{"result" : "success" }';
             }

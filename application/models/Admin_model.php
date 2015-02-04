@@ -127,7 +127,7 @@ class Admin_model extends CI_Model
         return 0;
     }
 
-    function add_code($sub,$type,$num)
+    function add_code($sub,$type,$num, $owner)
     {
         $datas = array();
         for($a=0;$a<$num;$a++)
@@ -139,7 +139,8 @@ class Admin_model extends CI_Model
             $code = $sub.substr($x, rand(1, 13), 24);
             $data = array(
                 'code' => $code,
-                'user' => $type
+                'user' => $type,
+		'owner' => $owner,
             );
             array_push($datas, $data);
         }
