@@ -1,5 +1,4 @@
 # moeSS
-moeSS
 moeSS is a front end for https://github.com/mengskysama/shadowsocks/tree/manyuser
 
 Thanks to ss-panel https://github.com/orvice/ss-panel
