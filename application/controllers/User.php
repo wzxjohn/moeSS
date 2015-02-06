@@ -147,7 +147,7 @@ class User extends CI_Controller
     function do_register()
     {
         $username = $this->input->post('username');
-        if ( strlen($username)<7||strlen($username)>32 )
+        if ( strlen($username)<6 || strlen($username)>32 )
         {
             echo '{"result" : "用户名不合法！" }';
             return;
