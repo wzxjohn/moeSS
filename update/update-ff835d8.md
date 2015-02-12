@@ -22,7 +22,7 @@ config.php
     $config['sess_driver']          = 'database';
     $config['sess_cookie_name']     = 'asiass_session';
     $config['sess_expiration']      = 7200;
-    $config['sess_save_path']       = 'moess_session';
+    $config['sess_save_path']       = 'moess_sessions';
     $config['sess_encrypt_cookie']  = TRUE;
     $config['sess_match_ip']        = FALSE;
     $config['sess_time_to_update']  = 300;
